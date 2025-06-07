@@ -49,7 +49,15 @@ const Navbar = () => {
                   <span className="absolute -bottom-1 left-0 w-0 h-px bg-primary transition-all duration-300 group-hover:w-full"></span>
                 </a>
 
-                <button className="bg-primary hover:bg-primary/90 text-white text-sm font-medium px-8 py-3 rounded-3xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-primary/25">
+                <button
+                  onClick={() =>
+                    window.open(
+                      "https://forms.clickup.com/90161070153/f/2kz09g29-456/VQATNDK2A8FV63QBYR",
+                      "_blank"
+                    )
+                  }
+                  className="bg-primary hover:bg-primary/90 text-white text-sm font-medium px-8 py-3 rounded-3xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-primary/25"
+                >
                   Register
                 </button>
               </div>

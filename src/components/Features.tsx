@@ -1,42 +1,51 @@
-import React from 'react';
-import { Brain, Zap, Target, Users, BookOpen, TrendingUp } from 'lucide-react';
+import React from "react";
+import { Brain, Zap, Target, Users, BookOpen, TrendingUp } from "lucide-react";
 
 const Features = () => {
   const features = [
     {
       icon: Brain,
-      title: 'AI-Powered Personalization',
-      description: 'Advanced machine learning algorithms adapt to your unique learning style and pace.'
+      title: "AI-Powered Personalization",
+      description:
+        "Advanced machine learning algorithms adapt to your unique learning style and pace.",
     },
     {
       icon: Zap,
-      title: 'Instant Feedback',
-      description: 'Get real-time corrections and suggestions to accelerate your learning journey.'
+      title: "Instant Feedback",
+      description:
+        "Get real-time corrections and suggestions to accelerate your learning journey.",
     },
     {
       icon: Target,
-      title: 'Goal-Oriented Learning',
-      description: 'Set specific objectives and let our AI create customized learning paths.'
+      title: "Goal-Oriented Learning",
+      description:
+        "Set specific objectives and let our AI create customized learning paths.",
     },
     {
       icon: Users,
-      title: 'Collaborative Environment',
-      description: 'Connect with peers and mentors in our intelligent learning community.'
+      title: "Collaborative Environment",
+      description:
+        "Connect with peers and mentors in our intelligent learning community.",
     },
     {
       icon: BookOpen,
-      title: 'Comprehensive Content',
-      description: 'Access thousands of courses across multiple disciplines and skill levels.'
+      title: "Comprehensive Content",
+      description:
+        "Access thousands of courses across multiple disciplines and skill levels.",
     },
     {
       icon: TrendingUp,
-      title: 'Progress Analytics',
-      description: 'Track your improvement with detailed insights and performance metrics.'
-    }
+      title: "Progress Analytics",
+      description:
+        "Track your improvement with detailed insights and performance metrics.",
+    },
   ];
 
   return (
-    <section id="features" className="py-24 bg-background relative overflow-hidden">
+    <section
+      id="features"
+      className="py-24 bg-background relative overflow-hidden"
+    >
       {/* Background elements */}
       <div className="absolute inset-0">
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl"></div>
@@ -52,8 +61,9 @@ const Features = () => {
             </span>
           </h2>
           <p className="text-xl text-text-secondary max-w-3xl mx-auto leading-relaxed">
-            Discover how our cutting-edge AI technology transforms the way you learn, 
-            making education more personalized, efficient, and engaging than ever before.
+            Discover how our cutting-edge AI technology transforms the way you
+            learn, making education more personalized, efficient, and engaging
+            than ever before.
           </p>
         </div>
 
@@ -66,7 +76,7 @@ const Features = () => {
             >
               {/* Glow effect on hover */}
               <div className="absolute inset-0 bg-primary/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              
+
               <div className="relative z-10 space-y-4">
                 {/* Icon */}
                 <div className="w-16 h-16 bg-surface border border-border rounded-2xl flex items-center justify-center transform group-hover:rotate-6 transition-transform duration-300 group-hover:border-primary/30">
@@ -91,11 +101,11 @@ const Features = () => {
         </div>
 
         {/* Bottom CTA */}
-        <div className="text-center mt-16">
+        {/* <div className="text-center mt-16">
           <button className="bg-primary hover:bg-primary/90 text-white px-8 py-4 rounded-lg transition-all duration-300 transform hover:scale-105 font-semibold shadow-lg hover:shadow-primary/25">
             Explore All Features
           </button>
-        </div>
+        </div> */}
       </div>
     </section>
   );

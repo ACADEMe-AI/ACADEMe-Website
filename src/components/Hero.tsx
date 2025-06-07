@@ -69,12 +69,25 @@ const Hero = () => {
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4">
-              <button className="group bg-primary hover:bg-primary/90 text-white px-8 py-4 rounded-lg transition-all duration-300 transform hover:scale-105 flex items-center justify-center space-x-2 font-semibold shadow-lg hover:shadow-primary/25">
+              <button
+                onClick={() =>
+                  window.open(
+                    "https://forms.clickup.com/90161070153/f/2kz09g29-456/VQATNDK2A8FV63QBYR",
+                    "_blank"
+                  )
+                }
+                className="group bg-primary hover:bg-primary/90 text-white px-8 py-4 rounded-lg transition-all duration-300 transform hover:scale-105 flex items-center justify-center space-x-2 font-semibold shadow-lg hover:shadow-primary/25"
+              >
                 <Download className="w-5 h-5 group-hover:animate-bounce" />
                 <span>Download App</span>
               </button>
 
-              <button className="group border border-border hover:border-primary/50 text-text-secondary hover:text-text-primary px-8 py-4 rounded-lg transition-all duration-300 transform hover:scale-105 flex items-center justify-center space-x-2 backdrop-blur-sm font-semibold">
+              <button
+                onClick={() =>
+                  window.open("https://youtu.be/GgiS5VnMmEk", "_blank")
+                }
+                className="group border border-border hover:border-primary/50 text-text-secondary hover:text-text-primary px-8 py-4 rounded-lg transition-all duration-300 transform hover:scale-105 flex items-center justify-center space-x-2 backdrop-blur-sm font-semibold"
+              >
                 <Play className="w-5 h-5 group-hover:animate-pulse" />
                 <span>Watch Demo</span>
               </button>
@@ -84,17 +97,15 @@ const Hero = () => {
             <div className="grid grid-cols-3 gap-8 pt-8 border-t border-border">
               <div className="text-center">
                 <div className="text-2xl sm:text-3xl font-bold text-text-primary">
-                  1M+
+                  10+
                 </div>
-                <div className="text-text-secondary text-sm">
-                  Active Learners
-                </div>
+                <div className="text-text-secondary text-sm">Langauges</div>
               </div>
               <div className="text-center">
                 <div className="text-2xl sm:text-3xl font-bold text-text-primary">
-                  95%
+                  99%
                 </div>
-                <div className="text-text-secondary text-sm">Success Rate</div>
+                <div className="text-text-secondary text-sm">Accurate</div>
               </div>
               <div className="text-center">
                 <div className="text-2xl sm:text-3xl font-bold text-text-primary">
