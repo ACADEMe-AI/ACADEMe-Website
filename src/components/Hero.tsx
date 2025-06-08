@@ -128,7 +128,7 @@ const Hero = () => {
                 <div className="absolute inset-0 bg-primary/10 rounded-[3rem] blur-2xl scale-110"></div>
 
                 {/* Phone body - Increased height to prevent cutoff */}
-                <div className="relative w-64 sm:w-72 lg:w-80 h-[520px] sm:h-[560px] lg:h-[620px] bg-gradient-to-b from-surface to-background rounded-[3rem] p-2 shadow-2xl border border-border">
+                <div className="relative w-64 sm:w-72 lg:w-80 h-[520px] sm:h-[560px] lg:h-[580px] bg-gradient-to-b from-surface to-background rounded-[3rem] p-2 shadow-2xl border border-border">
                   {/* Screen */}
                   <div className="w-full h-full bg-gradient-to-br from-surface to-background rounded-[2.5rem] overflow-hidden relative">
                     {/* Status bar */}
@@ -221,7 +221,7 @@ const Hero = () => {
                   </div>
                 </div>
 
-                <div className="hidden lg:block absolute -bottom-6 -right-6 bg-surface/60 backdrop-blur-sm border border-border rounded-xl p-3 animate-float delay-1000">
+                <div className="hidden lg:block absolute -bottom-2 -right-10 bg-surface/60 backdrop-blur-sm border border-border rounded-xl p-3 animate-float delay-1000">
                   <div className="text-text-secondary text-xs">
                     Learning Speed
                   </div>
