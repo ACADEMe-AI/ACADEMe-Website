@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Github, Twitter, Linkedin, Mail, MapPin, Phone } from "lucide-react";
 
 const Footer = () => {
@@ -152,12 +153,12 @@ const Footer = () => {
             © 2025 ACADEMe. All rights reserved.
           </p>
           <div className="flex space-x-6 mt-4 md:mt-0">
-            <a
-              href="#"
+            <Link
+              to="/privacy-policy"
               className="text-text-secondary hover:text-text-primary text-sm transition-colors duration-300"
             >
               Privacy Policy
-            </a>
+            </Link>
             <a
               href="#"
               className="text-text-secondary hover:text-text-primary text-sm transition-colors duration-300"

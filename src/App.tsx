@@ -1,19 +1,17 @@
-import React from 'react';
-import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import Features from './components/Features';
-import AppShowcase from './components/AppShowcase';
-import Footer from './components/Footer';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import HomePage from "./pages/HomePage";
+import PrivacyPolicy from "./pages/PrivacyPolicyPage";
+import DeleteData from "./pages/DeleteDataPage";
 
 function App() {
   return (
-    <div className="min-h-screen bg-background">
-      <Navbar />
-      <Hero />
-      <Features />
-      <AppShowcase />
-      <Footer />
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="/delete" element={<DeleteData />} />
+      </Routes>
+    </Router>
   );
 }
 
