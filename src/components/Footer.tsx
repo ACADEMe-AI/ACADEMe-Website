@@ -159,18 +159,6 @@ const Footer = () => {
             >
               Privacy Policy
             </Link>
-            <a
-              href="#"
-              className="text-text-secondary hover:text-text-primary text-sm transition-colors duration-300"
-            >
-              Terms of Service
-            </a>
-            <a
-              href="#"
-              className="text-text-secondary hover:text-text-primary text-sm transition-colors duration-300"
-            >
-              Cookie Policy
-            </a>
           </div>
         </div>
       </div>
