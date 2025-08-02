@@ -50,10 +50,10 @@ const DeleteData = () => {
           </div>
 
           {/* Email Contact Box */}
-          <div className="bg-surface/30 border border-border rounded-xl p-8 text-center mb-8">
-            <div className="flex items-center justify-center space-x-3 mb-4">
-              <Mail className="w-6 h-6 text-primary" />
-              <span className="text-2xl font-bold text-text-primary">
+          <div className="bg-surface/30 border border-border rounded-xl p-4 sm:p-8 text-center mb-8">
+            <div className="flex flex-col sm:flex-row items-center justify-center space-y-2 sm:space-y-0 sm:space-x-3 mb-4">
+              <Mail className="w-6 h-6 text-primary flex-shrink-0" />
+              <span className="text-lg sm:text-xl lg:text-2xl font-bold text-text-primary break-all sm:break-normal">
                 academe.noreply@gmail.com
               </span>
             </div>
@@ -64,10 +64,10 @@ const DeleteData = () => {
                   "mailto:academe.noreply@gmail.com?subject=Data Deletion Request - ACADEMe Account&body=Hello ACADEMe Team,%0A%0AI would like to request the deletion of my personal data from your platform.%0A%0AAccount Details:%0A- Name: [Your Name]%0A- Email: [Your Email]%0A- Reason for deletion: [Optional]%0A%0APlease confirm once my data has been deleted.%0A%0AThank you."
                 )
               }
-              className="bg-primary hover:bg-primary/90 text-white px-8 py-4 rounded-xl transition-all duration-300 transform hover:scale-105 font-semibold shadow-lg hover:shadow-primary/25 inline-flex items-center space-x-2"
+              className="bg-primary hover:bg-primary/90 text-white px-4 sm:px-8 py-3 sm:py-4 rounded-xl transition-all duration-300 transform hover:scale-105 font-semibold shadow-lg hover:shadow-primary/25 inline-flex items-center space-x-2 text-sm sm:text-base"
             >
-              <Mail className="w-5 h-5" />
-              <span>Send Deletion Request Email</span>
+              <Mail className="w-4 h-4 sm:w-5 sm:h-5" />
+              <span className="whitespace-nowrap">Send Deletion Request</span>
             </button>
           </div>
 

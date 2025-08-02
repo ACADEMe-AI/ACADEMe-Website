@@ -62,8 +62,10 @@ const PrivacyPolicy = () => {
                 <span>Guwahati, Assam - India</span>
               </div>
               <div className="flex items-center space-x-3 text-text-secondary">
-                <Mail className="w-4 h-4" />
-                <span>academe.noreply@gmail.com</span>
+                <Mail className="w-4 h-4 flex-shrink-0" />
+                <span className="break-all sm:break-normal">
+                  academe.noreply@gmail.com
+                </span>
               </div>
             </div>
           </section>
@@ -329,8 +331,11 @@ const PrivacyPolicy = () => {
 
             <div className="mt-6 p-4 bg-primary/10 border border-primary/30 rounded-xl">
               <p className="text-text-primary">
-                <strong>To exercise your rights:</strong> Please contact us at
-                academe.noreply@gmail.com or visit our
+                <strong>To exercise your rights:</strong> Please contact us at{" "}
+                <span className="break-all sm:break-normal">
+                  academe.noreply@gmail.com
+                </span>{" "}
+                or visit our
                 <Link
                   to="/delete"
                   className="text-primary hover:underline ml-1"
@@ -434,8 +439,10 @@ const PrivacyPolicy = () => {
             </p>
             <div className="bg-surface/30 rounded-xl p-6 space-y-3">
               <div className="flex items-center space-x-3 text-text-secondary">
-                <Mail className="w-5 h-5 text-primary" />
-                <span>Email: academe.noreply@gmail.com</span>
+                <Mail className="w-5 h-5 text-primary flex-shrink-0" />
+                <span className="break-all sm:break-normal">
+                  Email: academe.noreply@gmail.com
+                </span>
               </div>
               <div className="flex items-center space-x-3 text-text-secondary">
                 <MapPin className="w-5 h-5 text-primary" />
