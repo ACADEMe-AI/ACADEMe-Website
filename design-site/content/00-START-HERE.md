@@ -2,6 +2,7 @@
 
 **Audience v1:** AI agents (primary) · founders/designers (secondary)  
 **Pattern:** [design.duolingo.com](https://design.duolingo.com/) — four brand pillars + product/agent layers  
+**UI:** Award-oriented shell — Lenis smooth scroll, GSAP reveals, Framer Motion page transitions, Scheme B palette  
 **Last updated:** 2026-08-02
 
 ---

@@ -15,9 +15,13 @@ export default function App() {
       <Route element={<Layout />}>
         <Route index element={<HomePage />} />
         {docPaths.map((path) => (
-          <Route key={path} path={path} element={<DocPage />} />
+          <Route
+            key={path}
+            path={path.startsWith("/") ? path.slice(1) : path}
+            element={<DocPage />}
+          />
         ))}
-        <Route path="*" element={<DocPage />} />
+        <Route path="*" element={<HomePage />} />
       </Route>
     </Routes>
   );
