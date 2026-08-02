@@ -2,12 +2,9 @@ import { Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout";
 import HomePage from "./pages/HomePage";
 import DocPage from "./pages/DocPage";
-import { nav } from "./lib/nav";
+import { navGroups } from "./lib/nav";
 
-const docPaths = nav
-  .flatMap((s) => s.items)
-  .filter((i) => i.path !== "/")
-  .map((i) => i.path);
+const docPaths = navGroups.flatMap((g) => g.items.map((i) => i.path));
 
 export default function App() {
   return (

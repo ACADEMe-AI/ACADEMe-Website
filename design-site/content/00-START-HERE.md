@@ -1,58 +1,28 @@
-# ACADEMe Design System — START HERE
+# Start here
 
-**Audience v1:** AI agents (primary) · founders/designers (secondary)  
-**Pattern:** [design.duolingo.com](https://design.duolingo.com/) — four brand pillars + product/agent layers  
-**UI:** Award-oriented shell — Lenis smooth scroll, GSAP reveals, Framer Motion page transitions, Scheme B palette  
-**Last updated:** 2026-08-02
+**This is the ACADEMe design system** — one place for brand, product order, and build rules.
 
----
+## What should I do?
 
-## Hard rules (do not violate)
+1. **Building something?** → [Checklist](./product/checklist.md)  
+2. **Need colors / logo?** → [Color](./identity/color.md) · [Logo](./identity/logo.md)  
+3. **Need hard rules?** → [Guardrails](./agents/guardrails.md)  
 
-1. **Students / college grads first** — not schools/teachers day one  
-2. **Mobile-first app**; marketing site = showcase + QR → app  
-3. **Desktop / computer later** — never “available on all devices” yet  
-4. **Colors:** dark Scheme **B**, light Scheme **D** (settings toggle)  
-5. **Phase order:** Design system site → polish marketing site → mascot motion → Phase 1 app parity  
-6. **KnowUnity-class student features** for P1; school OS = Phase 3+  
-7. **Principal-engineer structure** — no vibe-coded god screens  
-8. **Mascot:** asset exists (Pebby sheet); **don’t overuse the name** in product UI  
-9. Agents: update checklists when finishing work  
+## Hard rules (short)
 
----
+- Students first, mobile first  
+- Dark colors = Scheme B, light = Scheme D  
+- Marketing site ≠ this design system site  
+- Mascot name: use sparingly in product UI  
+- No school/admin product in Phase 1  
 
-## Site map (Duo-like pillars)
+## Menu (top of site)
 
-```
-Home
-├── Identity     logos, color, tokens
-├── Writing      voice, messaging
-├── Illustration shape language, mascot (light touch)
-├── Marketing    showcase site rules, QR, CTAs
-├── Product      roadmap, phases, screen IA
-└── Agents       guardrails, architecture, how to use this site
-```
+| Menu | What’s inside |
+|------|----------------|
+| **Brand** | Color, tokens, logo, voice |
+| **Product** | Roadmap, checklist, app structure |
+| **Build** | Agent / engineer rules |
+| **Visual** | Mascot sheet, shape language, motion |
 
----
-
-## Current phase focus
-
-| Now | Phase **0.4** — Design system site (this app) |
-|-----|-----------------------------------------------|
-| Next | Phase **0.5** — Marketing site polish (tokens + QR + copy) |
-| Then | Phase **0.8** — Mascot motion (Rive) using Pebby sheet lightly |
-| Then | Phase **1** — Mobile student product parity |
-
-See `product/roadmap.md` and `product/checklist.md`.
-
----
-
-## Quick links (files)
-
-- Color: `identity/color.md`  
-- Tokens: `identity/tokens.md`  
-- Voice: `writing/voice.md`  
-- Shape language: `illustration/shape-language.md`  
-- Mascot: `illustration/mascot.md`  
-- Guardrails: `agents/guardrails.md`  
-- Architecture: `agents/architecture.md`  
+Keep pages short. Prefer images (logo, mascot, color chips) over long essays.

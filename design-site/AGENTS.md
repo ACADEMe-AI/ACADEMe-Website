@@ -27,7 +27,7 @@ cd design-site && pnpm install && pnpm dev
 ```
 
 Marketing landing site remains the **root** Vite app (`pnpm dev` port 5173).  
-Design system site is **separate** (port 5174) — like design.duolingo.com vs duolingo.com.
+Design system site is **separate** (port 5174).
 
 ## Mascot note
 

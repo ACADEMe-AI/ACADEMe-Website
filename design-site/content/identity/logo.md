@@ -1,24 +1,21 @@
-# Logo & app icon
+# Logo
 
-## Wordmark
+## Primary mark
 
-- “ACADEMe” geometric sans; don’t stretch  
-- On dark: near-white text; on light: near-black  
-- Clear space ≈ height of capital A  
+Use the ACADEMe mark from `/logo.png` (repo: `public/Logos/7.png`).
 
-## Icon concepts (status)
+| Context | Treatment |
+|---------|-----------|
+| Dark UI | Logo as-is on dark surface |
+| Light UI | Logo on white / light gray |
+| Nav | 32px height minimum |
 
-| ID | Idea | Note |
-|----|------|------|
-| I1 Spark A | Letter A + spark | Safe without mascot |
-| I2 Character | Simplified mascot head | After mascot art locked |
-| I3 Book-node | Abstract study mark | Fallback |
+## Rules
 
-**Default until decision:** I1 or existing `public/Logos/7.png` on marketing site.
+- Don’t stretch or recolor arbitrarily  
+- Keep clear space around the mark  
+- Pair with wordmark “ACADEMe” when space allows  
 
-## Specs checklist
+## App icon
 
-- [ ] 1024 master  
-- [ ] iOS no-alpha store icon  
-- [ ] Android adaptive  
-- [ ] Favicon 32 + SVG  
+See product icon plan — letter “A” / mark until character icon is locked.

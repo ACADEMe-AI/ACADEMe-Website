@@ -1,38 +1,24 @@
 # Mascot
 
-## Status
+## Role
 
-| Field | Value |
-|-------|--------|
-| Working name | **Pebby** (internal; use sparingly in product) |
-| Role | Learning buddy — curious, smart, encouraging, friendly |
-| Asset | `design/mascot/mascot_academe.png` (full sheet: expressions, actions, turnaround) |
-| Public copy | Prefer “learning buddy” / AI tutor over the name |
+Learning buddy for students — curious, smart, encouraging, friendly.
 
-## Character (from sheet)
+## In product UI
 
-- Soft rounded **blob** body  
-- Soft **periwinkle / purple-blue** in source art (recolor to brand primary when integrating)  
-- White face panel, large eyes  
-- **Three head tufts** as signature  
-- Soft 3D/plush presentation in source; product may use stills or Rive later  
+- Prefer **“learning buddy”** or no name on screens  
+- Internal design name exists; **don’t put it on every empty state**  
+- Show the character on: onboarding, empty library, wins, optional AI thinking  
+- Not on every list row  
 
-## When it appears
+## Asset
 
-| Surface | Yes? |
-|---------|------|
-| Onboarding, empty states | Yes |
-| Session complete / wins | Yes |
-| AI thinking | Optional small |
-| Every content row | **No** |
-| Settings: hide character | Yes |
+Full character sheet (expressions, study actions, turnaround):
 
-## Motion
+`design/mascot/mascot_academe.png` (also `/mascot.png` on this site)
 
-See [Motion](./motion.md). State IDs live in catalog; don’t invent new names casually.
+## Motion next
 
-## Don’t
+Map expressions to states: idle · wave · think · celebrate · encourage · wow · sleepy  
 
-- Guilt-spam Clippy behavior  
-- New style every screen  
-- Over-brand the name in UI  
+See [Motion](./motion.md).
