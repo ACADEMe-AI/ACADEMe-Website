@@ -1,24 +1,26 @@
-# Mascot
+# Learning buddy
 
-## Role
+Soft rounded character that coaches students. Internal name exists for design work. Prefer “learning buddy” in product UI.
 
-Learning buddy for students — curious, smart, encouraging, friendly.
+## Traits
 
-## In product UI
+* Curious  
+* Smart  
+* Encouraging  
+* Friendly  
 
-- Prefer **“learning buddy”** or no name on screens  
-- Internal design name exists; **don’t put it on every empty state**  
-- Show the character on: onboarding, empty library, wins, optional AI thinking  
-- Not on every list row  
+## Assets on this site
 
-## Asset
+Hero and pose files live in `/mascot/`. Logo cube mark lives in `/brand/`.
 
-Full character sheet (expressions, study actions, turnaround):
+## Do
 
-`design/mascot/mascot_academe.png` (also `/mascot.png` on this site)
+* Keep proportions consistent across poses  
+* Recolor toward brand blue when placing in dark UI if needed  
+* Pair with short microcopy  
 
-## Motion next
+## Do not
 
-Map expressions to states: idle · wave · think · celebrate · encourage · wow · sleepy  
-
-See [Motion](./motion.md).
+* Put the full multi panel guide image inside the app  
+* Use the character on every screen  
+* Add sharp or noisy styles that break the soft look  

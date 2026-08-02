@@ -1,7 +1,7 @@
 export type NavItem = {
   path: string;
   label: string;
-  file: string;
+  file?: string;
   description?: string;
 };
 
@@ -12,54 +12,56 @@ export type NavGroup = {
   items: NavItem[];
 };
 
-/**
- * Human-clear IA:
- * Brand  → how we look & sound
- * Product → what we build & in what order
- * Build  → rules for agents/engineers
- * Visual → mascot, shape language, motion
- */
+/** Simple map inspired by Material, Polaris, Carbon: few top items, clear sections */
 export const navGroups: NavGroup[] = [
+  {
+    id: "start",
+    label: "Start",
+    description: "Where to begin",
+    items: [
+      { path: "/start", label: "Overview", file: "start/overview.md", description: "How this site works" },
+      { path: "/start/checklist", label: "What next", file: "product/checklist.md", description: "Current tasks" },
+    ],
+  },
   {
     id: "brand",
     label: "Brand",
-    description: "How ACADEMe looks and sounds",
+    description: "Look and sound",
     items: [
-      { path: "/brand/color", label: "Color", file: "identity/color.md", description: "Dark & light palettes" },
-      { path: "/brand/tokens", label: "Tokens", file: "identity/tokens.md", description: "Spacing, type, motion" },
-      { path: "/brand/logo", label: "Logo", file: "identity/logo.md", description: "Wordmark & app icon" },
-      { path: "/brand/voice", label: "Voice", file: "writing/voice.md", description: "Tone of copy" },
-      { path: "/brand/messaging", label: "Messaging", file: "writing/messaging.md", description: "Pitches & CTAs" },
+      { path: "/brand/logo", label: "Logo", file: "identity/logo.md", description: "Marks and usage" },
+      { path: "/brand/color", label: "Color", file: "identity/color.md", description: "Palettes" },
+      { path: "/brand/type", label: "Type and space", file: "identity/tokens.md", description: "Tokens" },
+      { path: "/brand/voice", label: "Voice", file: "writing/voice.md", description: "How we write" },
+    ],
+  },
+  {
+    id: "character",
+    label: "Character",
+    description: "Learning buddy assets",
+    items: [
+      { path: "/character", label: "Meet the buddy", file: "illustration/mascot.md", description: "Overview" },
+      { path: "/character/expressions", label: "Expressions", file: "illustration/expressions.md", description: "Faces and moods" },
+      { path: "/character/moments", label: "In the app", file: "illustration/moments.md", description: "Study moments" },
+      { path: "/character/motion", label: "Motion", file: "illustration/motion.md", description: "Animation states" },
     ],
   },
   {
     id: "product",
     label: "Product",
-    description: "What to build and when",
+    description: "What we ship",
     items: [
       { path: "/product/roadmap", label: "Roadmap", file: "product/roadmap.md", description: "Phase order" },
-      { path: "/product/checklist", label: "Checklist", file: "product/checklist.md", description: "What to do next" },
-      { path: "/product/app-ia", label: "App structure", file: "product/app-ia.md", description: "Tabs & flows" },
+      { path: "/product/structure", label: "App structure", file: "product/app-ia.md", description: "Tabs and flow" },
     ],
   },
   {
     id: "build",
     label: "Build",
-    description: "Rules for agents & engineers",
+    description: "Rules for makers",
     items: [
-      { path: "/build/start", label: "Start here", file: "agents/how-to-use.md", description: "How to use this system" },
-      { path: "/build/guardrails", label: "Guardrails", file: "agents/guardrails.md", description: "Hard product rules" },
-      { path: "/build/architecture", label: "Architecture", file: "agents/architecture.md", description: "Code structure" },
-    ],
-  },
-  {
-    id: "visual",
-    label: "Visual",
-    description: "Mascot, illustration, motion",
-    items: [
-      { path: "/visual/mascot", label: "Mascot", file: "illustration/mascot.md", description: "Character sheet" },
-      { path: "/visual/shape-language", label: "Shape language", file: "illustration/shape-language.md", description: "How we draw" },
-      { path: "/visual/motion", label: "Motion", file: "illustration/motion.md", description: "Animation states" },
+      { path: "/build/rules", label: "Rules", file: "agents/guardrails.md", description: "Hard limits" },
+      { path: "/build/architecture", label: "Architecture", file: "agents/architecture.md", description: "Code shape" },
+      { path: "/build/agents", label: "For agents", file: "agents/how-to-use.md", description: "Read order" },
     ],
   },
 ];
@@ -68,35 +70,10 @@ export function fileForPath(pathname: string): string | null {
   if (pathname === "/" || pathname === "") return null;
   for (const group of navGroups) {
     for (const item of group.items) {
-      if (item.path === pathname) return item.file;
+      if (item.path === pathname && item.file) return item.file;
     }
   }
-  // legacy paths
-  const legacy: Record<string, string> = {
-    "/identity": "identity/overview.md",
-    "/identity/color": "identity/color.md",
-    "/identity/tokens": "identity/tokens.md",
-    "/identity/logo": "identity/logo.md",
-    "/writing": "writing/overview.md",
-    "/writing/voice": "writing/voice.md",
-    "/writing/messaging": "writing/messaging.md",
-    "/illustration": "illustration/overview.md",
-    "/illustration/shape-language": "illustration/shape-language.md",
-    "/illustration/mascot": "illustration/mascot.md",
-    "/illustration/motion": "illustration/motion.md",
-    "/marketing": "marketing/overview.md",
-    "/marketing/showcase": "marketing/showcase-site.md",
-    "/marketing/ctas": "marketing/ctas.md",
-    "/product": "product/overview.md",
-    "/product/roadmap": "product/roadmap.md",
-    "/product/checklist": "product/checklist.md",
-    "/product/app-ia": "product/app-ia.md",
-    "/agents": "agents/overview.md",
-    "/agents/guardrails": "agents/guardrails.md",
-    "/agents/architecture": "agents/architecture.md",
-    "/agents/how-to-use": "agents/how-to-use.md",
-  };
-  return legacy[pathname] ?? "00-START-HERE.md";
+  return "start/overview.md";
 }
 
 export function labelForPath(pathname: string): string {
@@ -105,5 +82,9 @@ export function labelForPath(pathname: string): string {
       if (item.path === pathname) return item.label;
     }
   }
-  return "Docs";
+  return "Page";
+}
+
+export function groupForPath(pathname: string) {
+  return navGroups.find((g) => g.items.some((i) => i.path === pathname));
 }

@@ -1,21 +1,23 @@
 # Logo
 
-## Primary mark
+Cube grid mark for ACADEMe. Transparent files are ready for dark and light surfaces.
 
-Use the ACADEMe mark from `/logo.png` (repo: `public/Logos/7.png`).
+## Files
 
-| Context | Treatment |
-|---------|-----------|
-| Dark UI | Logo as-is on dark surface |
-| Light UI | Logo on white / light gray |
-| Nav | 32px height minimum |
+| File | Use on |
+|------|--------|
+| /brand/logo-on-dark.png | Dark backgrounds (default site) |
+| /brand/logo-on-light.png | Light backgrounds and print |
 
 ## Rules
 
-- Don’t stretch or recolor arbitrarily  
-- Keep clear space around the mark  
-- Pair with wordmark “ACADEMe” when space allows  
+* Keep the cube upright  
+* Do not stretch  
+* Leave clear space around the mark equal to one small cube face  
+* Prefer the mark alone at small sizes; add “ACADEMe” wordmark when space allows  
 
-## App icon
+## Sizes
 
-See product icon plan — letter “A” / mark until character icon is locked.
+* Nav: about 32px tall  
+* Hero: 48px to 72px tall  
+* Favicon: simplify if needed later  

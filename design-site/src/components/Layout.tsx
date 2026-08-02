@@ -1,75 +1,9 @@
 import { Link, NavLink, Outlet, useLocation } from "react-router-dom";
 import { navGroups } from "../lib/nav";
-import { ChevronDown, Menu, X } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { Menu, X } from "lucide-react";
+import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import SmoothScroll from "./SmoothScroll";
-
-function DesktopDropdown({
-  group,
-}: {
-  group: (typeof navGroups)[0];
-}) {
-  const [open, setOpen] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
-  const location = useLocation();
-
-  useEffect(() => setOpen(false), [location.pathname]);
-
-  useEffect(() => {
-    const onDoc = (e: MouseEvent) => {
-      if (!ref.current?.contains(e.target as Node)) setOpen(false);
-    };
-    document.addEventListener("mousedown", onDoc);
-    return () => document.removeEventListener("mousedown", onDoc);
-  }, []);
-
-  const active = group.items.some((i) => i.path === location.pathname);
-
-  return (
-    <div className="relative" ref={ref}>
-      <button
-        type="button"
-        onClick={() => setOpen((v) => !v)}
-        className={`inline-flex items-center gap-1 px-3 py-2 rounded-xl text-sm font-medium transition-colors ${
-          active || open
-            ? "text-white bg-white/[0.06]"
-            : "text-muted hover:text-white hover:bg-white/[0.04]"
-        }`}
-      >
-        {group.label}
-        <ChevronDown
-          className={`w-3.5 h-3.5 transition-transform ${open ? "rotate-180" : ""}`}
-        />
-      </button>
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 6 }}
-            transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="absolute left-0 top-full mt-2 w-64 rounded-2xl border border-white/10 bg-[#12141c]/95 backdrop-blur-xl shadow-2xl shadow-black/40 p-2 z-50"
-          >
-            <p className="px-3 pt-2 pb-1.5 text-[11px] text-muted">{group.description}</p>
-            {group.items.map((item) => (
-              <Link
-                key={item.path}
-                to={item.path}
-                className="block rounded-xl px-3 py-2.5 hover:bg-white/[0.05] transition-colors"
-              >
-                <div className="text-sm font-medium text-white">{item.label}</div>
-                {item.description && (
-                  <div className="text-[12px] text-muted mt-0.5">{item.description}</div>
-                )}
-              </Link>
-            ))}
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
-  );
-}
 
 export default function Layout() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -79,66 +13,87 @@ export default function Layout() {
 
   return (
     <SmoothScroll>
-      <div className="grain" aria-hidden />
-      <div className="min-h-screen flex flex-col relative">
-        {/* Top bar */}
-        <header className="sticky top-0 z-40 border-b border-white/[0.07] bg-[#07080c]/85 backdrop-blur-xl">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
-            <Link to="/" className="flex items-center gap-2.5 shrink-0 group">
+      <div className="min-h-screen flex flex-col bg-[#0a0b0f] text-[#f2f3f5]">
+        <header className="sticky top-0 z-50 border-b border-white/[0.08] bg-[#0a0b0f]/92 backdrop-blur-md">
+          <div className="mx-auto flex h-[4.25rem] max-w-[1120px] items-center justify-between gap-6 px-5">
+            <Link to="/" className="flex items-center gap-3 shrink-0">
               <img
-                src="/logo.png"
+                src="/brand/logo-on-dark.png"
                 alt="ACADEMe"
-                className="w-8 h-8 object-contain opacity-95 group-hover:opacity-100 transition-opacity"
+                className="h-9 w-9 object-contain"
               />
-              <div className="leading-tight">
-                <div className="font-semibold text-[15px] tracking-tight text-white">
-                  ACADEMe
-                </div>
-                <div className="text-[10px] text-muted tracking-wide hidden sm:block">
-                  Design system
-                </div>
+              <div className="hidden sm:block leading-none">
+                <div className="text-[15px] font-semibold tracking-tight">ACADEMe</div>
+                <div className="mt-1 text-[11px] text-[#8b93a7]">Design</div>
               </div>
             </Link>
 
-            {/* Desktop menu with dropdowns */}
-            <nav className="hidden md:flex items-center gap-0.5">
-              {navGroups.map((g) => (
-                <DesktopDropdown key={g.id} group={g} />
+            {/* Desktop: hover dropdowns (CSS group) */}
+            <nav className="hidden lg:flex items-center gap-1">
+              {navGroups.map((group) => (
+                <div key={group.id} className="group relative">
+                  <button
+                    type="button"
+                    className="inline-flex items-center gap-1 rounded-lg px-3 py-2 text-[13px] font-medium text-[#aeb5c4] transition-colors group-hover:bg-white/[0.05] group-hover:text-white"
+                  >
+                    {group.label}
+                  </button>
+                  <div className="invisible absolute left-0 top-full z-50 w-64 pt-2 opacity-0 transition-all duration-150 group-hover:visible group-hover:opacity-100">
+                    <div className="rounded-xl border border-white/10 bg-[#12141c] p-2 shadow-2xl shadow-black/50">
+                      <p className="px-3 pb-2 pt-1 text-[11px] text-[#8b93a7]">
+                        {group.description}
+                      </p>
+                      {group.items.map((item) => (
+                        <Link
+                          key={item.path}
+                          to={item.path}
+                          className="block rounded-lg px-3 py-2.5 transition-colors hover:bg-white/[0.06]"
+                        >
+                          <div className="text-[13px] font-medium text-white">
+                            {item.label}
+                          </div>
+                          {item.description && (
+                            <div className="mt-0.5 text-[12px] text-[#8b93a7]">
+                              {item.description}
+                            </div>
+                          )}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                </div>
               ))}
             </nav>
 
-            <div className="hidden md:flex items-center gap-2">
-              <Link
-                to="/product/checklist"
-                className="text-sm font-medium text-primary hover:text-primary/80 px-3 py-2"
-              >
-                What next?
-              </Link>
-            </div>
+            <Link
+              to="/start/checklist"
+              className="hidden md:inline-flex rounded-full bg-[#5b6cff] px-4 py-2 text-[13px] font-semibold text-white transition hover:bg-[#6b7aff]"
+            >
+              What next
+            </Link>
 
             <button
               type="button"
-              className="md:hidden p-2 text-muted hover:text-white"
-              aria-label="Open menu"
+              className="lg:hidden p-2 text-[#aeb5c4]"
+              aria-label="Menu"
               onClick={() => setMobileOpen((v) => !v)}
             >
-              {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </button>
           </div>
 
-          {/* Mobile full menu */}
           <AnimatePresence>
             {mobileOpen && (
               <motion.div
                 initial={{ height: 0, opacity: 0 }}
                 animate={{ height: "auto", opacity: 1 }}
                 exit={{ height: 0, opacity: 0 }}
-                className="md:hidden border-t border-white/[0.07] bg-[#0a0b10] overflow-hidden"
+                className="border-t border-white/[0.08] bg-[#0a0b0f] lg:hidden overflow-hidden"
               >
-                <div className="px-4 py-4 space-y-5 max-h-[70vh] overflow-y-auto">
+                <div className="max-h-[70vh] overflow-y-auto px-4 py-4 space-y-5">
                   {navGroups.map((group) => (
                     <div key={group.id}>
-                      <div className="text-[11px] font-semibold uppercase tracking-wider text-muted mb-2">
+                      <div className="mb-2 text-[11px] font-semibold uppercase tracking-wider text-[#8b93a7]">
                         {group.label}
                       </div>
                       <div className="space-y-1">
@@ -147,10 +102,10 @@ export default function Layout() {
                             key={item.path}
                             to={item.path}
                             className={({ isActive }) =>
-                              `block rounded-xl px-3 py-2.5 text-sm ${
+                              `block rounded-lg px-3 py-2 text-sm ${
                                 isActive
-                                  ? "bg-primary/15 text-white"
-                                  : "text-muted hover:text-white hover:bg-white/[0.04]"
+                                  ? "bg-[#5b6cff]/20 text-white"
+                                  : "text-[#aeb5c4] hover:bg-white/[0.04] hover:text-white"
                               }`
                             }
                           >
@@ -166,18 +121,16 @@ export default function Layout() {
           </AnimatePresence>
         </header>
 
-        <main className="flex-1 relative">
-          <div className="pointer-events-none absolute inset-0 overflow-hidden">
-            <div className="glow-orb w-[380px] h-[380px] bg-primary/15 -top-24 right-0" />
-          </div>
-          <div className="relative max-w-6xl mx-auto px-4 sm:px-6 py-10 sm:py-14">
+        <main className="relative flex-1">
+          <div className="pointer-events-none absolute inset-x-0 top-0 h-72 bg-[radial-gradient(ellipse_at_top,rgba(91,108,255,0.12),transparent_60%)]" />
+          <div className="relative mx-auto max-w-[1120px] px-5 py-10 sm:py-12">
             <AnimatePresence mode="wait">
               <motion.div
                 key={location.pathname}
-                initial={{ opacity: 0, y: 12 }}
+                initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -8 }}
-                transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
               >
                 <Outlet />
               </motion.div>
@@ -185,13 +138,13 @@ export default function Layout() {
           </div>
         </main>
 
-        <footer className="border-t border-white/[0.07] py-8">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-sm text-muted">
-            <div className="flex items-center gap-2">
-              <img src="/logo.png" alt="" className="w-5 h-5 object-contain opacity-70" />
-              <span>ACADEMe Design System</span>
+        <footer className="border-t border-white/[0.08] py-8">
+          <div className="mx-auto flex max-w-[1120px] flex-col gap-3 px-5 sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex items-center gap-2.5">
+              <img src="/brand/logo-on-dark.png" alt="" className="h-6 w-6 object-contain opacity-80" />
+              <span className="text-sm text-[#8b93a7]">ACADEMe Design</span>
             </div>
-            <p className="text-xs">For builders & agents · keep product UI simple</p>
+            <p className="text-xs text-[#6b7285]">Builders and agents · keep product UI simple</p>
           </div>
         </footer>
       </div>

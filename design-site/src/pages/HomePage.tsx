@@ -1,177 +1,191 @@
 import { Link } from "react-router-dom";
 import { navGroups } from "../lib/nav";
-import { ArrowRight, CheckCircle2, ListOrdered, Palette, Wrench } from "lucide-react";
-import Reveal from "../components/Reveal";
+import { ArrowRight } from "lucide-react";
 
-const starts = [
+const paths = [
   {
-    title: "What do we build next?",
-    desc: "Roadmap and checklist — one path, no confusion.",
-    to: "/product/checklist",
-    icon: ListOrdered,
-    cta: "Open checklist",
+    title: "What next",
+    body: "See the current checklist and build order.",
+    to: "/start/checklist",
   },
   {
-    title: "Brand basics",
-    desc: "Colors, logo, and voice in one place.",
-    to: "/brand/color",
-    icon: Palette,
-    cta: "See brand",
+    title: "Brand",
+    body: "Logo, color, and how we write.",
+    to: "/brand/logo",
   },
   {
-    title: "Building as an agent",
-    desc: "Hard rules so you don’t invent process.",
-    to: "/build/start",
-    icon: Wrench,
-    cta: "Read rules",
+    title: "Character",
+    body: "Learning buddy poses for the app.",
+    to: "/character",
   },
+];
+
+const poses = [
+  { src: "/mascot/idle.jpg", label: "Default" },
+  { src: "/mascot/thinking.jpg", label: "Thinking" },
+  { src: "/mascot/studying.jpg", label: "Studying" },
+  { src: "/mascot/celebrate.jpg", label: "Celebrate" },
+  { src: "/mascot/wave.jpg", label: "Wave" },
 ];
 
 export default function HomePage() {
   return (
-    <div>
+    <div className="space-y-16">
       {/* Hero */}
-      <section className="grid lg:grid-cols-[1.1fr_0.9fr] gap-10 lg:gap-14 items-center mb-16">
+      <section className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
         <div>
-          <div className="flex items-center gap-3 mb-6">
-            <img src="/logo.png" alt="ACADEMe logo" className="w-12 h-12 object-contain" />
-            <span className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">
+          <div className="mb-5 flex items-center gap-3">
+            <img
+              src="/brand/logo-on-dark.png"
+              alt="ACADEMe logo"
+              className="h-11 w-11 object-contain"
+            />
+            <span className="text-xs font-semibold uppercase tracking-[0.14em] text-[#8b93a7]">
               Design system
             </span>
           </div>
 
-          <h1 className="text-[clamp(2.25rem,5.5vw,3.5rem)] font-bold tracking-[-0.04em] leading-[1.05] text-white mb-4">
-            Clear rules.
-            <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">
-              One place to look.
-            </span>
+          <h1 className="mb-4 text-[clamp(2.1rem,4.5vw,3.15rem)] font-semibold leading-[1.08] tracking-tight text-white">
+            Build ACADEMe with clear rules and real assets
           </h1>
 
-          <p className="text-lg text-muted max-w-md leading-relaxed mb-8">
-            Brand, product order, and build rules for ACADEMe. Short pages.
-            Real logos and character art — not walls of text.
+          <p className="mb-8 max-w-md text-[17px] leading-relaxed text-[#9aa3b5]">
+            Logo, color, character poses, product order, and build rules.
+            Short pages. Images first. One path when you are unsure.
           </p>
 
           <div className="flex flex-wrap gap-3">
             <Link
-              to="/product/checklist"
-              className="inline-flex items-center gap-2 bg-primary hover:bg-primary/90 text-white text-sm font-semibold px-5 py-3 rounded-2xl shadow-[0_0_32px_rgba(91,108,255,0.35)]"
+              to="/start/checklist"
+              className="inline-flex items-center gap-2 rounded-full bg-[#5b6cff] px-5 py-2.5 text-sm font-semibold text-white hover:bg-[#6b7aff]"
             >
-              Start: what next?
-              <ArrowRight className="w-4 h-4" />
+              Start with checklist
+              <ArrowRight className="h-4 w-4" />
             </Link>
             <Link
-              to="/visual/mascot"
-              className="inline-flex items-center gap-2 border border-white/10 bg-white/[0.03] hover:border-primary/40 text-sm font-medium px-5 py-3 rounded-2xl text-muted hover:text-white"
+              to="/character"
+              className="inline-flex items-center gap-2 rounded-full border border-white/15 px-5 py-2.5 text-sm font-medium text-[#c5cad6] hover:border-white/30 hover:text-white"
             >
-              See mascot
+              View character
             </Link>
           </div>
         </div>
 
-        <Reveal y={24}>
-          <div className="relative rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.05] to-transparent p-4 sm:p-6 overflow-hidden">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(91,108,255,0.2),transparent_55%)]" />
+        <div className="relative">
+          <div className="absolute -inset-4 rounded-[2rem] bg-[#5b6cff]/10 blur-2xl" />
+          <div className="relative overflow-hidden rounded-[1.75rem] border border-white/10 bg-[#12141c] p-6 sm:p-8">
             <img
-              src="/mascot.png"
-              alt="ACADEMe learning buddy character sheet"
-              className="relative w-full h-auto rounded-2xl object-cover max-h-[420px] object-top"
+              src="/mascot/hero.jpg"
+              alt="ACADEMe learning buddy"
+              className="mx-auto h-auto w-full max-w-[320px] object-contain"
             />
-            <p className="relative mt-3 text-xs text-muted text-center">
-              Character sheet · learning buddy (name used sparingly in product)
+            <p className="mt-4 text-center text-sm text-[#8b93a7]">
+              Learning buddy · use sparingly in product UI
             </p>
           </div>
-        </Reveal>
+        </div>
       </section>
 
-      {/* 3 clear starts */}
-      <section className="mb-16">
-        <h2 className="text-sm font-semibold uppercase tracking-[0.14em] text-muted mb-4">
-          Pick how you arrived
+      {/* Three paths */}
+      <section>
+        <h2 className="mb-4 text-sm font-semibold uppercase tracking-[0.12em] text-[#8b93a7]">
+          Choose a path
         </h2>
-        <div className="grid sm:grid-cols-3 gap-4">
-          {starts.map((s, i) => (
-            <Reveal key={s.to} delay={0.06 * i}>
-              <Link
-                to={s.to}
-                className="group flex flex-col h-full rounded-2xl border border-white/[0.08] bg-white/[0.02] p-5 hover:border-primary/40 hover:bg-white/[0.04] transition-all"
-              >
-                <s.icon className="w-6 h-6 text-primary mb-3" />
-                <h3 className="text-base font-semibold text-white mb-1">{s.title}</h3>
-                <p className="text-sm text-muted flex-1 mb-4">{s.desc}</p>
-                <span className="text-sm font-medium text-primary inline-flex items-center gap-1">
-                  {s.cta}
-                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
-                </span>
-              </Link>
-            </Reveal>
+        <div className="grid gap-4 sm:grid-cols-3">
+          {paths.map((p) => (
+            <Link
+              key={p.to}
+              to={p.to}
+              className="group rounded-2xl border border-white/[0.08] bg-[#111318] p-5 transition hover:border-[#5b6cff]/50 hover:bg-[#141824]"
+            >
+              <h3 className="mb-2 text-base font-semibold text-white">{p.title}</h3>
+              <p className="mb-4 text-sm leading-relaxed text-[#8b93a7]">{p.body}</p>
+              <span className="inline-flex items-center gap-1 text-sm font-medium text-[#7b8cff]">
+                Open
+                <ArrowRight className="h-3.5 w-3.5 transition group-hover:translate-x-0.5" />
+              </span>
+            </Link>
           ))}
         </div>
       </section>
 
-      {/* Menu map */}
-      <section className="mb-16">
-        <h2 className="text-sm font-semibold uppercase tracking-[0.14em] text-muted mb-4">
-          Full menu
-        </h2>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {navGroups.map((g, i) => (
-            <Reveal key={g.id} delay={0.05 * i}>
-              <div className="rounded-2xl border border-white/[0.07] bg-[#0e1016] p-5 h-full">
-                <h3 className="text-white font-semibold mb-1">{g.label}</h3>
-                <p className="text-xs text-muted mb-3">{g.description}</p>
-                <ul className="space-y-1.5">
-                  {g.items.map((item) => (
-                    <li key={item.path}>
-                      <Link
-                        to={item.path}
-                        className="text-sm text-muted hover:text-primary transition-colors"
-                      >
-                        {item.label}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-      </section>
-
-      {/* Simple order */}
-      <Reveal>
-        <section className="rounded-3xl border border-white/[0.08] bg-gradient-to-br from-primary/10 to-transparent p-6 sm:p-8">
-          <h2 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
-            <CheckCircle2 className="w-5 h-5 text-accent" />
-            Build order (don’t skip)
+      {/* Character strip */}
+      <section>
+        <div className="mb-4 flex items-end justify-between gap-4">
+          <h2 className="text-sm font-semibold uppercase tracking-[0.12em] text-[#8b93a7]">
+            Character poses
           </h2>
-          <ol className="space-y-3 text-sm text-muted">
-            <li className="flex gap-3">
-              <span className="text-primary font-mono font-semibold">1</span>
-              Finish this design system (you’re here)
-            </li>
-            <li className="flex gap-3">
-              <span className="text-primary font-mono font-semibold">2</span>
-              Polish marketing website (QR, colors, clear copy)
-            </li>
-            <li className="flex gap-3">
-              <span className="text-primary font-mono font-semibold">3</span>
-              Mascot motion for the app
-            </li>
-            <li className="flex gap-3">
-              <span className="text-primary font-mono font-semibold">4</span>
-              Mobile student product
-            </li>
-          </ol>
-          <Link
-            to="/product/roadmap"
-            className="inline-flex mt-5 text-sm font-medium text-primary hover:underline"
-          >
-            Full roadmap →
+          <Link to="/character/expressions" className="text-sm text-[#7b8cff] hover:underline">
+            All expressions
           </Link>
-        </section>
-      </Reveal>
+        </div>
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-5">
+          {poses.map((p) => (
+            <div
+              key={p.label}
+              className="rounded-2xl border border-white/[0.08] bg-[#111318] p-3 text-center"
+            >
+              <div className="mb-2 flex aspect-square items-center justify-center rounded-xl bg-white/[0.03]">
+                <img src={p.src} alt={p.label} className="max-h-full max-w-full object-contain" />
+              </div>
+              <p className="text-xs font-medium text-[#c5cad6]">{p.label}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Site map */}
+      <section>
+        <h2 className="mb-4 text-sm font-semibold uppercase tracking-[0.12em] text-[#8b93a7]">
+          Site map
+        </h2>
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
+          {navGroups.map((g) => (
+            <div
+              key={g.id}
+              className="rounded-2xl border border-white/[0.07] bg-[#0e1016] p-4"
+            >
+              <p className="mb-1 text-sm font-semibold text-white">{g.label}</p>
+              <p className="mb-3 text-[12px] text-[#8b93a7]">{g.description}</p>
+              <ul className="space-y-1">
+                {g.items.map((item) => (
+                  <li key={item.path}>
+                    <Link
+                      to={item.path}
+                      className="text-[13px] text-[#9aa3b5] hover:text-[#7b8cff]"
+                    >
+                      {item.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Order */}
+      <section className="rounded-2xl border border-white/[0.08] bg-[#111318] p-6 sm:p-8">
+        <h2 className="mb-4 text-lg font-semibold text-white">Build order</h2>
+        <ol className="space-y-3 text-sm text-[#9aa3b5]">
+          <li>
+            <span className="mr-2 font-mono text-[#5b6cff]">1</span>
+            Design system (this site)
+          </li>
+          <li>
+            <span className="mr-2 font-mono text-[#5b6cff]">2</span>
+            Marketing website polish
+          </li>
+          <li>
+            <span className="mr-2 font-mono text-[#5b6cff]">3</span>
+            Character motion in the app
+          </li>
+          <li>
+            <span className="mr-2 font-mono text-[#5b6cff]">4</span>
+            Mobile student product
+          </li>
+        </ol>
+      </section>
     </div>
   );
 }
