@@ -1,6 +1,6 @@
 # ACADEMe Design System Site
 
-Agent-first design docs (pattern: [design.duolingo.com](https://design.duolingo.com/)).
+Agent-first design docs for ACADEMe (brand, product order, build rules).
 
 ## Run
 

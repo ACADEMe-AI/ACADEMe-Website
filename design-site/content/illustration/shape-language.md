@@ -1,6 +1,6 @@
 # Shape language
 
-Adapted from industry practice (e.g. Duolingo design.duolingo.com illustration guides). ACADEMe-owned colors and characters.
+Industry shape-language practice: few soft primitives, simple budgets. ACADEMe colors and characters only.
 
 ## Construction
 

@@ -18,4 +18,4 @@ Create artwork that feels at home in ACADEMe: clear, soft-geometric, fast to pro
 
 ## Reference method
 
-Duolingo public design system (shape language / characters) — **method only**, not Duo IP or green owl.
+Rounded primitives, simple shape budgets, clear silhouettes — our brand only.

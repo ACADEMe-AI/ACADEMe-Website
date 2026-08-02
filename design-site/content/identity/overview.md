@@ -14,7 +14,7 @@ Successfully represent ACADEMe with core brand elements and usage rules.
 |--|--|
 | **Product** | AI study companion for students & college grads |
 | **Feel** | Fast + clean (IG/TikTok smooth); light playful moments |
-| **Not** | Corporate LMS day one · cartoon Duolingo clone · “all devices” yet |
+| **Not** | Corporate LMS day one · generic cartoon clone · “all devices” yet |
 
 ## Dual surfaces
 
