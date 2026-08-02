@@ -1,6 +1,6 @@
 # Learning buddy
 
-Soft rounded character that coaches students. Keep the internal name for design work only. In product UI prefer “learning buddy” or no name at all.
+Soft rounded character that coaches students. Internal name: **Pebby** (design work only, spare use). In product UI prefer “learning buddy” or no name at all.
 
 ## Source
 

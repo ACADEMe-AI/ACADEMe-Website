@@ -13,7 +13,7 @@
 
 ```
 Upload / capture → Material hub
-  → Summary | Notes | Flashcards | Quiz | Practice | Chat about this
+  → Chat | Flashcards | Quizzes | Summaries | Practice tests
 ```
 
 ## Nav rule

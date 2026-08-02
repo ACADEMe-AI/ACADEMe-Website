@@ -1,13 +1,13 @@
 # Product roadmap (current)
 
-**Updated:** 2026-08-02  
+**Updated:** 2026-08-03  
 
 ## Phase map
 
 ```
-0.4  Design system site (design.academe / src/design)  ← NOW
+0.4  Design system site (src/design)            ✅ shipped (PR #3)
   ↓
-0.5  Marketing showcase site polish (QR, tokens, copy)
+0.5  Marketing showcase site polish (QR, tokens, copy)  ← NOW
   ↓
 0.6  Guardrails (done — keep maintained)
   ↓
@@ -27,7 +27,7 @@
 | Phase | Done when |
 |-------|-----------|
 | **0.4** | Agents open `src/design/content/` first; site runs at `/design`; roadmap points here |
-| **0.5** | Marketing site uses B/D tokens; no “all devices”; QR path clear |
+| **0.5** | Marketing site uses D tokens; no “all devices”; QR path clear |
 | **0.8** | At least idle + celebrate wired; hide-mascot setting planned |
 | **1.0** | Upload → summary/cards/quiz → chat → practice test works on mobile |
 

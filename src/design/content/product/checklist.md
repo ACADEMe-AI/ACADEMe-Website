@@ -14,10 +14,10 @@
 
 ## Phase 0.5 — Marketing site (next)
 
-- [ ] Align Tailwind colors to Scheme B  
-- [ ] Remove “all devices” language  
-- [ ] QR + store badges  
-- [ ] Feature copy = 5 study pillars  
+- [x] Tailwind colors aligned to Scheme D (light default)  
+- [ ] Remove “all devices” + “millions of learners” language  
+- [ ] QR asset + store badges live  
+- [ ] Feature copy = 5 study pillars (chat · flashcards · quizzes · summaries · practice tests)  
 - [ ] Honest social proof structure  
 - [ ] Craft pass (type, motion, signature moment)  
 

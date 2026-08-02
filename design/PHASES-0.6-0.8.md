@@ -28,10 +28,10 @@ This file remains as a **repo-side mirror** of design-phase work.
 
 # Phase 0.5 — Marketing website polish
 
-- [ ] Scheme B colors on root site  
+- [x] Scheme D colors on root site  
 - [ ] QR + App Store / Play  
 - [ ] No “available on all devices”  
-- [ ] Feature pillars = study loop  
+- [ ] Feature pillars = study loop (chat · flashcards · quizzes · summaries · practice tests)  
 - [ ] Craft bar ≥ 8/10  
 
 ---
