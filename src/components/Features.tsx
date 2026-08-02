@@ -1,4 +1,3 @@
-import React from "react";
 import { Brain, Zap, Target, Users, BookOpen, TrendingUp } from "lucide-react";
 
 const Features = () => {

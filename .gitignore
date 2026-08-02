@@ -24,6 +24,9 @@ dist-ssr
 *.sw?
 .env
 
+# TypeScript build info
+*.tsbuildinfo
+
 # design-site
 design-site/node_modules/
 design-site/dist/

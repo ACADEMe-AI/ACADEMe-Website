@@ -1,6 +1,5 @@
-import React from "react";
 import { Link } from "react-router-dom";
-import { Github, Twitter, Linkedin, Mail, MapPin, Phone } from "lucide-react";
+import { MapPin } from "lucide-react";
 
 const Footer = () => {
   return (
@@ -12,11 +11,10 @@ const Footer = () => {
             <div className="flex items-center space-x-3">
               <div className="w-10 h-10 relative">
                 <img
-                  src="robot_logo.png"
-                  alt="AI Education Logo"
-                  className="w-full h-full object-contain filter brightness-0 invert"
+                  src="/logos/logo-white-bg-removed.png"
+                  alt="ACADEMe"
+                  className="w-full h-full object-contain"
                 />
-                <div className="absolute inset-0 bg-gradient-to-r from-primary to-secondary opacity-60 mix-blend-multiply rounded-full"></div>
               </div>
               <span className="text-xl font-bold bg-gradient-to-r from-text-primary to-text-secondary bg-clip-text text-transparent">
                 ACADEMe
