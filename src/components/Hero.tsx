@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { Download, Play, Star } from "lucide-react";
 
 const Hero = () => {
@@ -26,7 +26,7 @@ const Hero = () => {
   }, []);
 
   return (
-    <div className="relative min-h-screen bg-background overflow-hidden pt-28">
+    <div className="relative min-h-screen bg-background overflow-hidden pt-24 sm:pt-28">
       {/* Background elements */}
       <div className="absolute inset-0">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl"></div>
@@ -147,9 +147,9 @@ const Hero = () => {
                       <div className="text-center space-y-2">
                         <div className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 mx-auto bg-surface rounded-2xl flex items-center justify-center border border-border">
                           <img
-                            src="robot_logo.png"
-                            alt="AI Logo"
-                            className="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8 filter brightness-0 invert"
+                            src="/logos/logo-white-bg-removed.png"
+                            alt="ACADEMe"
+                            className="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8"
                           />
                         </div>
                         <h3 className="text-text-primary font-bold text-sm sm:text-base lg:text-lg">

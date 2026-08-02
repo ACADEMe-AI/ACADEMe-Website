@@ -48,9 +48,9 @@ const PrivacyPolicy = () => {
               <div className="flex items-center space-x-3">
                 <div className="w-8 h-8">
                   <img
-                    src="robot_logo.png"
+                    src="/logos/logo-white-bg-removed.png"
                     alt="ACADEMe"
-                    className="w-full h-full filter brightness-0 invert"
+                    className="w-full h-full"
                   />
                 </div>
                 <span className="text-text-primary font-semibold text-lg">

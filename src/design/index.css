@@ -1,0 +1,758 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+  Structure inspired by brand.dropbox.com tile nav + scroll phases.
+  Identity: ACADEMe — cube mark, soft purple buddy, primary #5B6CFF.
+*/
+
+:root {
+  --tab: #5b6cff;
+  --tab-hot: #7b8cff;
+  --graphite: #14161c;
+  --ink: #0f1115;
+  --mist: #f4f1ea;
+  --paper: #fffef9;
+  --subtle: #5c6578;
+  --ease: cubic-bezier(0.65, 0, 0.45, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --button-size: 102px;
+  --gap: 10px;
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Hide scrollbars everywhere — scroll still works */
+html {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+html::-webkit-scrollbar {
+  display: none;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  min-height: 100%;
+  background: #fff;
+  color: var(--ink);
+  font-family: Archivo, "Helvetica Neue", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+body::-webkit-scrollbar,
+#root::-webkit-scrollbar,
+*::-webkit-scrollbar {
+  display: none;
+  width: 0 !important;
+  height: 0 !important;
+  background: transparent;
+}
+
+::selection {
+  background: rgba(91, 108, 255, 0.2);
+}
+
+.db-grid {
+  background-image:
+    linear-gradient(to right, rgba(91, 108, 255, 0.14) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(91, 108, 255, 0.14) 1px, transparent 1px);
+  background-size: 16.666% 25%;
+}
+
+.db-display {
+  font-weight: 700;
+  letter-spacing: -0.045em;
+  line-height: 0.94;
+}
+
+/* ========== FULL VIEWPORT TILE STAGE ========== */
+.nav-stage {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+/*
+  Absolute board — each tile sized with calc so a perfect
+  --button-size hole sits at center for the cube (Dropbox method).
+  Columns: 20% | 30% | 30% | 20%
+*/
+.tile-menu {
+  position: absolute;
+  inset: 0;
+}
+
+/* shared tile chrome */
+.tile {
+  --tile-bg: #ccc;
+  --tile-fg: #111;
+  --tile-hover: #ddd;
+  position: absolute;
+  overflow: hidden;
+  text-decoration: none;
+  color: var(--tile-fg);
+  background: var(--tile-bg);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: stretch;
+  padding: 22px 24px;
+  border-radius: 0;
+  isolation: isolate;
+  transition:
+    background-color 0.45s var(--ease),
+    color 0.45s var(--ease),
+    border-radius 0.4s var(--ease),
+    transform 0.5s var(--ease-out),
+    box-shadow 0.45s var(--ease);
+}
+
+.tile::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    120% 80% at 100% 100%,
+    rgba(255, 255, 255, 0.22),
+    transparent 55%
+  );
+  opacity: 0;
+  transition: opacity 0.45s var(--ease);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.tile > * {
+  position: relative;
+  z-index: 1;
+}
+
+.tile:hover {
+  background: var(--tile-hover);
+  border-radius: 0;
+  z-index: 5;
+  box-shadow: 0 22px 50px -24px rgba(15, 17, 21, 0.45);
+  /* don't fight fly-in transform while scrolling */
+}
+
+.tile:hover::after {
+  opacity: 1;
+}
+
+.tile:hover .tile-art {
+  transform: translateY(-6px) scale(1.06);
+}
+
+.tile:hover .tile-title {
+  letter-spacing: -0.03em;
+}
+
+.tile-title {
+  font-size: clamp(1.2rem, 1.65vw, 1.6rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  transition: letter-spacing 0.4s var(--ease);
+}
+
+.tile-art {
+  pointer-events: none;
+  margin-top: auto;
+  align-self: flex-end;
+  max-width: min(72%, 220px);
+  max-height: 52%;
+  transition: transform 0.55s var(--ease-out);
+}
+
+/* --- left col 20% --- */
+.t-framework {
+  left: var(--gap);
+  top: var(--gap);
+  width: calc(20% - var(--gap) * 2);
+  height: calc(50% + var(--button-size) / 2 - var(--gap));
+  transform-origin: 100% 100%;
+  --tile-bg: #1c1f2e;
+  --tile-hover: #2a3148;
+  --tile-fg: #c5cad6;
+}
+.t-icon {
+  left: var(--gap);
+  bottom: var(--gap);
+  width: calc(20% - var(--gap) * 2);
+  height: calc(50% - var(--button-size) / 2 - var(--gap) * 2);
+  transform-origin: 100% 0;
+  --tile-bg: #b8e03a;
+  --tile-hover: #c8eb5c;
+  --tile-fg: #1a3d14;
+}
+
+/* --- mid-left col 30% (stops short of center on Color) --- */
+.t-voice {
+  left: 20%;
+  top: var(--gap);
+  width: calc(30% + var(--button-size) / 2);
+  height: calc(50% - var(--button-size) / 2 - var(--gap) * 2);
+  transform-origin: 100% 100%;
+  --tile-bg: #f0d45c;
+  --tile-hover: #f5df7a;
+  --tile-fg: #3d3200;
+}
+.t-color {
+  left: 20%;
+  bottom: var(--gap);
+  width: calc(30% - var(--button-size) / 2 - var(--gap));
+  height: calc(50% + var(--button-size) / 2 - var(--gap));
+  transform-origin: 100% 0;
+  --tile-bg: #ff9a2e;
+  --tile-hover: #ffb04d;
+  --tile-fg: #3a1800;
+}
+
+/* --- mid-right col 30% (Logo stops short of center) --- */
+.t-logo {
+  right: 20%;
+  top: var(--gap);
+  width: calc(30% - var(--button-size) / 2 - var(--gap));
+  height: calc(50% + var(--button-size) / 2 - var(--gap));
+  transform-origin: 0 100%;
+  --tile-bg: #6ec8ff;
+  --tile-hover: #8ad4ff;
+  --tile-fg: #053a55;
+}
+.t-imagery {
+  right: 20%;
+  bottom: var(--gap);
+  width: calc(30% + var(--button-size) / 2);
+  height: calc(50% - var(--button-size) / 2 - var(--gap) * 2);
+  transform-origin: 0 0;
+  --tile-bg: #6b3d8c;
+  --tile-hover: #7e4da3;
+  --tile-fg: #f3e9fb;
+}
+
+/* --- right col 20% --- */
+.t-type {
+  right: var(--gap);
+  top: var(--gap);
+  width: calc(20% - var(--gap) * 2);
+  height: calc(50% - var(--button-size) / 2 - var(--gap) * 2);
+  transform-origin: 0 100%;
+  --tile-bg: #ff6a3d;
+  --tile-hover: #ff835c;
+  --tile-fg: #3a0d00;
+}
+.t-motion {
+  right: var(--gap);
+  bottom: var(--gap);
+  width: calc(20% - var(--gap) * 2);
+  height: calc(50% + var(--button-size) / 2 - var(--gap));
+  transform-origin: 0 0;
+  --tile-bg: #b8a0f0;
+  --tile-hover: #c9b6f5;
+  --tile-fg: #241540;
+}
+
+/*
+  Cube sits in the exact hole left by the four center-adjacent tiles.
+  White gap is real empty space between cards — not an outline paint-over.
+*/
+.center-tab {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: var(--button-size);
+  height: var(--button-size);
+  margin: 0;
+  transform: translate(-50%, -50%);
+  /* background set inline — purple only after cards join */
+  background: transparent;
+  z-index: 10;
+  display: grid;
+  place-items: center;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  cursor: pointer;
+  overflow: hidden;
+  box-shadow: none;
+  transition: filter 0.35s var(--ease);
+}
+
+.center-tab:hover {
+  border-radius: 0;
+  filter: brightness(1.06);
+}
+
+.center-tab img {
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+  pointer-events: none;
+  transition: transform 0.5s var(--ease-out);
+}
+
+.center-tab:hover img {
+  transform: rotate(-6deg) scale(1.04);
+}
+
+/*
+  Mobile full-screen board.
+  One spacing token (--gap) everywhere — including around the center cube.
+  Square hole: 50% ± (btn/2 + gap). Uneven tiles. Desktop unchanged.
+*/
+@media (max-width: 900px) {
+  :root {
+    --button-size: 68px;
+    --gap: 8px;
+  }
+
+  .nav-stage {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+  }
+
+  .tile-menu,
+  .tile-menu--mobile {
+    position: absolute;
+    inset: var(--gap);
+    width: auto;
+    height: auto;
+    max-width: none;
+    max-height: none;
+  }
+
+  /*
+    Hole box (relative to .tile-menu):
+      left   = 50% - btn/2
+      right  = 50% + btn/2
+      top    = 50% - btn/2
+      bottom = 50% + btn/2
+    All neighboring tiles stop --gap away from that box.
+  */
+
+  /* Top-left — tall, ends --gap above hole */
+  .tile-menu--mobile .t-framework {
+    left: 0;
+    top: 0;
+    width: calc(58% - var(--gap) / 2);
+    height: calc(50% - var(--button-size) / 2 - var(--gap));
+    border-radius: 0;
+  }
+
+  /* Top-right stack — voice / type, type ends --gap above hole */
+  .tile-menu--mobile .t-voice {
+    right: 0;
+    top: 0;
+    left: auto;
+    width: calc(42% - var(--gap) / 2);
+    height: calc(30% - var(--gap) / 2);
+    border-radius: 0;
+  }
+  .tile-menu--mobile .t-type {
+    right: 0;
+    left: auto;
+    top: calc(30% + var(--gap) / 2);
+    width: calc(42% - var(--gap) / 2);
+    /* bottom = hole top - gap */
+    height: calc(50% - var(--button-size) / 2 - var(--gap) - (30% + var(--gap) / 2));
+    border-radius: 0;
+  }
+
+  /* Left of hole — full gap to cube */
+  .tile-menu--mobile .t-color {
+    left: 0;
+    top: calc(50% - var(--button-size) / 2);
+    width: calc(50% - var(--button-size) / 2 - var(--gap));
+    height: var(--button-size);
+    border-radius: 0;
+  }
+  /* Right of hole — full gap to cube */
+  .tile-menu--mobile .t-logo {
+    left: calc(50% + var(--button-size) / 2 + var(--gap));
+    right: 0;
+    top: calc(50% - var(--button-size) / 2);
+    width: auto;
+    height: var(--button-size);
+    border-radius: 0;
+  }
+
+  /* Bottom row — starts --gap below hole, even horizontal gaps */
+  .tile-menu--mobile .t-icon {
+    left: 0;
+    top: calc(50% + var(--button-size) / 2 + var(--gap));
+    bottom: 0;
+    width: calc((100% - var(--gap) * 2) * 0.36);
+    height: auto;
+    border-radius: 0;
+  }
+  .tile-menu--mobile .t-imagery {
+    left: calc((100% - var(--gap) * 2) * 0.36 + var(--gap));
+    top: calc(50% + var(--button-size) / 2 + var(--gap));
+    bottom: 0;
+    right: auto;
+    width: calc((100% - var(--gap) * 2) * 0.38);
+    height: auto;
+    border-radius: 0;
+  }
+  .tile-menu--mobile .t-motion {
+    right: 0;
+    top: calc(50% + var(--button-size) / 2 + var(--gap));
+    bottom: 0;
+    left: auto;
+    width: calc((100% - var(--gap) * 2) * 0.26);
+    height: auto;
+    border-radius: 0;
+  }
+
+  .tile-menu--mobile .tile {
+    padding: 12px;
+    border-radius: 0 !important;
+  }
+
+  .tile-menu--mobile .tile-title {
+    font-size: clamp(0.88rem, 3.5vw, 1.12rem);
+  }
+
+  .tile-menu--mobile .tile-art {
+    max-width: min(60%, 110px);
+    max-height: 48%;
+  }
+
+  .center-tab--mobile {
+    left: 50%;
+    top: 50%;
+    bottom: auto !important;
+    width: var(--button-size);
+    height: var(--button-size);
+    border-radius: 0;
+    z-index: 40;
+  }
+
+  .center-tab--mobile img {
+    width: 36px;
+    height: 36px;
+  }
+
+  .doc-shell main {
+    padding-top: 1.5rem;
+    padding-bottom: 2rem;
+  }
+
+  .doc-shell footer {
+    padding-bottom: calc(1.5rem + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+/* ========== Card expand → full screen ========== */
+.expand-veil {
+  position: fixed;
+  z-index: 9999;
+  overflow: hidden;
+  pointer-events: none;
+  transition:
+    left 0.62s cubic-bezier(0.65, 0, 0.45, 1),
+    top 0.62s cubic-bezier(0.65, 0, 0.45, 1),
+    width 0.62s cubic-bezier(0.65, 0, 0.45, 1),
+    height 0.62s cubic-bezier(0.65, 0, 0.45, 1),
+    border-radius 0.5s cubic-bezier(0.65, 0, 0.45, 1);
+  will-change: left, top, width, height;
+  box-shadow: 0 40px 100px -20px rgba(15, 17, 21, 0.35);
+}
+
+.expand-veil-label {
+  position: absolute;
+  left: 22px;
+  top: 22px;
+  font-size: clamp(1.2rem, 1.65vw, 1.6rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  transition: opacity 0.28s ease;
+}
+
+/* ========== Navbar logo → home (size-matched handoff) ========== */
+.home-return-wash {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  background: #ffffff;
+  pointer-events: none;
+  /* Soft wash in/out with the longer logo flight */
+  transition: opacity 0.7s cubic-bezier(0.33, 1, 0.36, 1);
+}
+
+.home-return-logo {
+  position: fixed;
+  z-index: 9999;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+  /* Match HOME_FLY_MS (~1.1s) — ease-out so it settles gently into place */
+  transition:
+    left 1.1s cubic-bezier(0.22, 1, 0.36, 1),
+    top 1.1s cubic-bezier(0.22, 1, 0.36, 1),
+    width 1.1s cubic-bezier(0.22, 1, 0.36, 1),
+    height 1.1s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.56s cubic-bezier(0.33, 1, 0.36, 1);
+  will-change: left, top, width, height, opacity;
+}
+
+.home-return-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  /* no heavy shadow — home mark has none at start */
+  filter: none;
+}
+
+/* ========== Hamburger → home: cards reassemble around centered logo ========== */
+/*
+  Overlay z-index / position also set inline (see expand.tsx) so the
+  mobile drawer can never paint above the return board.
+*/
+.home-return-cards {
+  position: fixed;
+  inset: 0;
+  z-index: 2147483646;
+  pointer-events: auto;
+  opacity: 1;
+  visibility: visible;
+  background: #fff;
+}
+
+.home-return-cards-stage {
+  /* Same geometry as home .tile-menu / .tile-menu--mobile */
+  position: absolute !important;
+  inset: 0;
+  width: auto;
+  height: auto;
+}
+
+@media (max-width: 900px) {
+  .home-return-cards-stage.tile-menu--mobile {
+    inset: var(--gap, 8px);
+  }
+}
+
+/* GSAP owns transform/opacity — start invisible until timeline runs */
+.home-return-card {
+  opacity: 0;
+  will-change: transform, opacity;
+  transition: none !important;
+}
+
+/*
+  Logo stays in the BETWEEN / center hole the whole time —
+  not a side-nav motion; cards come to it.
+*/
+.home-return-center {
+  position: absolute !important;
+  left: 50% !important;
+  top: 50% !important;
+  bottom: auto !important;
+  right: auto !important;
+  width: var(--button-size, 102px);
+  height: var(--button-size, 102px);
+  margin: 0 !important;
+  z-index: 20;
+  display: grid;
+  place-items: center;
+  background: #5b6cff !important;
+  border-radius: 0;
+  opacity: 1;
+  box-shadow: 0 16px 48px rgba(91, 108, 255, 0.4);
+  pointer-events: none;
+}
+
+.home-return-center img {
+  width: 52%;
+  height: 52%;
+  object-fit: contain;
+}
+
+@media (max-width: 900px) {
+  .home-return-cards-stage {
+    inset: var(--gap, 8px);
+  }
+  .home-return-center {
+    width: var(--button-size, 68px);
+    height: var(--button-size, 68px);
+  }
+}
+
+.doc-entry-flash {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  transition: opacity 0.5s cubic-bezier(0.65, 0, 0.45, 1);
+}
+
+/* Soft section enter after tile expand */
+.doc-page-enter {
+  opacity: 0;
+  transform: translate3d(0, 18px, 0);
+  filter: blur(4px);
+  transition:
+    opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform, filter;
+}
+
+.doc-page-enter.is-in {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  filter: blur(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .doc-page-enter {
+    transition: none !important;
+    filter: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ========== V1 doc body (markdown) ========== */
+.doc-shell {
+  font-family: Archivo, "DM Sans", system-ui, sans-serif;
+}
+
+.doc-body h1 {
+  font-size: clamp(1.75rem, 3vw, 2.25rem);
+  font-weight: 650;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  margin: 0 0 1rem;
+  color: #12141a;
+}
+
+.doc-body h2 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin: 2rem 0 0.65rem;
+  color: #12141a;
+}
+
+.doc-body h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 1.4rem 0 0.4rem;
+  color: #1c1f28;
+}
+
+.doc-body p {
+  color: #5c6578;
+  line-height: 1.7;
+  margin: 0.65rem 0;
+  font-size: 0.98rem;
+}
+
+.doc-body a {
+  color: #5b6cff;
+  text-decoration: none;
+}
+
+.doc-body a:hover {
+  text-decoration: underline;
+}
+
+.doc-body code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.84em;
+  color: #0d9f6e;
+  background: rgba(13, 159, 110, 0.1);
+  padding: 0.1em 0.35em;
+  border-radius: 0.3rem;
+}
+
+.doc-body pre {
+  background: #eef0f5;
+  border: 1px solid #d8dce6;
+  border-radius: 0.85rem;
+  padding: 1rem 1.1rem;
+  overflow-x: auto;
+  margin: 1rem 0;
+}
+
+.doc-body pre code {
+  background: none;
+  color: #5c6578;
+  padding: 0;
+}
+
+.doc-body ul {
+  color: #5c6578;
+  padding-left: 1.15rem;
+  margin: 0.65rem 0;
+  line-height: 1.65;
+}
+
+.doc-body li {
+  margin: 0.3rem 0;
+}
+
+.doc-body table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  margin: 1rem 0;
+}
+
+.doc-body th {
+  text-align: left;
+  color: #5c6578;
+  font-weight: 500;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-bottom: 1px solid #d8dce6;
+  padding: 0.55rem 0.6rem 0.55rem 0;
+}
+
+.doc-body td {
+  border-bottom: 1px solid #e8ebf2;
+  padding: 0.6rem 0.6rem 0.6rem 0;
+  color: #1c1f28;
+  vertical-align: top;
+}
+
+.doc-body hr {
+  border: none;
+  border-top: 1px solid #d8dce6;
+  margin: 2rem 0;
+}
+
+.doc-body label {
+  display: flex;
+  gap: 0.5rem;
+  align-items: flex-start;
+  color: #5c6578;
+  font-size: 0.92rem;
+  margin: 0.35rem 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+  .expand-veil {
+    transition-duration: 0.01ms !important;
+  }
+}

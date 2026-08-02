@@ -1,5 +1,5 @@
-import React, { useEffect, useRef } from "react";
-import { Play, Download, Star, Award, Clock, Users } from "lucide-react";
+import { useEffect, useRef } from "react";
+import { Star, Award, Clock, Users } from "lucide-react";
 
 const AppShowcase = () => {
   const showcaseRef = useRef<HTMLDivElement>(null);
@@ -24,7 +24,7 @@ const AppShowcase = () => {
   }, []);
 
   return (
-    <section className="py-24 bg-background relative overflow-hidden">
+    <section id="showcase" className="py-24 bg-background relative overflow-hidden">
       {/* Minimal background elements */}
       <div className="absolute inset-0">
         <div className="absolute top-1/3 left-0 w-96 h-96 bg-surface/10 rounded-full blur-3xl"></div>

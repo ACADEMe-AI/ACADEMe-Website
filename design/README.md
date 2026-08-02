@@ -2,7 +2,7 @@
 
 **Owner:** Product + design orchestration  
 
-**Canonical for agents:** `../design-site/` — `pnpm dev:design` → http://localhost:5174 · start at `design-site/AGENTS.md`  
+**Canonical for agents:** `../src/design/content/` — `pnpm dev` loads it at `http://localhost:3000/design` · start at `src/design/content/00-START-HERE.md`  
 
 **Phases:** 0.4 Design site · 0.5 Marketing · 0.6 Guardrails · 0.7 UI · 0.8 Mascot motion  
 
@@ -44,11 +44,11 @@ design/
 | Primary user | **Locked** | Solo student / college grad |
 | Colors | **Approved** | B dark + D light |
 | Mascot | **Pebby sheet** | Name sparingly in product UI |
-| Design docs | **Phase 0.4** | `design-site/` |
+| Design docs | **Phase 0.4** | `src/design/` |
 | Platform | **Locked** | Mobile first (Flutter) |
 | Color scheme | **Approved** | **B dark + D light** (settings toggle) |
 | Mascot | **Pebby sheet** (name sparingly) | Asset: `mascot/mascot_academe.png` · Motion later (0.8) |
-| Design docs site | **Phase 0.4** | `design-site/` agent-first |
+| Design docs site | **Phase 0.4** | `src/design/` agent-first |
 | Typography | **Proposed** | Display + body pair in tokens |
 | Motion stack | **Proposed** | Rive for mascot; Flutter animate for UI |
 
@@ -63,6 +63,6 @@ design/
 
 ## Related product docs
 
-- `usp/academe-product-roadmap.md` — full product phases  
-- `usp/knowunity-usp.md` — competitor features  
-- `usp/comparison.md` — strategy compare  
+- `design/usp/academe-product-roadmap.md` — full product phases  
+- `design/usp/knowunity-usp.md` — competitor features  
+- `design/usp/comparison.md` — strategy compare  
