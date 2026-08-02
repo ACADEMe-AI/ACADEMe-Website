@@ -12,6 +12,7 @@ export default {
         warning: "#c98a12",
         error: "#e03e4d",
         accent: "#0d9f6e",
+        background: "#f6f7fa",
         bg: "#f6f7fa",
         surface: "#ffffff",
         surface2: "#eef0f5",

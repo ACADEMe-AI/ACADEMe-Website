@@ -2,6 +2,7 @@ import { useEffect, useRef, useState, type MouseEvent } from "react";
 import { useLocation } from "react-router-dom";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ChevronDown } from "lucide-react";
 import { tiles } from "../lib/nav";
 import TileArt from "../components/TileArt";
 import { useExpand } from "../lib/expandContext";
@@ -118,13 +119,19 @@ export default function HomePage() {
     }
 
     const touch = window.matchMedia("(hover: none), (pointer: coarse)").matches;
+    const narrowBoard = window.matchMedia("(max-width: 900px)").matches;
+    // Shorter pin distance = less scroll to assemble cards (mobile much tighter)
+    const pinEnd = narrowBoard ? "+=160%" : "+=240%";
+    // Lower scrub = snappier follow (mobile slightly more responsive)
+    const scrubAmt = narrowBoard ? 0.55 : 0.85;
+
     const st = ScrollTrigger.create({
       trigger: el,
       start: "top top",
-      end: "+=420%",
+      end: pinEnd,
       pin: true,
       pinType: touch ? "fixed" : "transform",
-      scrub: 1.35,
+      scrub: scrubAmt,
       anticipatePin: 1,
       invalidateOnRefresh: true,
       onUpdate: (self) => {
@@ -175,8 +182,11 @@ export default function HomePage() {
   const logoPx = HERO_MARK.box - logoSettle * (HERO_MARK.box - tabSize);
   const logoLift = (1 - logoSettle) * HERO_MARK.lift;
 
-  const boardReveal = smooth(clamp01((p - 0.46) / 0.42));
+  // Slightly earlier board so cards feel within reach of a short scroll
+  const boardReveal = smooth(clamp01((p - 0.38) / 0.48));
   const cardsInteractive = boardReveal > 0.82;
+  // Hint arrow: visible until cards are mostly in
+  const scrollHintOpacity = clamp01(1 - smooth(clamp01((p - 0.12) / 0.55)));
 
   const purpleFill = smooth(clamp01((boardReveal - 0.62) / 0.38));
   const centerTabOn = smooth(clamp01((p - 0.5) / 0.18));
@@ -333,6 +343,34 @@ export default function HomePage() {
             />
           </button>
         </div>
+      </div>
+
+      {/* Scroll hint — bottom-right, both desktop + mobile */}
+      <div
+        className="scroll-hint"
+        style={{
+          opacity: scrollHintOpacity * (welcome ? 1 : 0),
+          pointerEvents: scrollHintOpacity > 0.2 ? "auto" : "none",
+        }}
+        aria-hidden={scrollHintOpacity < 0.15}
+      >
+        <button
+          type="button"
+          className="scroll-hint-btn"
+          aria-label="Scroll to reveal cards"
+          onClick={() => {
+            const max =
+              ScrollTrigger.maxScroll(window) ||
+              document.documentElement.scrollHeight;
+            // Jump partway so cards start assembling without a long drag
+            window.scrollTo({
+              top: Math.max(max * 0.55, window.innerHeight * 1.2),
+              behavior: "smooth",
+            });
+          }}
+        >
+          <ChevronDown className="scroll-hint-icon" strokeWidth={2.25} />
+        </button>
       </div>
     </div>
   );

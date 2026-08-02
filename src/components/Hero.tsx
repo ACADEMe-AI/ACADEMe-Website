@@ -1,5 +1,7 @@
 import { useEffect, useRef } from "react";
 import { Download, Play, Star } from "lucide-react";
+import QRCode from "./QRCode";
+import { WAITLIST_URL, DEMO_URL } from "../lib/constants";
 
 const Hero = () => {
   const phoneRef = useRef<HTMLDivElement>(null);
@@ -46,36 +48,26 @@ const Hero = () => {
           {/* Left content */}
           <div className="space-y-8 animate-fade-in-up order-2 lg:order-1">
             <div className="space-y-6">
-              <div className="inline-flex items-center space-x-2 bg-surface/40 border border-border/50 rounded-full px-4 py-2 text-sm text-text-secondary">
+              <div className="inline-flex items-center gap-2 bg-surface/40 border border-border/50 rounded-full px-4 py-2 text-sm text-text-secondary">
                 <Star className="w-4 h-4 fill-current text-primary" />
-                <span>AI-Powered Learning</span>
+                <span>AI study companion</span>
               </div>
 
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight">
-                <span className="text-text-primary">Future of</span>
-                <br />
-                <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-                  Education
-                </span>
-                <br />
-                <span className="text-text-primary">is Here</span>
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight tracking-tight text-text-primary">
+                Study smarter with your own tutor, in your pocket
               </h1>
 
               <p className="text-lg sm:text-xl text-text-secondary leading-relaxed max-w-lg">
-                Experience personalized learning powered by advanced AI. Adapt,
-                learn, and excel with ACADEMe's intelligent education platform.
+                Turn your notes into understanding — chat, flashcards, quizzes,
+                summaries, and practice tests. Built mobile-first for college
+                students who want help that fits their routine.
               </p>
             </div>
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4">
               <button
-                onClick={() =>
-                  window.open(
-                    "https://forms.clickup.com/90161070153/f/2kz09g29-456/VQATNDK2A8FV63QBYR",
-                    "_blank"
-                  )
-                }
+                onClick={() => window.open(WAITLIST_URL, "_blank")}
                 className="group bg-primary hover:bg-primary/90 text-white px-8 py-4 rounded-lg transition-all duration-300 transform hover:scale-105 flex items-center justify-center space-x-2 font-semibold shadow-lg hover:shadow-primary/25"
               >
                 <Download className="w-5 h-5 group-hover:animate-bounce" />
@@ -83,9 +75,7 @@ const Hero = () => {
               </button>
 
               <button
-                onClick={() =>
-                  window.open("https://youtu.be/GgiS5VnMmEk", "_blank")
-                }
+                onClick={() => window.open(DEMO_URL, "_blank")}
                 className="group border border-border hover:border-primary/50 text-text-secondary hover:text-text-primary px-8 py-4 rounded-lg transition-all duration-300 transform hover:scale-105 flex items-center justify-center space-x-2 backdrop-blur-sm font-semibold"
               >
                 <Play className="w-5 h-5 group-hover:animate-pulse" />
@@ -93,25 +83,20 @@ const Hero = () => {
               </button>
             </div>
 
-            {/* Stats */}
-            <div className="grid grid-cols-3 gap-8 pt-8 border-t border-border">
-              <div className="text-center">
-                <div className="text-2xl sm:text-3xl font-bold text-text-primary">
-                  10+
+            {/* Honest value signal + QR */}
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 pt-8 border-t border-border">
+              <div className="flex items-center gap-5">
+                <div className="p-2 bg-surface/60 border border-border rounded-2xl">
+                  <QRCode value={WAITLIST_URL} size={92} />
                 </div>
-                <div className="text-text-secondary text-sm">Langauges</div>
-              </div>
-              <div className="text-center">
-                <div className="text-2xl sm:text-3xl font-bold text-text-primary">
-                  99%
+                <div className="space-y-1">
+                  <div className="text-sm font-semibold text-text-primary">
+                    Scan to get the app
+                  </div>
+                  <p className="text-sm text-text-secondary max-w-[16rem]">
+                    Joins the waitlist for early access. iOS and Android.
+                  </p>
                 </div>
-                <div className="text-text-secondary text-sm">Accurate</div>
-              </div>
-              <div className="text-center">
-                <div className="text-2xl sm:text-3xl font-bold text-text-primary">
-                  24/7
-                </div>
-                <div className="text-text-secondary text-sm">AI Support</div>
               </div>
             </div>
           </div>
@@ -215,18 +200,16 @@ const Hero = () => {
 
                 {/* Floating UI elements - Desktop only */}
                 <div className="hidden lg:block absolute -top-6 -left-6 bg-surface/60 backdrop-blur-sm border border-border rounded-xl p-3 animate-float">
-                  <div className="text-text-secondary text-xs">AI Analysis</div>
+                  <div className="text-text-secondary text-xs">Now</div>
                   <div className="text-text-primary text-sm font-semibold">
-                    98% Accuracy
+                    Chat alive
                   </div>
                 </div>
 
                 <div className="hidden lg:block absolute -bottom-2 -right-10 bg-surface/60 backdrop-blur-sm border border-border rounded-xl p-3 animate-float delay-1000">
-                  <div className="text-text-secondary text-xs">
-                    Learning Speed
-                  </div>
+                  <div className="text-text-secondary text-xs">Study plan</div>
                   <div className="text-text-primary text-sm font-semibold">
-                    3x Faster
+                    From your notes
                   </div>
                 </div>
               </div>

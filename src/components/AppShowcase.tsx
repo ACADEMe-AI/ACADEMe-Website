@@ -1,5 +1,7 @@
 import { useEffect, useRef } from "react";
-import { Star, Award, Clock, Users } from "lucide-react";
+import { Clock, Award } from "lucide-react";
+import QRCode from "./QRCode";
+import { WAITLIST_URL } from "../lib/constants";
 
 const AppShowcase = () => {
   const showcaseRef = useRef<HTMLDivElement>(null);
@@ -39,70 +41,28 @@ const AppShowcase = () => {
           {/* Left content */}
           <div className="space-y-8">
             <div className="space-y-4">
-              <div className="inline-flex items-center space-x-2 bg-surface/40 border border-border/50 rounded-full px-4 py-2 text-sm text-text-secondary">
-                <Award className="w-4 h-4" />
-                <span>Award-Winning App</span>
-              </div>
-
-              <h2 className="text-4xl lg:text-5xl font-bold leading-tight">
-                <span className="text-text-primary">Download the</span>
-                <br />
-                <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-                  Future of Learning
-                </span>
+              <h2 className="text-4xl lg:text-5xl font-bold tracking-tight text-text-primary">
+                Built around how you study
               </h2>
 
               <p className="text-xl text-text-secondary leading-relaxed">
-                Join millions of learners worldwide who have transformed their
-                education with ACADEMe's AI-powered platform. Available on all
-                devices.
+                Drop in your course material, then study it the way you learn
+                best — chat when you're stuck, cards for memory, quizzes to
+                check, summaries to review, and tests that feel like the real
+                thing. All in your pocket.
               </p>
             </div>
 
-            {/* App stats */}
-            <div className="grid grid-cols-2 gap-6">
-              <div className="bg-surface/50 backdrop-blur-sm border border-border rounded-xl p-4">
-                <div className="flex items-center space-x-3">
-                  <div className="w-10 h-10 bg-surface border border-border rounded-lg flex items-center justify-center">
-                    <Star className="w-5 h-5 text-primary" />
-                  </div>
-                  <div>
-                    <div className="text-2xl font-bold text-text-primary">
-                      4.9
-                    </div>
-                    <div className="text-text-secondary text-sm">
-                      Internal Rating
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="bg-surface/50 backdrop-blur-sm border border-border rounded-xl p-4">
-                <div className="flex items-center space-x-3">
-                  <div className="w-10 h-10 bg-surface border border-border rounded-lg flex items-center justify-center">
-                    <Users className="w-5 h-5 text-primary" />
-                  </div>
-                  <div>
-                    <div className="text-2xl font-bold text-text-primary">
-                      24/7
-                    </div>
-                    <div className="text-text-secondary text-sm">
-                      Multilingual AI Tutor
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            {/* Honest social proof */}
+            <p className="text-text-secondary border-l-2 border-primary pl-4 italic leading-relaxed">
+              "I stopped staring at my notes and started actually understanding
+              them." — A college tester
+            </p>
 
             {/* Download buttons */}
             <div className="flex flex-col sm:flex-row gap-4">
               <button
-                onClick={() =>
-                  window.open(
-                    "https://forms.clickup.com/90161070153/f/2kz09g29-456/VQATNDK2A8FV63QBYR",
-                    "_blank"
-                  )
-                }
+                onClick={() => window.open(WAITLIST_URL, "_blank")}
                 className="group bg-text-primary hover:bg-text-primary/90 text-background px-6 py-3 rounded-xl transition-all duration-300 transform hover:scale-105 flex items-center space-x-3 font-semibold"
               >
                 <div className="w-8 h-8 bg-background rounded-lg flex items-center justify-center">
@@ -123,12 +83,7 @@ const AppShowcase = () => {
               </button>
 
               <button
-                onClick={() =>
-                  window.open(
-                    "https://forms.clickup.com/90161070153/f/2kz09g29-456/VQATNDK2A8FV63QBYR",
-                    "_blank"
-                  )
-                }
+                onClick={() => window.open(WAITLIST_URL, "_blank")}
                 className="group bg-text-primary hover:bg-text-primary/90 text-background px-6 py-3 rounded-xl transition-all duration-300 transform hover:scale-105 flex items-center space-x-3 font-semibold"
               >
                 <div className="w-8 h-8 bg-background rounded-lg flex items-center justify-center">
@@ -145,6 +100,19 @@ const AppShowcase = () => {
                   <div className="text-sm font-semibold">Google Play</div>
                 </div>
               </button>
+            </div>
+
+            {/* QR */}
+            <div className="flex items-center gap-4">
+              <div className="p-2 bg-surface/60 border border-border rounded-2xl">
+                <QRCode value={WAITLIST_URL} size={84} />
+              </div>
+              <p className="text-sm text-text-secondary max-w-[16rem]">
+                <span className="font-semibold text-text-primary">
+                  Scan on your phone
+                </span>{" "}
+                to join the waitlist for early access.
+              </p>
             </div>
           </div>
 

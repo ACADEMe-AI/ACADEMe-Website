@@ -1,12 +1,10 @@
 import { useState, useEffect } from "react";
+import { WAITLIST_URL as REGISTER_URL } from "../lib/constants";
 
 const links = [
   { href: "#features", label: "Features" },
   { href: "#showcase", label: "App" },
 ];
-
-const REGISTER_URL =
-  "https://forms.clickup.com/90161070153/f/2kz09g29-456/VQATNDK2A8FV63QBYR";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);

@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { MapPin } from "lucide-react";
+import { WAITLIST_URL } from "../lib/constants";
 
 const Footer = () => {
   return (
@@ -21,9 +22,9 @@ const Footer = () => {
               </span>
             </div>
             <p className="text-text-secondary leading-relaxed">
-              Revolutionizing education through artificial intelligence.
-              Empowering learners worldwide with personalized, adaptive learning
-              experiences.
+              ACADEMe is the AI study companion that turns notes into
+              understanding — chat, flashcards, quizzes, summaries, and practice
+              tests — in your pocket.
             </p>
             {/* <div className="flex space-x-4">
               <a
@@ -47,40 +48,24 @@ const Footer = () => {
             </div> */}
           </div>
 
-          {/* Product */}
+          {/* App */}
           <div className="space-y-4">
-            <h3 className="text-text-primary font-semibold text-lg">Product</h3>
+            <h3 className="text-text-primary font-semibold text-lg">App</h3>
             <ul className="space-y-2">
               <li>
                 <a
-                  href="#"
+                  href="#features"
                   className="text-text-secondary hover:text-text-primary transition-colors duration-300"
                 >
-                  Features
+                  How you study
                 </a>
               </li>
               <li>
                 <a
-                  href="#"
+                  href="#showcase"
                   className="text-text-secondary hover:text-text-primary transition-colors duration-300"
                 >
-                  Pricing
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="text-text-secondary hover:text-text-primary transition-colors duration-300"
-                >
-                  API
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="text-text-secondary hover:text-text-primary transition-colors duration-300"
-                >
-                  Integrations
+                  See the app
                 </a>
               </li>
             </ul>
@@ -92,34 +77,10 @@ const Footer = () => {
             <ul className="space-y-2">
               <li>
                 <a
-                  href="#"
-                  className="text-text-secondary hover:text-text-primary transition-colors duration-300"
+                  className="text-text-secondary hover:text-text-primary transition-colors duration-300 cursor-pointer"
+                  onClick={() => window.open(WAITLIST_URL, "_blank")}
                 >
-                  About
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="text-text-secondary hover:text-text-primary transition-colors duration-300"
-                >
-                  Blog
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="text-text-secondary hover:text-text-primary transition-colors duration-300"
-                >
-                  Careers
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="text-text-secondary hover:text-text-primary transition-colors duration-300"
-                >
-                  Press
+                  Join the waitlist
                 </a>
               </li>
             </ul>
@@ -127,19 +88,13 @@ const Footer = () => {
 
           {/* Contact */}
           <div className="space-y-4">
-            <h3 className="text-text-primary font-semibold text-lg">Contact</h3>
+            <h3 className="text-text-primary font-semibold text-lg">
+              Get the app
+            </h3>
             <div className="space-y-3">
-              {/* <div className="flex items-center space-x-3 text-text-secondary">
-                <Mail className="w-4 h-4" />
-                <span>hello@academe.com</span>
-              </div>
-              <div className="flex items-center space-x-3 text-text-secondary">
-                <Phone className="w-4 h-4" />
-                <span>+1 (555) 123-4567</span>
-              </div> */}
               <div className="flex items-center space-x-3 text-text-secondary">
                 <MapPin className="w-4 h-4" />
-                <span>Guwahati, Assam - India</span>
+                <span>Guwahati, Assam — India</span>
               </div>
             </div>
           </div>

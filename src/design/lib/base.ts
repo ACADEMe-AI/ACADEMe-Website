@@ -1,6 +1,12 @@
-/** Set in root `.env` as VITE_DESIGN_BASE=/design so routes stay under /design. */
+/**
+ * Design app lives at `/design/*` in the main site (see App.tsx).
+ *
+ * Default is `/design` so production builds work even when `.env` is not
+ * present (`.env` is gitignored; Vercel/CI often never set VITE_DESIGN_BASE).
+ * Override with VITE_DESIGN_BASE only if you mount design somewhere else.
+ */
 export const DESIGN_BASE = (
-  (import.meta.env.VITE_DESIGN_BASE as string | undefined) ?? ""
+  (import.meta.env.VITE_DESIGN_BASE as string | undefined) || "/design"
 ).replace(/\/$/, "");
 
 /** Prefix an absolute app path with the design base (e.g. /foundations → /design/foundations) */

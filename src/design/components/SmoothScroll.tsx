@@ -18,12 +18,13 @@ export default function SmoothScroll({ children }: { children: ReactNode }) {
 
     const touch = window.matchMedia("(hover: none), (pointer: coarse)").matches;
 
+    // Higher multipliers = less physical scroll to move through the pin story
     const lenis = new Lenis({
-      duration: touch ? 1.05 : 1.25,
+      duration: touch ? 0.85 : 1.0,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
-      touchMultiplier: touch ? 1.35 : 1.2,
-      wheelMultiplier: 0.9,
+      touchMultiplier: touch ? 2.1 : 1.45,
+      wheelMultiplier: touch ? 1.15 : 1.2,
     });
 
     lenis.on("scroll", ScrollTrigger.update);
