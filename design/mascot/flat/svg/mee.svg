@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ACADEMe "Mee" — flat 2D master SVG
+  Style: sticker / Pinterest app-mascot · NO 3D
+  Colors: Scheme B body #5B6CFF · accent ribbon #7CFFB2 · face #0B0C0F
+  Rive layer names (keep stable):
+    shadow, body, ribbon, eye_l, eye_r, pupil_l, pupil_r,
+    shine_l, shine_r, cheek_l, cheek_r, mouth, arm_l, arm_r
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none" id="mee-root" data-mascot="mee" data-version="2.0">
+  <title>Mee — ACADEMe flat mascot</title>
+
+  <!-- pill shadow (Duolingo: pill not oval) -->
+  <rect id="shadow" x="58" y="172" width="84" height="14" rx="7" fill="#5B6CFF" opacity="0.18"/>
+
+  <g id="mee-body-group">
+    <!-- soft circle body -->
+    <circle id="body" cx="100" cy="112" r="58" fill="#5B6CFF"/>
+
+    <!-- mint bookmark ribbon (signature) -->
+    <g id="ribbon">
+      <path fill="#7CFFB2" d="M86 42 L100 24 L114 42 L114 72 L100 62 L86 72 Z"/>
+    </g>
+
+    <!-- arms (animatable) -->
+    <ellipse id="arm_l" cx="42" cy="118" rx="16" ry="12" fill="#5B6CFF" transform="rotate(-18 42 118)"/>
+    <ellipse id="arm_r" cx="158" cy="118" rx="16" ry="12" fill="#5B6CFF" transform="rotate(18 158 118)"/>
+
+    <!-- eyes -->
+    <g id="eyes">
+      <ellipse id="eye_l" cx="80" cy="104" rx="15" ry="17" fill="#FFFFFF"/>
+      <ellipse id="eye_r" cx="120" cy="104" rx="15" ry="17" fill="#FFFFFF"/>
+      <!-- offset pupils = alive -->
+      <circle id="pupil_l" cx="83" cy="103" r="6.5" fill="#0B0C0F"/>
+      <circle id="pupil_r" cx="123" cy="103" r="6.5" fill="#0B0C0F"/>
+      <circle id="shine_l" cx="85" cy="100" r="2.2" fill="#FFFFFF"/>
+      <circle id="shine_r" cx="125" cy="100" r="2.2" fill="#FFFFFF"/>
+    </g>
+
+    <!-- soft cheeks -->
+    <ellipse id="cheek_l" cx="62" cy="122" rx="11" ry="7" fill="#7CFFB2" opacity="0.35"/>
+    <ellipse id="cheek_r" cx="138" cy="122" rx="11" ry="7" fill="#7CFFB2" opacity="0.35"/>
+
+    <!-- smile -->
+    <path id="mouth" d="M84 134 Q100 150 116 134" stroke="#0B0C0F" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+  </g>
+</svg>
