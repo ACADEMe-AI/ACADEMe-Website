@@ -8,7 +8,6 @@ import { ScrollProgress } from "./components/ui/ScrollProgress";
 import { SectionJump } from "./components/ui/SectionJump";
 import { QrModal } from "./components/ui/QrModal";
 import { BrandLoader } from "./loader";
-import { HeroEntrance } from "./components/ui/HeroEntrance";
 
 const DesignRoot = lazy(() => import("./design/DesignRoot"));
 
@@ -25,7 +24,6 @@ function MarketingApp() {
         (same WebGL canvas). Unmounting would force a second cube.
       */}
       <BrandLoader force={forceLoader} onFinished={() => setLoading(false)} />
-      <HeroEntrance active={!loading} />
       <SmoothScroll>
         <div id="top" className="app" aria-hidden={loading || undefined}>
           <ScrollProgress />
