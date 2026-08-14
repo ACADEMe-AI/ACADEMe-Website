@@ -823,7 +823,7 @@ body::-webkit-scrollbar,
   }
 }
 
-/* ── When design route is active: win over marketing film CSS ── */
+/* ── When design route is active: win over main site CSS ── */
 html.on-design-site {
   font-size: 16px !important;
   background: #fff !important;

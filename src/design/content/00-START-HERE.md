@@ -12,7 +12,7 @@
 
 - Students first, mobile first  
 - Dark colors = Scheme B, light = Scheme D  
-- Marketing site ≠ this design system site  
+- Main website (`/`) ≠ this design system site (`/design`)
 - Mascot name: use sparingly in product UI  
 - No school/admin product in Phase 1  
 

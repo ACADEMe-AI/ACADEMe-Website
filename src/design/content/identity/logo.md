@@ -6,11 +6,11 @@ Cube grid mark for ACADEMe. Transparent PNGs with backgrounds removed.
 
 **`logo-white-bg-removed.png`** — dark cube for light surfaces.
 
-Use this on the marketing site and design site while light mode is default.
+Use this on the website and design site while light mode is default.
 
 | Role | Path |
 |------|------|
-| Marketing site | `/logos/logo-white-bg-removed.png` |
+| Website | `/logos/logo-white-bg-removed.png` |
 | Design site default | `/brand/logo-on-light.png` (same mark) |
 
 ## On dark (reference only)

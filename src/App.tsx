@@ -11,7 +11,7 @@ import { BrandLoader } from "./loader";
 
 const DesignRoot = lazy(() => import("./design/DesignRoot"));
 
-function MarketingApp() {
+function WebsiteApp() {
   const [loading, setLoading] = useState(true);
   const forceLoader =
     typeof window !== "undefined" &&
@@ -71,7 +71,7 @@ export default function App() {
             </Suspense>
           }
         />
-        <Route path="/*" element={<MarketingApp />} />
+        <Route path="/*" element={<WebsiteApp />} />
       </Routes>
     </BrowserRouter>
   );

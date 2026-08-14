@@ -1,5 +1,5 @@
 /**
- * Wait until marketing assets are ready so the cube can keep solving
+ * Wait until site assets are ready so the cube can keep solving
  * for the full load time instead of finishing early.
  */
 

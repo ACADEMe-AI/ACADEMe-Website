@@ -1,6 +1,6 @@
-# ACADEMe — marketing site
+# ACADEMe website
 
-Premium cinematic marketing experience: **one persistent Three.js phone**, choreographed by **GSAP ScrollTrigger**, with a procedural Rubik’s-cube brand loader.
+Cinematic product site: **one persistent Three.js phone**, choreographed by **GSAP ScrollTrigger**, with a procedural Rubik’s-cube brand loader. Design system docs live at `/design`.
 
 ## Stack
 
@@ -27,7 +27,8 @@ pnpm typecheck
 pnpm build
 ```
 
-- `http://localhost:3010/design` — design system site (docs + tiles)
+- `http://localhost:3010/` — main website
+- `http://localhost:3010/design` — design system (docs + tiles)
 - `/?loader=1` — force brand loader
 
 ## Architecture
