@@ -1,4 +1,4 @@
-# Showcase (marketing) site
+# Showcase website
 
 ## Goals
 

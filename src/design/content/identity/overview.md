@@ -17,5 +17,5 @@ Fast and clean. Light playful moments. Not a corporate LMS on day one.
 
 | Surface | Role |
 |---------|------|
-| Marketing site | Sell the product |
+| Website | Sell the product |
 | Design system (this site) | Rules and assets for builders |

@@ -244,7 +244,7 @@ export const navGroups: NavGroup[] = [
         path: "/marketing/showcase",
         label: "Showcase site",
         file: "marketing/showcase-site.md",
-        description: "Marketing site notes",
+        description: "Website notes",
       },
     ],
   },

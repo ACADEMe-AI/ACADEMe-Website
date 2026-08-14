@@ -1,4 +1,4 @@
-/** Brand guidelines app — mounted at /design/* in the main marketing site. */
+/** Brand guidelines app — mounted at /design/* on the ACADEMe website. */
 import { useEffect } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import HomePage from "./pages/HomePage";
@@ -15,7 +15,7 @@ export default function DesignRoot() {
   useEffect(() => {
     const root = document.documentElement;
     const body = document.body;
-    // Marketing site scales root rem fluidly — design was built at 16px.
+    // Main site scales root rem fluidly — design was built at 16px.
     const prev = {
       htmlBg: root.style.background,
       htmlFont: root.style.fontSize,
