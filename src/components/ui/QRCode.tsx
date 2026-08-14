@@ -1,18 +1,19 @@
 import { useEffect, useRef, useState } from "react";
 
-interface QRCodeProps {
+export function QRCode({
+  value,
+  size = 168,
+  className = "",
+}: {
   value: string;
   size?: number;
   className?: string;
-}
-
-const QRCode = ({ value, size = 168, className = "" }: QRCodeProps) => {
+}) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [error, setError] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
-
     import("qrcode").then((QRCodeLib) => {
       if (cancelled || !canvasRef.current) return;
       QRCodeLib.toCanvas(canvasRef.current, value, {
@@ -23,7 +24,6 @@ const QRCode = ({ value, size = 168, className = "" }: QRCodeProps) => {
         if (!cancelled) setError(true);
       });
     });
-
     return () => {
       cancelled = true;
     };
@@ -31,25 +31,11 @@ const QRCode = ({ value, size = 168, className = "" }: QRCodeProps) => {
 
   if (error) {
     return (
-      <a
-        href={value}
-        target="_blank"
-        rel="noopener noreferrer"
-        className={className}
-      >
-        Open the waitlist
+      <a className={className} href={value} target="_blank" rel="noreferrer">
+        Open waitlist
       </a>
     );
   }
 
-  return (
-    <canvas
-      ref={canvasRef}
-      role="img"
-      aria-label="QR code for the ACADEMe waitlist"
-      className={className}
-    />
-  );
-};
-
-export default QRCode;
+  return <canvas ref={canvasRef} className={className} width={size} height={size} />;
+}

@@ -1,22 +1,80 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
-import HomePage from "./pages/HomePage";
-import PrivacyPolicy from "./pages/PrivacyPolicyPage";
-import DeleteData from "./pages/DeleteDataPage";
-import DesignRoot from "./design/DesignRoot";
+import { lazy, Suspense, useState } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Nav } from "./components/ui/Nav";
+import { Footer } from "./components/ui/Footer";
+import { ScrollExperience } from "./components/ScrollExperience";
+import { SmoothScroll } from "./components/SmoothScroll";
+import { ScrollProgress } from "./components/ui/ScrollProgress";
+import { SectionJump } from "./components/ui/SectionJump";
+import { QrModal } from "./components/ui/QrModal";
+import { BrandLoader } from "./loader";
+import { HeroEntrance } from "./components/ui/HeroEntrance";
 
-function App() {
+const DesignRoot = lazy(() => import("./design/DesignRoot"));
+
+function MarketingApp() {
+  const [loading, setLoading] = useState(true);
+  const forceLoader =
+    typeof window !== "undefined" &&
+    new URLSearchParams(window.location.search).get("loader") === "1";
+
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-        <Route path="/privacy" element={<Navigate to="/privacy-policy" replace />} />
-        <Route path="/Privacy" element={<Navigate to="/privacy-policy" replace />} />
-        <Route path="/delete" element={<DeleteData />} />
-        <Route path="/design/*" element={<DesignRoot />} />
-      </Routes>
-    </Router>
+    <>
+      {/*
+        Always mounted: the loader cube flies into the pocket and STAYS
+        (same WebGL canvas). Unmounting would force a second cube.
+      */}
+      <BrandLoader force={forceLoader} onFinished={() => setLoading(false)} />
+      <HeroEntrance active={!loading} />
+      <SmoothScroll>
+        <div id="top" className="app" aria-hidden={loading || undefined}>
+          <ScrollProgress />
+          <Nav />
+          <main>
+            <ScrollExperience />
+          </main>
+          <SectionJump />
+          <QrModal />
+          <div id="cta" className="post-story">
+            <Footer />
+          </div>
+        </div>
+      </SmoothScroll>
+    </>
   );
 }
 
-export default App;
+function DesignFallback() {
+  return (
+    <div
+      style={{
+        minHeight: "100vh",
+        display: "grid",
+        placeItems: "center",
+        fontFamily: "Archivo, system-ui, sans-serif",
+        color: "#5b6cff",
+        background: "#fff",
+      }}
+    >
+      Loading design system…
+    </div>
+  );
+}
+
+export default function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route
+          path="/design/*"
+          element={
+            <Suspense fallback={<DesignFallback />}>
+              <DesignRoot />
+            </Suspense>
+          }
+        />
+        <Route path="/*" element={<MarketingApp />} />
+      </Routes>
+    </BrowserRouter>
+  );
+}
