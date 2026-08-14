@@ -2,17 +2,14 @@
 logs
 *.log
 npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
 pnpm-debug.log*
-lerna-debug.log*
 
 node_modules
 dist
 dist-ssr
 *.local
 
-# Editor directories and files
+# Editor
 .vscode/*
 !.vscode/extensions.json
 .idea
@@ -24,9 +21,11 @@ dist-ssr
 *.sw?
 .env
 
-# TypeScript build info
+# TypeScript
 *.tsbuildinfo
 
-# design-site
-design-site/node_modules/
-design-site/dist/
+# QA / capture artifacts (regenerated)
+qa-shots/
+current_screenshots/
+flow-frames/
+academe-frames/

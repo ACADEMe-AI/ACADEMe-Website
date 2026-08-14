@@ -822,3 +822,20 @@ body::-webkit-scrollbar,
     transition-duration: 0.01ms !important;
   }
 }
+
+/* ── When design route is active: win over marketing film CSS ── */
+html.on-design-site {
+  font-size: 16px !important;
+  background: #fff !important;
+  color-scheme: light !important;
+}
+html.on-design-site body {
+  background: #fff !important;
+  color: #0f1115 !important;
+  font-family: Archivo, "Helvetica Neue", Arial, sans-serif !important;
+  font-size: 16px !important;
+}
+html.on-design-site #root {
+  background: #fff !important;
+  min-height: 100%;
+}
