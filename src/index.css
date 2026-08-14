@@ -67,14 +67,6 @@ html.loader-active .scroll-progress {
   pointer-events: none !important;
 }
 
-/* Hero + wordmark wait for intro until loader ends (layout size kept) */
-html.loader-active .nav-wordmark,
-html.loader-active .chapter-hero .hero-line,
-html.loader-active .chapter-hero .hero-lede,
-html.loader-active .chapter-hero .hero-cta-row .btn-flow,
-html.loader-active .chapter-hero .hero-micro {
-  opacity: 0;
-}
 /* Pocket is only a layout target; live cube is the loader stage (fixed over it) */
 html.loader-active:not(.loader-handing-off) .hero-logo-mark {
   /* keep layout size; cube is still flying in */
