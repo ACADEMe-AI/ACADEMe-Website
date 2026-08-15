@@ -1,4 +1,3 @@
-
 const CRITICAL_ASSETS = [
   "/models/Iphone.glb",
   "/models/phone.glb",
