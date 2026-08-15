@@ -1,264 +1,350 @@
-/**
- * ONE Three.js cube for the whole experience:
- * scramble → logo form → fly into pocket → stay there (same canvas).
- *
- * Never mounts a second cube for the pocket (that caused the hard cut).
- */
 import { useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import gsap from "gsap";
 import { LoaderScene } from "./LoaderScene";
 import { waitForAppAssets } from "./preloadAssets";
+import { onPocketChange } from "./pocketRegistry";
+import { onStoryProgress } from "../lib/sectionNav";
+import {
+  FLY_PX,
+  applyParkedPose,
+  createPinState,
+  freezeFromRect,
+  flyDurationSec,
+  logoHoldMs,
+  measureHeroOpacity,
+  measurePocket,
+  syncParkedPosition,
+  waitForPocket,
+} from "./pocketPin";
 
 type Props = {
   onFinished?: () => void;
   force?: boolean;
 };
 
-const SESSION_KEY = "academe-loader-seen";
+type Phase = "boot" | "load" | "fly" | "parked" | "done";
 
 export function BrandLoader({ onFinished, force = false }: Props) {
+  const [phase, setPhase] = useState<Phase>("boot");
   const [showOverlay, setShowOverlay] = useState(true);
   const [reduced, setReduced] = useState(false);
   const [freeze, setFreeze] = useState(false);
-  const [transparentGl, setTransparentGl] = useState(false);
-  const [mounted, setMounted] = useState(false);
   const [assetsReady, setAssetsReady] = useState(false);
-  /** Same canvas, locked to the pocket slot */
-  const [parked, setParked] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   const rootRef = useRef<HTMLDivElement>(null);
-  const stageRef = useRef<HTMLDivElement>(null);
+  const outerRef = useRef<HTMLDivElement>(null);
+  const scaleRef = useRef<HTMLDivElement>(null);
   const labelRef = useRef<HTMLParagraphElement>(null);
-  const canvasSize = useRef({ w: 360, h: 360 });
+  const pin = useRef(createPinState());
+  const phaseRef = useRef<Phase>("boot");
 
-  const exiting = useRef(false);
-  const appReleased = useRef(false);
-  const logoLocked = useRef(false);
+  const setPhaseSafe = (p: Phase) => {
+    phaseRef.current = p;
+    setPhase(p);
+  };
 
   useEffect(() => setMounted(true), []);
 
   useEffect(() => {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
     setReduced(mq.matches);
-    const onChange = () => setReduced(mq.matches);
-    mq.addEventListener("change", onChange);
-    return () => mq.removeEventListener("change", onChange);
+    const on = () => setReduced(mq.matches);
+    mq.addEventListener("change", on);
+    return () => mq.removeEventListener("change", on);
   }, []);
 
   useEffect(() => {
-    let cancelled = false;
+    let dead = false;
     waitForAppAssets()
       .then(() => {
-        if (!cancelled) setAssetsReady(true);
+        if (!dead) setAssetsReady(true);
       })
       .catch(() => {
-        if (!cancelled) setAssetsReady(true);
+        if (!dead) setAssetsReady(true);
       });
     return () => {
-      cancelled = true;
+      dead = true;
     };
   }, []);
 
   useEffect(() => {
     document.documentElement.classList.add("loader-active");
+    setPhaseSafe("load");
     return () => {
       document.documentElement.classList.remove("loader-active");
       document.documentElement.classList.remove("loader-handing-off");
     };
   }, []);
 
-  const markSeen = () => {
-    try {
-      sessionStorage.setItem(SESSION_KEY, "1");
-    } catch {
-      /* ignore */
-    }
-  };
-
-  const releaseApp = useCallback(() => {
-    if (appReleased.current) return;
-    appReleased.current = true;
-    markSeen();
+  const release = useCallback(() => {
+    if (phaseRef.current === "done") return;
+    setPhaseSafe("done");
     document.documentElement.classList.remove("loader-active");
     document.documentElement.classList.remove("loader-handing-off");
     setShowOverlay(false);
     onFinished?.();
   }, [onFinished]);
 
-  const measurePocket = () => {
-    const pocket = document.querySelector(".hero-logo-mark") as HTMLElement | null;
-    if (!pocket) return null;
-    const r = pocket.getBoundingClientRect();
-    if (r.width < 2 || r.height < 2) return null;
-    return { el: pocket, rect: r };
-  };
+    const finishPark = useCallback(
+    (rect?: ReturnType<typeof measurePocket>) => {
+      if (phaseRef.current === "parked" || phaseRef.current === "done") return;
 
-  /** Keep fixed stage glued to the pocket (scroll / resize / pin). */
-  const syncStageToPocket = useCallback(() => {
-    const stage = stageRef.current;
-    const pocketInfo = measurePocket();
-    if (!stage || !pocketInfo) return;
-    const { rect: to } = pocketInfo;
-    const { w, h } = canvasSize.current;
-    // Fill the slot; keep modest so “pocket.” doesn’t wrap
-    const scale = Math.min(to.width / w, to.height / h) * 1.3;
+      const outer = outerRef.current;
+      const scaleEl = scaleRef.current;
+      if (!outer || !scaleEl) {
+        release();
+        return;
+      }
 
-    gsap.set(stage, {
-      position: "fixed",
-      left: to.left + to.width / 2,
-      top: to.top + to.height / 2,
-      width: w,
-      height: h,
-      xPercent: -50,
-      yPercent: -50,
-      x: 0,
-      y: 0,
-      scale,
-      opacity: 1,
-      zIndex: 40,
-      margin: 0,
-      pointerEvents: "none",
-      transformOrigin: "50% 50%",
-    });
-  }, []);
+      gsap.killTweensOf(outer);
+      setFreeze(true);
+      document.documentElement.classList.add("loader-handing-off");
+      outer.classList.remove("brand-loader-stage--flying");
+
+      const apply = (r: NonNullable<ReturnType<typeof measurePocket>>) => {
+        pin.current.frozen = false;
+        freezeFromRect(pin.current, r, true);
+        pin.current.lastL = r.left;
+        pin.current.lastT = r.top;
+
+        applyParkedPose(
+          outer,
+          scaleEl,
+          pin.current,
+          r.left,
+          r.top,
+          measureHeroOpacity(),
+        );
+        outer.classList.add("brand-loader-stage--parked");
+        setPhaseSafe("parked");
+      };
+
+      const hideAndRelease = () => {
+        outer.style.cssText =
+          "position:fixed;left:0;top:0;width:1px;height:1px;opacity:0;visibility:hidden;pointer-events:none;z-index:0;";
+        outer.classList.add("brand-loader-stage--parked");
+        setPhaseSafe("parked");
+        release();
+      };
+
+      const immediate = rect ?? measurePocket();
+      if (immediate && immediate.left > 4 && immediate.top > 4) {
+        apply(immediate);
+        window.setTimeout(() => {
+          if (phaseRef.current !== "parked" && phaseRef.current !== "done") return;
+          const next = measurePocket();
+          if (!next || !outerRef.current || !scaleRef.current) return;
+          if (next.left < 4 && next.top < 4) return;
+          freezeFromRect(pin.current, next, true);
+          pin.current.lastL = next.left;
+          pin.current.lastT = next.top;
+          applyParkedPose(
+            outerRef.current,
+            scaleRef.current,
+            pin.current,
+            next.left,
+            next.top,
+            measureHeroOpacity(),
+          );
+        }, 100);
+        requestAnimationFrame(() => release());
+        return;
+      }
+
+      void waitForPocket(15, 40).then((r) => {
+        if (phaseRef.current === "done") return;
+        if (r && r.left > 4 && r.top > 4) {
+          apply(r);
+          requestAnimationFrame(() => release());
+        } else {
+          hideAndRelease();
+        }
+      });
+    },
+    [release],
+  );
 
   useEffect(() => {
-    if (!parked) return;
-    syncStageToPocket();
-    const onScroll = () => syncStageToPocket();
-    window.addEventListener("resize", syncStageToPocket);
-    window.addEventListener("scroll", onScroll, true);
-    // Pin / Lenis move the pocket without window scroll sometimes
-    const id = window.setInterval(syncStageToPocket, 100);
-    return () => {
-      window.removeEventListener("resize", syncStageToPocket);
-      window.removeEventListener("scroll", onScroll, true);
-      window.clearInterval(id);
+    if (phase !== "parked" && phase !== "done") return;
+    if (!pin.current.frozen) return;
+
+    let raf = 0;
+    let queued = false;
+    let didSizeCorrect = false;
+
+    const correctSizeIfNeeded = () => {
+      const outer = outerRef.current;
+      const scaleEl = scaleRef.current;
+      if (!outer || !scaleEl) return;
+      const next = measurePocket();
+      if (!next) return;
+      const settled = Math.round(Math.min(next.width, next.height));
+      if (settled < 28) return;
+      if (!didSizeCorrect && Math.abs(settled - pin.current.lockedSize) > 6) {
+        didSizeCorrect = true;
+        freezeFromRect(pin.current, next, true);
+        pin.current.lastL = next.left;
+        pin.current.lastT = next.top;
+        applyParkedPose(
+          outer,
+          scaleEl,
+          pin.current,
+          next.left,
+          next.top,
+          measureHeroOpacity(),
+        );
+        return;
+      }
+      syncParkedPosition(outer, pin.current);
     };
-  }, [parked, syncStageToPocket]);
 
-  const parkInPlace = useCallback(() => {
+    const sync = () => {
+      queued = false;
+      correctSizeIfNeeded();
+    };
+
+    const tick = () => {
+      if (queued) return;
+      queued = true;
+      raf = requestAnimationFrame(sync);
+    };
+
+    window.addEventListener("resize", tick, { passive: true });
+    const unsubPocket = onPocketChange(tick);
+    const unsubStory = onStoryProgress(() => tick());
+    window.addEventListener("scroll", tick, { capture: true, passive: true });
+    tick();
+    const t1 = window.setTimeout(tick, 50);
+    const t2 = window.setTimeout(tick, 200);
+
+    return () => {
+      cancelAnimationFrame(raf);
+      clearTimeout(t1);
+      clearTimeout(t2);
+      unsubPocket();
+      unsubStory();
+      window.removeEventListener("resize", tick);
+      window.removeEventListener("scroll", tick, true);
+    };
+  }, [phase]);
+
+  useEffect(() => {
+    if (phase !== "parked" && phase !== "done") return;
+    const outer = outerRef.current;
+    const scaleEl = scaleRef.current;
+    if (!outer || !scaleEl || !pin.current.frozen) return;
+    applyParkedPose(
+      outer,
+      scaleEl,
+      pin.current,
+      pin.current.lastL,
+      pin.current.lastT,
+      measureHeroOpacity(),
+    );
+  }, [phase, showOverlay, freeze, assetsReady]);
+
+  const fly = useCallback(() => {
+    if (phaseRef.current === "fly" || phaseRef.current === "parked" || phaseRef.current === "done") {
+      return;
+    }
+
+    const outer = outerRef.current;
+    const scaleEl = scaleRef.current;
+    if (!outer || reduced) {
+      finishPark();
+      return;
+    }
+
+    const to = measurePocket();
+    if (!to) {
+      finishPark();
+      return;
+    }
+
+    setPhaseSafe("fly");
+    freezeFromRect(pin.current, to);
+    pin.current.lastL = to.left;
+    pin.current.lastT = to.top;
+
+    const from = outer.getBoundingClientRect();
+    const sx = from.left + from.width / 2;
+    const sy = from.top + from.height / 2;
+    const startScale = Math.max(0.2, from.width / FLY_PX);
+    const ex = to.left + to.width / 2;
+    const ey = to.top + to.height / 2;
+    const endScale = pin.current.lockedScale;
+
     setFreeze(true);
-    setTransparentGl(true);
-    setParked(true);
     document.documentElement.classList.add("loader-handing-off");
-    // Next frame: size to pocket and unlock the site
-    requestAnimationFrame(() => {
-      syncStageToPocket();
-      releaseApp();
-    });
-  }, [releaseApp, syncStageToPocket]);
+    outer.classList.add("brand-loader-stage--flying");
 
-  const flyToPocket = useCallback(() => {
-    if (exiting.current) return;
-    exiting.current = true;
-
-    const stage = stageRef.current;
-    const root = rootRef.current;
-    const label = labelRef.current;
-
-    if (reduced || !stage) {
-      parkInPlace();
-      return;
+    gsap.killTweensOf(outer);
+    if (scaleEl) {
+      scaleEl.style.cssText = `width:${FLY_PX}px;height:${FLY_PX}px;transform:none;`;
     }
 
-    const from = stage.getBoundingClientRect();
-    const pocketInfo = measurePocket();
-    if (!pocketInfo) {
-      parkInPlace();
-      return;
-    }
-    const { rect: to } = pocketInfo;
-
-    canvasSize.current = { w: from.width, h: from.height };
-    const endScale = Math.min(to.width / from.width, to.height / from.height) * 1.3;
-    const startCX = from.left + from.width / 2;
-    const startCY = from.top + from.height / 2;
-    const endCX = to.left + to.width / 2;
-    const endCY = to.top + to.height / 2;
-
-    gsap.set(stage, {
+    gsap.set(outer, {
       position: "fixed",
-      left: startCX,
-      top: startCY,
-      width: from.width,
-      height: from.height,
+      left: sx,
+      top: sy,
+      width: FLY_PX,
+      height: FLY_PX,
       xPercent: -50,
       yPercent: -50,
       x: 0,
       y: 0,
-      scale: 1,
+      scale: startScale,
       opacity: 1,
       zIndex: 10050,
       margin: 0,
-      pointerEvents: "none",
+      overflow: "visible",
       transformOrigin: "50% 50%",
     });
 
-    setFreeze(true);
-    setTransparentGl(true);
-    document.documentElement.classList.add("loader-handing-off");
+    const label = labelRef.current;
+    const root = rootRef.current;
+    const flySec = flyDurationSec();
 
-    requestAnimationFrame(() => {
-      const tl = gsap.timeline({
-        onComplete: () => {
-          // SAME canvas — just mark parked + sync. No second Three.js mount.
-          setParked(true);
-          syncStageToPocket();
-          releaseApp();
-        },
-      });
-
-      if (label) {
-        tl.to(label, { y: 16, opacity: 0, duration: 0.2, ease: "power2.in" }, 0);
-      }
-      if (root) {
-        tl.to(root, { opacity: 0, duration: 0.75, ease: "power2.inOut" }, 0.05);
-      }
-
-      tl.to(
-        stage,
-        {
-          left: endCX,
-          top: endCY,
-          scale: endScale,
-          duration: 1.1,
-          ease: "power3.inOut",
-        },
-        0,
-      );
+    const tl = gsap.timeline({
+      onComplete: () => finishPark(to),
     });
-  }, [parkInPlace, reduced, releaseApp, syncStageToPocket]);
 
-  const handleLogoReady = useCallback(() => {
-    if (exiting.current || logoLocked.current) return;
-    logoLocked.current = true;
+    if (label) tl.to(label, { opacity: 0, duration: 0.1 }, 0);
+    if (root) tl.to(root, { opacity: 0, duration: Math.min(0.42, flySec * 0.55) }, 0);
+
+    tl.to(
+      outer,
+      {
+        left: ex,
+        top: ey,
+        scale: endScale,
+        duration: flySec,
+        ease: "power3.out",
+      },
+      0,
+    );
+  }, [finishPark, reduced]);
+
+  const onLogoReady = useCallback(() => {
+    if (phaseRef.current !== "load") return;
     setFreeze(true);
-    window.setTimeout(() => flyToPocket(), reduced ? 80 : 480);
-  }, [flyToPocket, reduced]);
+    window.setTimeout(() => fly(), logoHoldMs(reduced));
+  }, [fly, reduced]);
 
-  // Skip animation: ?loader=0 → jump straight to parked cube
   useEffect(() => {
-    if (force) return;
-    const params = new URLSearchParams(window.location.search);
-    if (params.get("loader") === "0") {
+    const params = new URLSearchParams(location.search);
+    if (!force && params.get("loader") === "0") {
       setAssetsReady(true);
       setFreeze(true);
-      setTransparentGl(true);
       setShowOverlay(false);
-      // Let scene mount once, then park
-      const t = window.setTimeout(() => {
-        const stage = stageRef.current;
-        if (stage) {
-          const r = stage.getBoundingClientRect();
-          canvasSize.current = { w: r.width || 360, h: r.height || 360 };
-        }
-        parkInPlace();
-      }, 200);
-      return () => window.clearTimeout(t);
+      const t = window.setTimeout(() => finishPark(), 100);
+      return () => clearTimeout(t);
     }
-  }, [force, parkInPlace]);
+  }, [finishPark, force]);
+
+  const busy = phase !== "done" && phase !== "parked";
 
   return (
     <>
@@ -268,7 +354,7 @@ export function BrandLoader({ onFinished, force = false }: Props) {
           className="brand-loader"
           role="progressbar"
           aria-label="Loading ACADEMe"
-          aria-busy={!parked}
+          aria-busy={busy}
         >
           <p ref={labelRef} className="brand-loader-label" aria-label="ACADEMe">
             ACADEM<span className="brand-loader-label-e">e</span>
@@ -276,22 +362,30 @@ export function BrandLoader({ onFinished, force = false }: Props) {
         </div>
       )}
 
-      {/* Single stage + single LoaderScene for life of the page */}
       {mounted
         ? createPortal(
             <div
-              ref={stageRef}
-              className={`brand-loader-stage${parked ? " brand-loader-stage--parked" : ""}`}
+              ref={outerRef}
+              className={`brand-loader-stage${
+                phase === "parked" || phase === "done"
+                  ? " brand-loader-stage--parked"
+                  : ""
+              }`}
               aria-hidden
             >
-              <LoaderScene
-                reducedMotion={reduced}
-                freeze={freeze}
-                transparentClear={transparentGl || parked}
-                assetsReady={assetsReady}
-                onLogoReady={handleLogoReady}
-                onComplete={handleLogoReady}
-              />
+              <div ref={scaleRef} className="brand-loader-scale">
+                <div className="brand-loader-stage-inner">
+                  <LoaderScene
+                    reducedMotion={reduced}
+                    freeze={freeze}
+                    transparentClear
+                    assetsReady={assetsReady || phase === "parked" || phase === "done"}
+                    fixedCssPx={FLY_PX}
+                    onLogoReady={onLogoReady}
+                    onComplete={onLogoReady}
+                  />
+                </div>
+              </div>
             </div>,
             document.body,
           )

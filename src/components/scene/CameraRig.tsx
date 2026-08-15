@@ -3,7 +3,6 @@ import { useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
 import { scrollState } from "../../lib/scrollState";
 
-/** Story camera — GSAP writes scrollState.camera; this lerps the real PerspectiveCamera. */
 export function CameraRig() {
   const { camera } = useThree();
   const look = useRef(new THREE.Vector3());
@@ -14,7 +13,7 @@ export function CameraRig() {
   useFrame((_, dt) => {
     const c = scrollState.camera;
     const k =
-      scrollState.poseLock || scrollState.reducedMotion ? 1 : 1 - Math.pow(0.0008, dt);
+      scrollState.reducedMotion ? 1 : 1 - Math.pow(0.0008, dt);
 
     camera.position.x = THREE.MathUtils.lerp(camera.position.x, c.x, k);
     camera.position.y = THREE.MathUtils.lerp(camera.position.y, c.y, k);

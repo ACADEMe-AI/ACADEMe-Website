@@ -1,12 +1,3 @@
-/**
- * Cube ↔ ACADEMe logo map.
- * Visibility of logo cubies is controlled by logoVisibility.ts → HIDDEN_BOXES
- *
- * World axes (camera on +X+Y+Z diagonal, orthographic):
- *   +Y = top (blue)
- *   −X ≈ left face of mark
- *   +Z ≈ right face of mark
- */
 
 import { boxId, isBoxHidden, HIDDEN_BOXES } from "./logoVisibility";
 
@@ -129,7 +120,6 @@ export type LayerTwist = {
   angle: number;
 };
 
-/** Longer, slower scramble → solve cycle (looped while assets load). Fits TIMING.cubeEnd. */
 export const LAYER_TWISTS: LayerTwist[] = [
   { start: 0, end: 14, axis: "y", layer: 1, angle: Math.PI / 2 },
   { start: 12, end: 26, axis: "x", layer: -1, angle: -Math.PI / 2 },
@@ -138,7 +128,6 @@ export const LAYER_TWISTS: LayerTwist[] = [
   { start: 48, end: 62, axis: "x", layer: 1, angle: Math.PI / 2 },
   { start: 60, end: 74, axis: "z", layer: -1, angle: -Math.PI / 2 },
   { start: 72, end: 86, axis: "y", layer: 0, angle: Math.PI / 2 },
-  // reverse / solve
   { start: 84, end: 96, axis: "y", layer: 0, angle: -Math.PI / 2 },
   { start: 94, end: 106, axis: "z", layer: -1, angle: Math.PI / 2 },
   { start: 104, end: 116, axis: "x", layer: 1, angle: -Math.PI / 2 },

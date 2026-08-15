@@ -1,23 +1,12 @@
-/**
- * Jump between story chapters by ScrollTrigger progress.
- * Targets mid-points of each chapter’s full-visibility window so text shows cleanly.
- */
 import type { ScrollTrigger } from "gsap/ScrollTrigger";
 import type Lenis from "lenis";
 
 export type StorySection = {
   id: string;
   label: string;
-  /** Progress where that chapter is fully dominant (not mid-crossfade) */
-  t: number;
+    t: number;
 };
 
-/**
- * Must land mid exclusive hold (not in a crossfade gap).
- * Matches ScrollExperience fades:
- * hero 0–0.10 | upload 0.14–0.38 | chat 0.48–0.58
- * practice 0.62–0.72 | adaptive 0.76–0.84 | mastery 0.87–0.93 | cta 0.96–1
- */
 export const STORY_SECTIONS: StorySection[] = [
   { id: "hero", label: "Hero", t: 0 },
   { id: "upload", label: "Upload", t: 0.26 },
@@ -30,6 +19,7 @@ export const STORY_SECTIONS: StorySection[] = [
 
 let storyST: ScrollTrigger | null = null;
 let lenisRef: Lenis | null = null;
+const progressListeners = new Set<(progress: number) => void>();
 
 export function registerStoryScrollTrigger(st: ScrollTrigger | null) {
   storyST = st;
@@ -39,7 +29,15 @@ export function registerLenis(instance: Lenis | null) {
   lenisRef = instance;
 }
 
-/** Nearest section by current ST progress — last section whose t is at/before progress */
+export function onStoryProgress(fn: (progress: number) => void) {
+  progressListeners.add(fn);
+  return () => progressListeners.delete(fn);
+}
+
+export function notifyStoryProgress(progress: number) {
+  progressListeners.forEach((fn) => fn(progress));
+}
+
 export function getCurrentSectionIndex(progress = storyST?.progress ?? 0): number {
   let idx = 0;
   for (let i = 0; i < STORY_SECTIONS.length; i++) {
@@ -56,16 +54,13 @@ function scrollToProgress(t: number) {
   const y = st.start + (st.end - st.start) * clamped;
 
   const settle = () => {
-    // Force scrub/timeline to the exact progress after Lenis lands
     if (typeof st.scroll === "function") {
       try {
         st.scroll(y);
       } catch {
-        /* ignore */
-      }
+              }
     }
     st.update();
-    // second tick after layout
     requestAnimationFrame(() => st.update());
   };
 
@@ -81,7 +76,6 @@ function scrollToProgress(t: number) {
     window.setTimeout(settle, 500);
   }
 
-  // Immediate ST nudge so pin doesn't lag a frame
   requestAnimationFrame(settle);
 }
 
@@ -91,7 +85,6 @@ export function goToSection(index: number) {
   return i;
 }
 
-/** Explicit next from a known index (avoids mid-crossfade mis-detect) */
 export function goNextFrom(index: number) {
   const next = index >= STORY_SECTIONS.length - 1 ? 0 : index + 1;
   return goToSection(next);

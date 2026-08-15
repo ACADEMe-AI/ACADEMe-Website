@@ -6,13 +6,8 @@ import { scrollState } from "../../lib/scrollState";
 import { createScreenTexture } from "../../lib/screenTexture";
 import { createRoundedPlaneGeometry } from "../../lib/roundedPlane";
 
-/**
- * Sketchfab phone (ｍｆｋ)
- * https://sketchfab.com/3d-models/phone-ca572a15f7074ea3890772139769f2b2
- */
 const MODEL_URL = "/models/Iphone.glb";
 const TARGET_HEIGHT = 2.28;
-/** Match iPhone-class continuous corner radius on the display */
 const SCREEN_CORNER = 0.11;
 
 useGLTF.preload(MODEL_URL);
@@ -63,7 +58,6 @@ function preparePhone(source: THREE.Object3D): Fit {
       if (!m) return;
       if ((m as THREE.MeshStandardMaterial).isMeshStandardMaterial) {
         const sm = m as THREE.MeshStandardMaterial;
-        // Aluminum-class case — back views must read metal, not black void
         if (sm.name === "PhoneCase_Mat") {
           sm.color.set("#2c3140");
           sm.metalness = 0.94;
@@ -128,22 +122,16 @@ function preparePhone(source: THREE.Object3D): Fit {
     mb.getSize(ms);
     mb.getCenter(mc);
     screenLocal = new THREE.Vector3(mc.x, mc.y, mc.z);
-    // Nearly full display — equal inset all sides so UI almost touches corners
     const inset = 0.975;
     screenW = ms.x * inset;
     screenH = ms.y * inset;
     screenLocal.z += Math.max(ms.z * 0.45, 0.008);
-    // Match continuous glass corner of the Sketchfab chassis
     screenRadius = Math.min(screenW, screenH) * 0.12;
   }
 
   return { root, screenLocal, screenW, screenH, screenRadius };
 }
 
-/**
- * Sketchfab chassis + rounded live UI plane.
- * Scroll drives continuous 360° Y rotation via scrollState.phone.rotY.
- */
 export function PhoneMesh() {
   const group = useRef<THREE.Group>(null);
   const screenRef = useRef<THREE.Mesh>(null);
@@ -155,7 +143,6 @@ export function PhoneMesh() {
 
   const fit = useMemo(() => preparePhone(scene), [scene]);
 
-  // Collect chassis materials for dynamic rim when screen faces away
   useEffect(() => {
     const mats: THREE.MeshStandardMaterial[] = [];
     fit.root.traverse((obj) => {
@@ -218,28 +205,23 @@ export function PhoneMesh() {
     if (!g) return;
     const p = scrollState.phone;
 
-    // YXZ = yaw (3/4) → pitch (recline) → roll (top tips right) — matches product framing
     if (g.rotation.order !== "YXZ") g.rotation.order = "YXZ";
 
-    // Gentle vertical bob — hero only (other chapters stay locked to path)
     const t = state.clock.elapsedTime;
     const onHero =
       scrollState.overlays.hero > 0.55 &&
-      !scrollState.poseLock &&
-      !scrollState.reducedMotion;
+      !scrollState.reducedMotion &&
+      !scrollState.isMobile;
     const bobY = onHero ? Math.sin(t * 1.05) * 0.032 : 0;
     const bobTilt = onHero ? Math.sin(t * 0.85) * 0.004 : 0;
 
-    // Snap hard to targets (direction must match frames, not lag)
-    // poseLock = slider debug — instant response
     const kDir =
-      scrollState.poseLock || scrollState.reducedMotion ? 1 : 1 - Math.pow(0.00005, dt);
+      scrollState.reducedMotion ? 1 : 1 - Math.pow(0.00005, dt);
 
     g.position.x = THREE.MathUtils.lerp(g.position.x, p.x, kDir);
     g.position.y = THREE.MathUtils.lerp(g.position.y, p.y + bobY, kDir);
     g.position.z = THREE.MathUtils.lerp(g.position.z, p.z, kDir);
     g.rotation.x = THREE.MathUtils.lerp(g.rotation.x, p.rotX + bobTilt, kDir);
-    // rotY monotonic for continuous spin — never wrap
     g.rotation.y = THREE.MathUtils.lerp(g.rotation.y, p.rotY, kDir);
     g.rotation.z = THREE.MathUtils.lerp(g.rotation.z, p.rotZ + bobTilt * 0.5, kDir);
     const s = THREE.MathUtils.lerp(g.scale.x, p.scale, kDir);
@@ -253,8 +235,6 @@ export function PhoneMesh() {
       mat.needsUpdate = true;
     }
 
-    // Show UI when display faces camera (multi-turn rotY via cos)
-    // Soften threshold so near-face poses always read as product, not black glass
     const face = Math.cos(g.rotation.y);
     const show = THREE.MathUtils.smoothstep(face, 0.05, 0.42);
     if (mat) {
@@ -270,7 +250,6 @@ export function PhoneMesh() {
       gm.opacity = 0.055 * show;
     }
 
-    // Chassis rim when face is away — cool aluminum, not purple plastic
     const backBoost = THREE.MathUtils.smoothstep(-face, 0.0, 0.7);
     for (const sm of caseMats.current) {
       if (!sm.emissive) sm.emissive = new THREE.Color("#000000");
@@ -290,7 +269,7 @@ export function PhoneMesh() {
     <group ref={group} position={[1.08, -0.45, 0.12]} rotation={[-0.18, -0.48, -0.18]}>
       <primitive object={root} />
 
-      {/* Rounded live UI — matches phone glass corners */}
+      {}
       <mesh
         ref={screenRef}
         position={[screenLocal.x, screenLocal.y, screenLocal.z]}
@@ -306,7 +285,7 @@ export function PhoneMesh() {
       >
         <meshBasicMaterial color="#ffffff" transparent opacity={0.045} depthWrite={false} />
       </mesh>
-      {/* No ground blob — Flowty stage has no dark disc under phone */}
+      {}
     </group>
   );
 }

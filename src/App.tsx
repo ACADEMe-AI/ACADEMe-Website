@@ -19,17 +19,15 @@ function WebsiteApp() {
 
   return (
     <>
-      {/*
-        Always mounted: the loader cube flies into the pocket and STAYS
-        (same WebGL canvas). Unmounting would force a second cube.
-      */}
+      {}
       <BrandLoader force={forceLoader} onFinished={() => setLoading(false)} />
       <SmoothScroll>
         <div id="top" className="app" aria-hidden={loading || undefined}>
           <ScrollProgress />
           <Nav />
           <main>
-            <ScrollExperience />
+            {}
+            <ScrollExperience enableFilm={!loading} />
           </main>
           <SectionJump />
           <QrModal />

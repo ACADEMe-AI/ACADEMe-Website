@@ -1,4 +1,6 @@
+import { useEffect, useRef } from "react";
 import { WAITLIST_URL } from "../../lib/constants";
+import { registerPocket } from "../../loader/pocketRegistry";
 import { openQrModal } from "./QrModal";
 
 function Mee({ src, className = "chapter-mee" }: { src: string; className?: string }) {
@@ -15,25 +17,26 @@ function Mee({ src, className = "chapter-mee" }: { src: string; className?: stri
   );
 }
 
-/**
- * Chapter type layouts vary — never all left-type / right-phone.
- * Distinct HQ Mee per section, above the headline on the type side.
- */
 export function ChapterOverlay() {
+  const pocketRef = useRef<HTMLSpanElement>(null);
+
+  useEffect(() => {
+    registerPocket(pocketRef.current);
+    return () => registerPocket(null);
+  }, []);
+
   return (
     <div className="chapter-layer" aria-live="polite">
-      {/* ===== HERO — type L / phone R ===== */}
+      {}
       <div className="chapter chapter-hero" data-chapter="hero">
         <div className="hero-headline">
           <h1>
             <span className="hero-line">Study smarter.</span>
             <span className="hero-line">
               In your{" "}
-              {/*
-                Empty slot only — BrandLoader parks the SAME loader cube here.
-                Do NOT mount PocketLogo3D / a second Three.js scene (causes a hard cut).
-              */}
+              {}
               <span
+                ref={pocketRef}
                 className="hero-logo-mark"
                 role="img"
                 aria-label="ACADEMe"
@@ -80,7 +83,7 @@ export function ChapterOverlay() {
         </div>
       </div>
 
-      {/* ===== UPLOAD — reading materials ===== */}
+      {}
       <div className="chapter chapter-feature chapter-upload" data-chapter="upload">
         <div className="chapter-stage stage-left">
           <div className="type-block">
@@ -98,7 +101,7 @@ export function ChapterOverlay() {
         </div>
       </div>
 
-      {/* ===== CHAT — idea / tutor ===== */}
+      {}
       <div className="chapter chapter-feature chapter-chat" data-chapter="chat">
         <div className="chapter-stage stage-right">
           <div className="type-block type-right">
@@ -116,7 +119,7 @@ export function ChapterOverlay() {
         </div>
       </div>
 
-      {/* ===== PRACTICE — studying ===== */}
+      {}
       <div className="chapter chapter-cinematic chapter-practice" data-chapter="practice">
         <div className="chapter-stage stage-practice">
           <div className="type-block type-practice">
@@ -134,7 +137,7 @@ export function ChapterOverlay() {
         </div>
       </div>
 
-      {/* ===== ADAPTIVE — thinking ===== */}
+      {}
       <div className="chapter chapter-feature chapter-adaptive" data-chapter="adaptive">
         <div className="chapter-stage stage-right">
           <div className="type-block type-right">
@@ -152,7 +155,7 @@ export function ChapterOverlay() {
         </div>
       </div>
 
-      {/* ===== MASTERY — trophy / achieved ===== */}
+      {}
       <div className="chapter chapter-feature chapter-mastery" data-chapter="mastery">
         <div className="chapter-stage stage-left stage-mastery">
           <div className="type-block">
@@ -170,7 +173,7 @@ export function ChapterOverlay() {
         </div>
       </div>
 
-      {/* ===== CTA — landscape phone + Join + barcode under product ===== */}
+      {}
       <div className="chapter chapter-feature chapter-cta" data-chapter="cta">
         <div className="chapter-stage stage-cta">
           <div className="type-block type-cta">

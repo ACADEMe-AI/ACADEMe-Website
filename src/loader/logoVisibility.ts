@@ -1,11 +1,3 @@
-/**
- * LOGO BOX VISIBILITY
- * Hidden cubies for the brand mark (edit HIDDEN_BOXES)
- *
- * Hidden numbers: 12, 25
- *   #12  1,0,-1   RIGHT · MID · BACK
- *   #25  0,-1,1   MID · BOTTOM · FRONT
- */
 
 export const HIDDEN_BOXES: string[] = [
   "1,0,-1", // #12
@@ -20,7 +12,6 @@ export function isBoxHidden(id: string, hidden: string[] = HIDDEN_BOXES) {
   return hidden.includes(id);
 }
 
-/** All 26 outer cubie ids (no core) */
 export function allBoxIds(): string[] {
   const ids: string[] = [];
   for (const x of [-1, 0, 1]) {
