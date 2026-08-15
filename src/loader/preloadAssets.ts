@@ -1,8 +1,3 @@
-/**
- * Wait until site assets are ready so the cube can keep solving
- * for the full load time instead of finishing early.
- */
-
 const CRITICAL_ASSETS = [
   "/models/Iphone.glb",
   "/models/phone.glb",
@@ -20,7 +15,6 @@ const CRITICAL_ASSETS = [
 
 function loadUrl(url: string): Promise<void> {
   return new Promise((resolve) => {
-    // Prefer fetch so GLB/binaries cache; images also fine
     fetch(url, { cache: "force-cache" })
       .then((res) => {
         if (!res.ok) {
@@ -49,13 +43,19 @@ function waitFonts(): Promise<void> {
   return document.fonts.ready.then(() => undefined).catch(() => undefined);
 }
 
-/** Minimum time the cube should solve so the sequence never feels rushed */
 export const MIN_CUBE_MS = 3200;
+export const MIN_CUBE_MS_MOBILE = 2100;
 
-/**
- * Resolves when fonts, window load, critical assets, and min cube time are done.
- */
-export async function waitForAppAssets(minMs = MIN_CUBE_MS): Promise<void> {
+function defaultMinCubeMs(): number {
+  if (typeof window === "undefined") return MIN_CUBE_MS;
+  const phone = window.matchMedia(
+    "(max-width: 768px), (max-height: 500px) and (pointer: coarse)",
+  ).matches;
+  return phone ? MIN_CUBE_MS_MOBILE : MIN_CUBE_MS;
+}
+
+export async function waitForAppAssets(minMs?: number): Promise<void> {
+  const floor = minMs ?? defaultMinCubeMs();
   const started = performance.now();
 
   await Promise.all([
@@ -65,7 +65,7 @@ export async function waitForAppAssets(minMs = MIN_CUBE_MS): Promise<void> {
   ]);
 
   const elapsed = performance.now() - started;
-  if (elapsed < minMs) {
-    await new Promise((r) => setTimeout(r, minMs - elapsed));
+  if (elapsed < floor) {
+    await new Promise((r) => setTimeout(r, floor - elapsed));
   }
 }

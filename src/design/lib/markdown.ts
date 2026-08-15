@@ -1,4 +1,3 @@
-/** Minimal markdown → HTML for agent-authored content (no extra deps). */
 export function renderMarkdown(md: string): string {
   const lines = md.replace(/\r\n/g, "\n").split("\n");
   const out: string[] = [];
@@ -41,6 +40,20 @@ export function renderMarkdown(md: string): string {
     inTable = false;
   };
 
+    const safeHref = (href: string) => {
+    const h = href.trim();
+    if (/^(https?:|mailto:|\/|#)/i.test(h)) return h.replace(/"/g, "&quot;");
+    return "#";
+  };
+
+  const anchorAttrs = (href: string) => {
+    const safe = safeHref(href);
+    const external = /^https?:/i.test(safe);
+    const rel = external ? ' rel="noopener noreferrer"' : "";
+    const target = external ? ' target="_blank"' : "";
+    return `href="${safe}"${rel}${target}`;
+  };
+
   const inline = (s: string) =>
     s
       .replace(/&/g, "&amp;")
@@ -53,7 +66,8 @@ export function renderMarkdown(md: string): string {
       .replace(/\*\*([^*]+)\*\*/g, '<strong class="text-ink font-semibold">$1</strong>')
       .replace(
         /\[([^\]]+)\]\(([^)]+)\)/g,
-        '<a class="text-primary hover:underline" href="$2">$1</a>'
+        (_m, text: string, href: string) =>
+          `<a class="text-primary hover:underline" ${anchorAttrs(href)}>${text}</a>`,
       );
 
   for (const line of lines) {

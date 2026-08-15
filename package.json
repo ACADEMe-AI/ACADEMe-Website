@@ -10,6 +10,7 @@
     "preview": "vite preview --port 3010",
     "typecheck": "tsc --noEmit",
     "qa": "node scripts/visual-qa.mjs",
+    "test:loader": "node scripts/loader-scroll-regression.mjs",
     "assets:phone": "node scripts/build-phone-glb.mjs",
     "assets:screens": "node scripts/build-screens.mjs",
     "assets:mascots": "node scripts/process-mascots.mjs",

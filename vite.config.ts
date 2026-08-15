@@ -23,4 +23,18 @@ export default defineConfig({
       "react-router-dom",
     ],
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes("node_modules/three") || id.includes("@react-three")) {
+            return "three";
+          }
+          if (id.includes("node_modules/gsap") || id.includes("node_modules/lenis")) {
+            return "motion";
+          }
+        },
+      },
+    },
+  },
 });

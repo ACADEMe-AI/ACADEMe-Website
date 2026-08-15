@@ -10,9 +10,6 @@ type Props = {
   scale: [number, number, number];
 };
 
-/**
- * Cubie with brand stickers — blue top / white sides like logo-on-dark.
- */
 export function CubePieceMesh({ piece, position, rotation, scale }: Props) {
   const materials = useMemo(() => {
     const plastic = new THREE.MeshStandardMaterial({
@@ -47,7 +44,6 @@ export function CubePieceMesh({ piece, position, rotation, scale }: Props) {
   };
   const faces: Face[] = [];
 
-  // Outer stickers only — logo-accurate colors
   if (gy === 1) faces.push({ pos: [0, half, 0], rot: [-Math.PI / 2, 0, 0], mat: materials.blue });
   if (gy === -1) faces.push({ pos: [0, -half, 0], rot: [Math.PI / 2, 0, 0], mat: materials.light });
   if (gx === 1) faces.push({ pos: [half, 0, 0], rot: [0, Math.PI / 2, 0], mat: materials.light });
@@ -55,7 +51,6 @@ export function CubePieceMesh({ piece, position, rotation, scale }: Props) {
   if (gz === 1) faces.push({ pos: [0, 0, half], rot: [0, 0, 0], mat: materials.light });
   if (gz === -1) faces.push({ pos: [0, 0, -half], rot: [0, Math.PI, 0], mat: materials.light });
 
-  // Ensure top blues always read even on edge cubies of top layer
   if (piece.role === "blue" && gy === 1 && !faces.some((f) => f.mat === materials.blue)) {
     faces.push({ pos: [0, half, 0], rot: [-Math.PI / 2, 0, 0], mat: materials.blue });
   }

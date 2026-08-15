@@ -1,8 +1,3 @@
-/**
- * Shared mutable state: GSAP writes, R3F useFrame reads.
- * Avoids React re-renders every scroll frame.
- */
-
 export type ScreenState =
   | "home"
   | "upload"
@@ -29,12 +24,6 @@ export const scrollState = {
   screen: "home" as ScreenState,
   reducedMotion: false,
   isMobile: false,
-
-  /**
-   * When true, GSAP scroll stops overwriting phone/camera.
-   * Used by the PoseDebug panel so you can dial exact numbers live.
-   */
-  poseLock: false,
 
   phone: {
     x: 2.3,
@@ -68,7 +57,6 @@ export const scrollState = {
     z: 0.2,
   },
 
-  /** HTML overlay opacities driven by timeline */
   overlays: {
     hero: 1,
     upload: 0,

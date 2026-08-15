@@ -1,41 +1,56 @@
-/* ── Brand loader: cube → animated logo → fly into pocket (no PNG) ─ */
-/* Backdrop only — must NOT clip the portaled stage */
+
+
 .brand-loader {
   position: fixed;
   inset: 0;
   z-index: 9999;
   background: #000000;
-  /* no overflow:hidden, no clip-path — those hid the flyer mid-path */
   pointer-events: none;
 }
 .brand-loader--flying {
-  /* veil fades via GSAP opacity; keep out of the way */
   pointer-events: none;
 }
-/* Stage is portaled to document.body so it never gets clipped */
+
 .brand-loader-stage {
   position: fixed;
   left: 50%;
-  top: 45%;
-  width: min(70vw, 360px);
-  height: min(70vw, 360px);
-  max-height: min(52vh, 360px);
-  /* Centering transform — GSAP overwrites transform:none when flight starts */
+  top: 50%;
+  width: 360px;
+  height: 360px;
   transform: translate(-50%, -50%);
   z-index: 10050;
-  display: grid;
-  place-items: center;
+  display: block;
   transform-origin: 50% 50%;
   pointer-events: none;
-  will-change: left, top, width, height, opacity;
+  will-change: left, top, opacity, transform;
+  overflow: visible;
 }
+
+.brand-loader-scale {
+  width: 360px;
+  height: 360px;
+  transform-origin: 0 0;
+  pointer-events: none;
+}
+
+.brand-loader-stage-inner {
+  width: 360px !important;
+  height: 360px !important;
+  min-width: 360px !important;
+  min-height: 360px !important;
+  position: relative;
+  transform: none !important;
+  overflow: hidden;
+}
+
 .brand-loader-canvas {
-  width: 100% !important;
-  height: 100% !important;
-  display: block;
+  width: 360px !important;
+  height: 360px !important;
+  display: block !important;
   touch-action: none;
   background: transparent !important;
 }
+
 .brand-loader-label {
   position: absolute;
   bottom: max(1.75rem, env(safe-area-inset-bottom));
@@ -46,7 +61,7 @@
   font-size: 0.78rem;
   font-weight: 600;
   letter-spacing: 0.22em;
-  text-transform: none; /* keep final e lowercase */
+  text-transform: none;
   color: rgba(244, 242, 255, 0.42);
   pointer-events: none;
   will-change: transform, opacity;
@@ -59,7 +74,6 @@
   opacity: 0.92;
 }
 
-/* Hide chrome that should not sit on the loader */
 html.loader-active .section-jump-corner,
 html.loader-active .scroll-progress {
   opacity: 0 !important;
@@ -67,238 +81,23 @@ html.loader-active .scroll-progress {
   pointer-events: none !important;
 }
 
-/* Pocket is only a layout target; live cube is the loader stage (fixed over it) */
 html.loader-active:not(.loader-handing-off) .hero-logo-mark {
-  /* keep layout size; cube is still flying in */
   opacity: 1;
   visibility: visible;
 }
+
+.brand-loader-stage--flying {
+  overflow: visible !important;
+}
+
 .brand-loader-stage--parked {
-  /* above chapter type, under nav (nav is higher) */
+  margin: 0 !important;
+  overflow: hidden !important;
+  transform: none !important;
+  pointer-events: none !important;
   z-index: 40 !important;
-}
-@media (max-width: 900px) {
-  .brand-loader-stage {
-    width: min(64vw, 280px);
-    height: min(64vw, 280px);
-    max-height: min(42vh, 280px);
-  }
-}
-
-
-.le-root {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-}
-.le-gallery {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  height: min(58vh, 520px);
-  min-height: 380px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-}
-.le-panel {
-  display: flex;
-  flex-direction: column;
-  min-height: 0;
-  background: #000;
-  border-right: 1px solid rgba(255, 255, 255, 0.08);
-}
-.le-panel:last-child {
-  border-right: 0;
-}
-.le-panel--accent {
-  box-shadow: inset 0 0 0 2px rgba(91, 108, 255, 0.35);
-}
-.le-panel h2 {
-  margin: 0;
-  padding: 0.65rem 0.9rem;
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.8);
-  background: #0c0c14;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-}
-.le-canvas-wrap {
-  flex: 1 1 auto;
-  position: relative;
-  width: 100%;
-  height: 100%;
-  min-height: 300px;
-  background: #000;
-}
-.le-canvas-wrap canvas {
-  width: 100% !important;
-  height: 100% !important;
-  display: block !important;
-}
-.le-real-wrap {
-  flex: 1;
-  display: grid;
-  place-items: center;
-  padding: 1.5rem;
-  background: #000;
-  min-height: 300px;
-}
-.le-real-img {
-  width: min(90%, 300px);
-  height: auto;
-  border-radius: 0.5rem;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  background: #000;
-}
-
-.le-controls {
-  padding: 1rem 1.25rem 2rem;
-  background: #0c0c12;
-}
-.le-controls-top {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.75rem;
-  margin-bottom: 0.85rem;
-}
-.le-status {
-  margin: 0;
-  font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.8);
-}
-.le-hidden-list {
-  color: #fda4af;
-  font-weight: 600;
-}
-.le-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem;
-}
-.le-btn {
-  appearance: none;
-  border: 0;
-  border-radius: 0.5rem;
-  padding: 0.55rem 0.9rem;
-  font-size: 0.82rem;
-  font-weight: 600;
-  cursor: pointer;
-  background: rgba(255, 255, 255, 0.08);
-  color: #fff;
-  font-family: inherit;
-}
-.le-btn.primary {
-  background: #5b6cff;
-}
-.le-btn:hover {
-  filter: brightness(1.08);
-}
-
-.le-faces {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1.25rem;
-  margin-bottom: 0.85rem;
-}
-.le-face-title {
-  font-size: 0.72rem;
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.5);
-  margin-bottom: 0.35rem;
-}
-.le-face-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 2.4rem);
-  gap: 0.3rem;
-}
-.le-cell {
-  appearance: none;
-  width: 2.4rem;
-  height: 2.4rem;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 0.35rem;
-  background: #5b6cff;
-  color: #fff;
-  font-size: 0.85rem;
-  font-weight: 700;
-  cursor: pointer;
-  font-family: inherit;
-}
-.le-cell.is-top {
-  background: #4b57f5;
-}
-.le-cell.is-hidden {
-  background: #e11d48;
-  text-decoration: line-through;
-}
-.le-cell.empty {
-  background: transparent;
-  border-color: transparent;
-  pointer-events: none;
-}
-
-.le-hint {
-  margin: 0 0 0.5rem;
-  font-size: 0.8rem;
-  color: rgba(255, 255, 255, 0.5);
-}
-.le-pad {
-  display: grid;
-  grid-template-columns: repeat(13, minmax(0, 1fr));
-  gap: 0.35rem;
-  max-width: 52rem;
-}
-.le-pad-btn {
-  appearance: none;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 0.4rem;
-  padding: 0.55rem 0;
-  font-size: 0.85rem;
-  font-weight: 700;
-  background: #5b6cff;
-  color: #fff;
-  cursor: pointer;
-  font-family: inherit;
-}
-.le-pad-btn.is-top {
-  background: #4b57f5;
-}
-.le-pad-btn.is-hidden {
-  background: #e11d48;
-  text-decoration: line-through;
-}
-.le-hover {
-  margin: 0.5rem 0 0;
-  font-size: 0.8rem;
-  color: #a5b4fc;
-  min-height: 1.2em;
-}
-.le-export {
-  margin: 1rem 0 0;
-  padding: 0.85rem 1rem;
-  border-radius: 0.5rem;
-  background: #08080f;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  font-size: 0.72rem;
-  line-height: 1.45;
-  color: #9b8cff;
-  overflow: auto;
-  max-width: 40rem;
-  white-space: pre;
-}
-
-@media (max-width: 1000px) {
-  .le-gallery {
-    grid-template-columns: 1fr;
-    min-height: auto;
-  }
-  .le-canvas-wrap,
-  .le-real-wrap {
-    min-height: 280px;
-  }
-  .le-pad {
-    grid-template-columns: repeat(9, minmax(0, 1fr));
-  }
+  transition: none !important;
+  will-change: left, top, opacity;
 }
 
 :root {
@@ -313,13 +112,7 @@ html.loader-active:not(.loader-handing-off) .hero-logo-mark {
   --font: "Archivo", system-ui, sans-serif;
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
 
-  /*
-   * Flowty-style proportional scale (v3 globals.css).
-   * Ideal 1440 = where we art-directed the site → root is exactly 16px there,
-   * so every existing rem layout/CTA/type stays identical at that width.
-   * Other desktop widths scale the whole UI as one unit (not a new layout).
-   * 3D phone is world-unit + FOV and is unaffected by this.
-   */
+  
   --size-unit: 16;
   --size-container-ideal: 1440;
   --size-container-min: 1024px;
@@ -333,7 +126,7 @@ html.loader-active:not(.loader-handing-off) .hero-logo-mark {
     var(--size-container) / (var(--size-container-ideal) / var(--size-unit))
   );
 
-  /* Shared page gutters — same on every edge of chrome (nav / type / CTAs) */
+  
   --page-pad-x: clamp(1.5rem, 4.2vw, 3.25rem);
   --page-pad-y: clamp(1.15rem, 2.8vh, 1.75rem);
   --btn-radius: 0.7rem;
@@ -341,7 +134,6 @@ html.loader-active:not(.loader-handing-off) .hero-logo-mark {
   --btn-icon-size: 1.125rem;
 }
 
-/* Tablet band — separate ideal so rem mobile polish still holds */
 @media (max-width: 1023px) {
   :root {
     --size-container-ideal: 834;
@@ -350,7 +142,6 @@ html.loader-active:not(.loader-handing-off) .hero-logo-mark {
   }
 }
 
-/* Phone band */
 @media (max-width: 767px) {
   :root {
     --size-container-ideal: 390;
@@ -364,9 +155,9 @@ html.loader-active:not(.loader-handing-off) .hero-logo-mark {
 html {
   scroll-behavior: auto;
   background: var(--stage-deep);
-  /* Root scale — all rem UI tracks this (Flowty consistency) */
+  
   font-size: var(--size-font);
-  /* Hide native side scrollbar — progress is the top story bar (v3 pattern) */
+  
   scrollbar-width: none;
 }
 
@@ -378,7 +169,7 @@ html, body, #root { min-height: 100%; margin: 0; }
 
 body {
   font-family: var(--font);
-  font-size: 1rem; /* inherit proportional root; never hard 16px */
+  font-size: 1rem; 
   background: var(--stage);
   color: var(--ink-on-dark);
   -webkit-font-smoothing: antialiased;
@@ -397,7 +188,6 @@ a:focus-visible { outline: 2px solid var(--primary); outline-offset: 4px; }
 
 .app { min-height: 100%; background: var(--stage); }
 
-/* Frame-00: company name top-right — ACADEMe */
 .nav,
 .nav-flowty {
   position: fixed;
@@ -429,7 +219,6 @@ a:focus-visible { outline: 2px solid var(--primary); outline-offset: 4px; }
 
 .nav-wordmark:hover { color: #fff; }
 
-/* Flowty CTAs + hover fill: right → left wipe */
 .btn-flow {
   position: relative;
   display: inline-flex;
@@ -447,7 +236,7 @@ a:focus-visible { outline: 2px solid var(--primary); outline-offset: 4px; }
   font-family: inherit;
   border-radius: var(--btn-radius);
   min-height: var(--btn-height);
-  /* No lift/pop on hover — only internal fill animation */
+  
   transition:
     border-color 0.3s var(--ease),
     color 0.3s var(--ease),
@@ -481,7 +270,6 @@ a:focus-visible { outline: 2px solid var(--primary); outline-offset: 4px; }
   transition: color 0.3s var(--ease);
 }
 
-/* Icons always match button chrome size */
 .btn-flow-icon {
   width: var(--btn-icon-size);
   height: var(--btn-icon-size);
@@ -546,11 +334,6 @@ a:focus-visible { outline: 2px solid var(--primary); outline-offset: 4px; }
   color: #12141a;
 }
 
-/*
- * v3 story-progress:
- * fixed 2px white line, full width, scaled from left with scaleX(progress).
- * GPU transform (not width %) = buttery fill while scrolling.
- */
 .story-progress {
   position: fixed;
   top: 0;
@@ -565,7 +348,6 @@ a:focus-visible { outline: 2px solid var(--primary); outline-offset: 4px; }
   will-change: transform;
 }
 
-/* Bottom-right section jump — icon only, no border / radius / plate */
 .section-jump-corner {
   position: fixed;
   right: max(var(--page-pad-x), env(safe-area-inset-right));
@@ -641,7 +423,6 @@ a:focus-visible { outline: 2px solid var(--primary); outline-offset: 4px; }
   }
 }
 
-/* ── QR modal: expand from barcode button → center ── */
 .qr-modal {
   position: fixed;
   inset: 0;
@@ -685,7 +466,7 @@ a:focus-visible { outline: 2px solid var(--primary); outline-offset: 4px; }
 }
 
 .qr-modal-simple {
-  /* room for close X above the QR */
+  
   padding-top: 2.75rem;
 }
 
@@ -784,7 +565,7 @@ a:focus-visible { outline: 2px solid var(--primary); outline-offset: 4px; }
 }
 
 .qr-modal-cta {
-  display: none; /* removed — Join lives outside the modal */
+  display: none; 
 }
 
 .story { position: relative; background: var(--stage); }
@@ -796,7 +577,7 @@ a:focus-visible { outline: 2px solid var(--primary); outline-offset: 4px; }
   height: 100dvh;
   overflow: hidden;
   isolation: isolate;
-  /* Dual glow — left + right so side-switched compositions both feel lit */
+  
   background:
     radial-gradient(ellipse 52% 68% at 78% 40%, rgba(95, 78, 195, 0.46), transparent 64%),
     radial-gradient(ellipse 46% 60% at 18% 42%, rgba(78, 64, 170, 0.28), transparent 62%),
@@ -827,7 +608,7 @@ a:focus-visible { outline: 2px solid var(--primary); outline-offset: 4px; }
 }
 
 .chapter { position: absolute; inset: 0; opacity: 0; pointer-events: none; will-change: opacity; }
-/* Fallback 1 so hard-refresh never blanks hero before GSAP writes vars */
+
 .chapter-hero { opacity: var(--o-hero, 1); }
 .chapter-upload { opacity: var(--o-upload, 0); }
 .chapter-chat { opacity: var(--o-chat, 0); }
@@ -836,10 +617,6 @@ a:focus-visible { outline: 2px solid var(--primary); outline-offset: 4px; }
 .chapter-mastery { opacity: var(--o-mastery, 0); }
 .chapter-cta { opacity: var(--o-cta, 0); }
 
-/*
- * Invisible chapters still hit-test if children have pe:auto.
- * Only .is-live interactive nodes receive clicks.
- */
 .chapter .btn-flow,
 .chapter .hero-cta-row,
 .chapter .cta-row,
@@ -856,17 +633,16 @@ a:focus-visible { outline: 2px solid var(--primary); outline-offset: 4px; }
 .chapter.is-live button {
   pointer-events: auto;
 }
-/* Logo mark can hover even when parent chapter pe is limited */
+
 .chapter.is-live .hero-logo-mark {
   pointer-events: auto;
 }
 
-/* Headline top-left — same gutter as wordmark (desktop) */
 .hero-headline {
   position: absolute;
   top: max(var(--page-pad-y), env(safe-area-inset-top));
   left: var(--page-pad-x);
-  max-width: min(72vw, 58rem); /* room for “In your [logo] pocket.” on one line */
+  max-width: min(72vw, 58rem); 
   padding-top: 0.1rem;
   z-index: 6;
   pointer-events: none;
@@ -878,15 +654,14 @@ a:focus-visible { outline: 2px solid var(--primary); outline-offset: 4px; }
   font-weight: 400;
   letter-spacing: -0.036em;
   line-height: 0.95;
-  /* avoid balance wrapping “pocket.” onto its own line */
+  
   text-wrap: pretty;
 }
 
-/* Pure rem so headline tracks root scale (at 1440 this equals previous clamp max) */
 .hero-headline h1 { font-size: 6.5rem; }
 .hero-line {
   display: flex;
-  flex-wrap: nowrap; /* keep “In your [logo] pocket.” on one line */
+  flex-wrap: nowrap; 
   align-items: center;
   gap: 0.06em 0.08em;
   white-space: nowrap;
@@ -895,10 +670,7 @@ a:focus-visible { outline: 2px solid var(--primary); outline-offset: 4px; }
 .hero-logo-mark {
   display: inline-block;
   position: relative;
-  /*
-    Large enough to read, small enough that “pocket.” stays on the same line
-    at desktop headline size.
-  */
+  
   width: 1.35em;
   height: 1.35em;
   vertical-align: -0.16em;
@@ -910,7 +682,7 @@ a:focus-visible { outline: 2px solid var(--primary); outline-offset: 4px; }
   pointer-events: auto;
   overflow: visible;
 }
-/* Pocket slot is empty — no PNG, no second canvas inside */
+
 .hero-logo-mark img,
 .hero-logo-mark canvas {
   display: none !important;
@@ -931,7 +703,6 @@ a:focus-visible { outline: 2px solid var(--primary); outline-offset: 4px; }
 }
 .hero-accent { color: #ececf0; font-weight: 400; opacity: 0.95; }
 
-/* Bottom-left: lede + Start Free + QR — lifted for tighter vertical rhythm */
 .hero-bottom-left {
   position: absolute;
   left: var(--page-pad-x);
@@ -957,7 +728,7 @@ a:focus-visible { outline: 2px solid var(--primary); outline-offset: 4px; }
   align-items: center;
   gap: 0.55rem;
   margin-top: 1.25rem;
-  pointer-events: none; /* re-enabled on .is-live */
+  pointer-events: none; 
 }
 
 .btn-flow.outline {
@@ -997,7 +768,6 @@ a:focus-visible { outline: 2px solid var(--primary); outline-offset: 4px; }
   pointer-events: none;
 }
 
-/* Composition lanes — deliberate variety, not one template */
 .stage-left {
   justify-content: flex-start;
   align-items: center;
@@ -1005,7 +775,7 @@ a:focus-visible { outline: 2px solid var(--primary); outline-offset: 4px; }
 .stage-right {
   justify-content: flex-end;
   align-items: center;
-  /* Same right gutter as wordmark */
+  
   padding-right: var(--page-pad-x);
 }
 .stage-practice {
@@ -1015,7 +785,7 @@ a:focus-visible { outline: 2px solid var(--primary); outline-offset: 4px; }
 }
 .stage-mastery {
   align-items: center;
-  /* Type stays left of centered phone */
+  
   padding-right: min(42vw, 28rem);
 }
 
@@ -1036,7 +806,6 @@ a:focus-visible { outline: 2px solid var(--primary); outline-offset: 4px; }
 }
 .type-block .btn-flow { pointer-events: auto; }
 
-/* CTA: landscape phone center · Join + QR clear of footer */
 .stage-cta {
   justify-content: center;
   align-items: flex-end;
@@ -1046,7 +815,7 @@ a:focus-visible { outline: 2px solid var(--primary); outline-offset: 4px; }
   position: relative;
   z-index: 2;
   background: #07070d;
-  /* solid stage so story never bleeds footer chrome into the pin */
+  
   box-shadow: 0 -40px 60px #07070d;
 }
 .cta-row-center {
@@ -1059,7 +828,6 @@ a:focus-visible { outline: 2px solid var(--primary); outline-offset: 4px; }
   max-width: 22rem;
 }
 
-/* Mee sits above the chapter headline — HQ renders, crisp on dark */
 .chapter-mee {
   display: block;
   width: clamp(4.75rem, 6.2vw, 6.5rem);
@@ -1068,7 +836,7 @@ a:focus-visible { outline: 2px solid var(--primary); outline-offset: 4px; }
   object-fit: contain;
   background: transparent;
   image-rendering: auto;
-  /* soft lift only — no black plate */
+  
   filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.28));
   pointer-events: none;
   user-select: none;
@@ -1086,7 +854,7 @@ a:focus-visible { outline: 2px solid var(--primary); outline-offset: 4px; }
 }
 
 .display {
-  /* 4.5rem = previous clamp result at 1440 (5vw); scales with root elsewhere */
+  
   font-size: 4.5rem;
   letter-spacing: -0.034em;
 }
@@ -1100,14 +868,13 @@ a:focus-visible { outline: 2px solid var(--primary); outline-offset: 4px; }
 }
 .type-right .lede.tight { max-width: 21rem; }
 
-/* Per-chapter micro offsets */
 .chapter-upload .type-block { transform: translateY(-3vh); }
 .chapter-chat .type-block { transform: translateY(-1vh); }
 .chapter-adaptive .type-block { transform: translateY(0); }
 .chapter-mastery .type-block { transform: translateY(1vh); }
 .chapter-cta .cta-row { margin-top: 0; }
 .chapter-cta .type-block {
-  /* chrome sits under landscape phone only — no headline block */
+  
   margin-bottom: 0;
   width: auto;
 }
@@ -1117,7 +884,7 @@ a:focus-visible { outline: 2px solid var(--primary); outline-offset: 4px; }
   align-items: center;
   gap: 0.85rem;
   margin-top: 1.4rem;
-  pointer-events: none; /* enabled via .chapter.is-live */
+  pointer-events: none; 
 }
 .qr-wrap {
   display: flex;
@@ -1139,7 +906,6 @@ a:focus-visible { outline: 2px solid var(--primary); outline-offset: 4px; }
 
 .post-story { position: relative; z-index: 5; background: var(--stage-deep); }
 
-/* Flowty-style closer: legal + logo, then half-cropped mega wordmark */
 .site-footer {
   position: relative;
   z-index: 5;
@@ -1188,14 +954,13 @@ a:focus-visible { outline: 2px solid var(--primary); outline-offset: 4px; }
   transform: rotate(-10deg) scale(1.06);
 }
 
-/* Huge ACADEMe — Flowty half-cut (desktop + mobile same idea) */
 .footer-mega-clip {
   position: relative;
   width: 100%;
   max-width: 100%;
   margin: clamp(1.5rem, 4vh, 2.75rem) auto 0;
   overflow: hidden;
-  /* ~half letter height — bottom of ACADEMe is cut */
+  
   height: clamp(2.8rem, 9.5vw, 7rem);
   user-select: none;
   pointer-events: none;
@@ -1206,7 +971,7 @@ a:focus-visible { outline: 2px solid var(--primary); outline-offset: 4px; }
   display: flex;
   align-items: flex-start;
   gap: 0;
-  /* Oversized so the clip cuts ~half */
+  
   font-size: clamp(7.5rem, 24vw, 18rem);
   font-weight: 400;
   letter-spacing: -0.05em;
@@ -1218,7 +983,7 @@ a:focus-visible { outline: 2px solid var(--primary); outline-offset: 4px; }
 .footer-mega-letter {
   display: inline-block;
   will-change: transform, opacity;
-  /* Visible by default if JS animation hasn't run */
+  
   opacity: 1;
 }
 .footer-mega-e {
@@ -1230,7 +995,6 @@ a:focus-visible { outline: 2px solid var(--primary); outline-offset: 4px; }
   will-change: transform, opacity;
 }
 
-/* Store-style QR modal extras */
 .qr-modal-store .qr-modal-sub {
   margin: 0;
   font-size: 0.78rem;
@@ -1330,104 +1094,188 @@ a:focus-visible { outline: 2px solid var(--primary); outline-offset: 4px; }
 }
 
 @media (max-width: 768px), (max-height: 500px) and (pointer: coarse) {
-  .nav, .nav-flowty { padding: max(1rem, env(safe-area-inset-top)) var(--page-pad-x) 0.9rem; }
-  .nav-wordmark { font-size: 1.1rem; }
+  .nav, .nav-flowty {
+    padding: max(0.85rem, env(safe-area-inset-top)) 1.15rem 0.7rem;
+  }
+  .nav-wordmark { font-size: 1.05rem; }
+
   :root {
-    --page-pad-x: 1.25rem;
-    --btn-height: 2.6rem;
+    --page-pad-x: 1.15rem;
+    --btn-height: 2.65rem;
     --btn-icon-size: 1.05rem;
   }
-  .story-pin { background: radial-gradient(ellipse 90% 65% at 72% 27%, rgba(103, 80, 211, 0.45), transparent 62%), linear-gradient(145deg, #07070d, #0b0a19 65%, #080712); }
-  .hero-headline {
-    /* phone only: more air under the top edge */
-    top: calc(max(1rem, env(safe-area-inset-top)) + 36px);
-    left: 1.25rem;
-    max-width: calc(100% - 5.5rem);
+
+  .story-pin {
+    background:
+      radial-gradient(ellipse 95% 55% at 50% 32%, rgba(103, 80, 211, 0.42), transparent 64%),
+      linear-gradient(160deg, #07070d, #0b0a19 62%, #080712);
   }
-  .hero-headline h1 { font-size: clamp(2.6rem, 11vw, 3.5rem); line-height: 0.94; }
-  .hero-line { white-space: nowrap; flex-wrap: nowrap; }
-  .hero-logo-mark { width: 1.15em; height: 1.15em; }
+
+  
+  .hero-headline {
+    top: calc(max(0.85rem, env(safe-area-inset-top)) + 2.65rem);
+    left: 1.15rem;
+    right: 1.15rem;
+    max-width: none;
+    z-index: 12;
+  }
+  .hero-headline h1 {
+    font-size: clamp(2.35rem, 9.8vw, 3.05rem);
+    line-height: 0.96;
+    letter-spacing: -0.035em;
+  }
+  .hero-line {
+    white-space: nowrap;
+    flex-wrap: nowrap;
+    gap: 0.28em;
+  }
+  
+  .hero-logo-mark {
+    width: 1.55em;
+    height: 1.55em;
+    min-width: 1.55em;
+    min-height: 1.55em;
+    flex: 0 0 auto;
+  }
+
+  
   .hero-bottom-left {
     right: auto;
-    left: 1.25rem;
-    bottom: max(2.25rem, calc(env(safe-area-inset-bottom) + 1.5rem));
+    left: 1.15rem;
+    bottom: max(5.75rem, calc(env(safe-area-inset-bottom) + 4.25rem));
     width: auto;
-    max-width: calc(100% - 5rem);
+    max-width: calc(100% - 4.75rem);
+    z-index: 12;
   }
-  .hero-lede { max-width: 21rem; font-size: 0.91rem; }
-  .hero-cta-row { margin-top: 1.05rem; }
-  .btn-flow.primary { min-height: 2.6rem; padding-inline: 1rem; }
-  .btn-flow.icon { width: 2.6rem; height: 2.6rem; min-height: 2.6rem; }
-  .hero-micro { margin-top: 0.65rem; }
+  .hero-lede {
+    max-width: 20.5rem;
+    font-size: 0.9rem;
+    line-height: 1.45;
+  }
+  .hero-cta-row { margin-top: 0.95rem; gap: 0.65rem; }
+  .btn-flow.primary {
+    min-height: 2.65rem;
+    padding-inline: 1.05rem;
+    font-size: 0.92rem;
+  }
+  .btn-flow.icon {
+    width: 2.65rem;
+    height: 2.65rem;
+    min-height: 2.65rem;
+  }
+  .hero-micro {
+    margin-top: 0.55rem;
+    font-size: 0.78rem;
+  }
+
+  
   .chapter-stage {
     align-items: flex-end;
     justify-content: flex-start;
-    padding: 5rem 1.25rem max(2.6rem, calc(env(safe-area-inset-bottom) + 1.75rem));
+    padding:
+      4.5rem
+      1.15rem
+      max(3.25rem, calc(env(safe-area-inset-bottom) + 2.35rem));
   }
-  .stage-right { justify-content: flex-start; padding-right: 1.25rem; }
-  .stage-practice { align-items: flex-end; padding-top: 5rem; }
-  .stage-mastery { padding-right: 1.25rem; }
+  .stage-right,
+  .stage-practice,
+  .stage-mastery {
+    justify-content: flex-start;
+    align-items: flex-end;
+    padding-right: 1.15rem;
+    padding-top: 4.5rem;
+  }
   .type-block,
   .type-block.type-right,
   .type-block.type-practice,
-  .type-block.type-cta { width: min(100%, 25rem); }
-  .display, .display-cinematic { font-size: clamp(2.55rem, 10.6vw, 3.35rem); line-height: 0.94; }
-  .lede.tight { margin-top: 1rem; font-size: 0.92rem; }
-  .chapter-mee { width: 3.1rem; margin-bottom: 0.65rem; }
+  .type-block.type-cta {
+    width: min(100%, 24rem);
+    max-width: 100%;
+  }
+  .display,
+  .display-cinematic {
+    font-size: clamp(2.2rem, 9.2vw, 3rem);
+    line-height: 0.96;
+  }
+  .lede.tight {
+    margin-top: 0.85rem;
+    font-size: 0.9rem;
+    line-height: 1.45;
+    max-width: 22rem;
+  }
+  .chapter-mee {
+    width: 3.25rem;
+    margin-bottom: 0.55rem;
+  }
   .chapter-upload .type-block,
   .chapter-chat .type-block,
   .chapter-practice .type-block,
   .chapter-adaptive .type-block,
   .chapter-mastery .type-block,
-  .chapter-cta .type-block { align-self: flex-end; margin-top: 0; transform: none; }
-  .store-row { margin-top: 1.1rem; }
+  .chapter-cta .type-block {
+    align-self: flex-end;
+    margin-top: 0;
+    transform: none;
+  }
+
+  .store-row { margin-top: 0.95rem; }
+
+  
+  .stage-cta {
+    padding-bottom: max(6.75rem, calc(env(safe-area-inset-bottom) + 5.25rem));
+    align-items: flex-end;
+    justify-content: center;
+  }
+  .cta-row-center {
+    margin-bottom: 0.15rem;
+    width: 100%;
+    justify-content: center;
+  }
+
+  
+  .section-jump-corner {
+    right: 0.85rem;
+    bottom: max(1.15rem, env(safe-area-inset-bottom));
+  }
+  .section-jump-btn {
+    width: 2.55rem;
+    height: 2.55rem;
+  }
+
+  
   .site-footer {
     padding:
-      clamp(1.35rem, 3.5vh, 2.25rem)
-      var(--page-pad-x)
+      clamp(1.25rem, 3.2vh, 2rem)
+      1.15rem
       max(0.35rem, env(safe-area-inset-bottom));
     overflow: hidden;
   }
   .footer-row {
-    gap: 0.75rem;
-    min-height: 2.75rem;
+    gap: 0.65rem;
+    min-height: 2.5rem;
   }
   .footer-legal {
-    gap: 0.55rem 0.75rem;
-    font-size: 0.72rem;
-    max-width: calc(100% - 3.5rem);
+    gap: 0.5rem 0.7rem;
+    font-size: 0.7rem;
+    max-width: calc(100% - 3.25rem);
   }
-  .footer-logo {
-    width: 2.35rem;
-  }
-  /* Mobile half-cut — a bit smaller so full ACADEMe (incl. last e) fits */
+  .footer-logo { width: 2.2rem; }
   .footer-mega-clip {
     width: 100%;
     max-width: 100%;
-    height: clamp(1.95rem, 10.5vw, 2.85rem);
-    margin-top: 0.85rem;
+    height: clamp(1.9rem, 10vw, 2.75rem);
+    margin-top: 0.75rem;
     overflow: hidden;
   }
   .footer-mega {
     width: auto;
     max-width: none;
-    font-size: clamp(4.1rem, 17.5vw, 5.5rem);
+    font-size: clamp(3.9rem, 16.5vw, 5.25rem);
     letter-spacing: -0.055em;
     line-height: 0.8;
     justify-content: flex-start;
   }
-  .footer-mega-letter {
-    transform-style: flat;
-  }
-  .stage-cta {
-    padding-bottom: max(6.5rem, calc(env(safe-area-inset-bottom) + 5rem));
-    align-items: flex-end;
-  }
-  .cta-row-center { margin-bottom: 0.25rem; }
-  .hero-bottom-left {
-    bottom: max(5.5rem, calc(env(safe-area-inset-bottom) + 4rem));
-  }
-  .chapter-mee { width: 3.6rem; margin-bottom: 0.75rem; }
+  .footer-mega-letter { transform-style: flat; }
 }
 
 @media (max-height: 500px) and (pointer: coarse) {
@@ -1448,7 +1296,6 @@ a:focus-visible { outline: 2px solid var(--primary); outline-offset: 4px; }
   *, *::before, *::after { scroll-behavior: auto !important; transition-duration: 0.01ms !important; }
 }
 
-/* ── Pose debug panel (always available) ── */
 .pose-debug-fab {
   position: fixed;
   left: 1rem;
