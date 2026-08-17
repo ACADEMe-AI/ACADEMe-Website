@@ -63,3 +63,7 @@ App
 | 0.66 | Adaptive | practice |
 | 0.82 | Mastery | mastery |
 | 0.92 | CTA | landscape waitlist |
+
+## Contributing
+
+Read `CONTRIBUTING.md` and `AGENTS.md`. Skills for Grok / Claude / Cursor live in `.agents/skills/` so every clone gets the same pack. Product/design law is `design/agent/GUARDRAILS.md`.

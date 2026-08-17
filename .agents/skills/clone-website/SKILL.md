@@ -48,6 +48,15 @@ Refuse and explain if the request is for:
 
 Legitimate uses: migrating a site the user owns, recovering lost frontend source, or studying layout/animation techniques.
 
+## In this ACADEMe website repo
+
+This repository already ships a production Vite + React marketing site in `src/`.
+
+- **Do not** replace `src/`, `index.html`, `public/brand/`, or `public/mascot/` with a clone.
+- **Do not** treat “clone flowty.co” (or any live site) as permission to publish that site as ACADEMe.
+- Study a reference only in an isolated directory the user names (`v3/`, `research/`, a fresh template repo).
+- If the workspace is not the official cloner template, follow the scaffold rule below — never dump a Next.js clone over this Vite app.
+
 ## Scope Defaults
 
 The target is whatever page the provided URL(s) resolve to. Clone exactly what's visible at that URL. Unless the user specifies otherwise:

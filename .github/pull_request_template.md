@@ -10,7 +10,7 @@ This PR includes the following changes:
 
 <!--- Please link to the issue here: -->
 
-[#0000](https://github.com/ACADEMe-AI/ACADEMe/issues/0)
+[#0000](https://github.com/ACADEMe-AI/ACADEMe-Website/issues/0)
 
 ## Types of changes
 

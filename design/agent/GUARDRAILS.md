@@ -151,4 +151,20 @@ If (3) = prototype → restructure, then ship.
 
 ---
 
-*Phase 0.6 deliverable. Version 1.1 — 2026-07-30 (principal-engineer + architecture law)*
+## 10. This website repo (Vite + React)
+
+`ARCHITECTURE-PRINCIPLES.md` and §4 apply to the **Flutter app**. This repository ships the marketing site.
+
+| Rule | Detail |
+|------|--------|
+| W1 | Stack is React + Vite + GSAP + Lenis + Three / R3F. Do not invent a Next.js or Flutter app here unless the founder asks for an isolated experiment. |
+| W2 | Production surface is `src/`. Experiments (`v3/`, clones) stay isolated and never replace `/`. |
+| W3 | One persistent WebGL phone (`public/models/Iphone.glb`). No CSS fake. No second phone. |
+| W4 | Do not flatten the scroll film into a left-copy / right-device SaaS template. |
+| W5 | `clone-website` is reference study only. Never publish another brand’s site, assets, or copy as ACADEMe. |
+| W6 | Waitlist and demo URLs only in `src/lib/constants.ts`. No invented metrics or testimonials. |
+| W7 | Agents start at repo `AGENTS.md` + `academe-website-brain`. `academe-brain` is product facts, not file-structure law for this repo. |
+
+---
+
+*Phase 0.6 deliverable. Version 1.2 — 2026-08-17 (website-repo rules + agent entry)*
