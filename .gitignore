@@ -9,7 +9,7 @@ dist
 dist-ssr
 *.local
 
-# Editor
+# Editor / local agent settings
 .vscode/*
 !.vscode/extensions.json
 .idea
@@ -20,6 +20,7 @@ dist-ssr
 *.sln
 *.sw?
 .env
+.claude/settings.local.json
 
 # TypeScript
 *.tsbuildinfo
