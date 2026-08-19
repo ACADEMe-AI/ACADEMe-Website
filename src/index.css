@@ -188,8 +188,7 @@ a:focus-visible { outline: 2px solid var(--primary); outline-offset: 4px; }
 
 .app { min-height: 100%; background: var(--stage); }
 
-.nav,
-.nav-flowty {
+.nav {
   position: fixed;
   top: 0;
   right: 0;
@@ -1094,7 +1093,7 @@ a:focus-visible { outline: 2px solid var(--primary); outline-offset: 4px; }
 }
 
 @media (max-width: 768px), (max-height: 500px) and (pointer: coarse) {
-  .nav, .nav-flowty {
+  .nav {
     padding: max(0.85rem, env(safe-area-inset-top)) 1.15rem 0.7rem;
   }
   .nav-wordmark { font-size: 1.05rem; }

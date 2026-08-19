@@ -1,6 +1,6 @@
 /**
- * Flowty-style closer: logo left, legal right, huge half-cropped ACADEMe.
- * Letters always stay visible; stagger is a polish animation only (never hides forever).
+ * Closer: logo left, legal right, huge half-cropped ACADEMe.
+ * Letters always stay visible; stagger is polish only (never hides forever).
  */
 import { useEffect, useRef } from "react";
 import gsap from "gsap";

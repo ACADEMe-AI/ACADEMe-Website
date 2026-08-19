@@ -40,7 +40,7 @@ pnpm qa          # Playwright screenshots → qa-shots/ (gitignored)
 - Students first. Site = showcase + waitlist + QR. No “all devices.” No teacher/admin homepage.
 - No fake metrics or invented testimonials. URLs only from `src/lib/constants.ts`.
 - One persistent WebGL phone. Do not flatten the film into a SaaS split layout.
-- Edit `src/`. Do not replace production with a cloned third-party site.
+- This repo is ACADEMe only. Edit `src/`.
 - Tokens and voice from `design/` + `src/design/content/`.
 
 ## Pull requests
