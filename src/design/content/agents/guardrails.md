@@ -18,7 +18,9 @@ Full text: `design/agent/GUARDRAILS.md` + `ARCHITECTURE-PRINCIPLES.md`.
 
 ## Engineering
 
-- Feature modules: domain / data / application / presentation  
+- Feature modules: domain / data / application / presentation **(Flutter app)**  
+- This website repo: Vite + React film in `src/` — do not transplant Flutter layers  
+- One persistent WebGL phone. ACADEMe assets only.  
 - No god screens  
 - One state-management approach  
 - AI behind one gateway  

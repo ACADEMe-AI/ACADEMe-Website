@@ -2,9 +2,7 @@ import { useEffect } from "react";
 import { scrollState } from "../../lib/scrollState";
 
 /**
- * v3-style top progress line.
- * Uses GPU transform: scaleX(progress) from the left — not width%.
- * Same pattern as v3 `story-progress` + rAF tick on scrollState.progress.
+ * Top progress line. GPU transform: scaleX(progress) from the left — not width%.
  */
 export function ScrollProgress() {
   useEffect(() => {

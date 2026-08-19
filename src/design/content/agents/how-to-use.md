@@ -3,7 +3,9 @@
 ## Always
 
 ```
-src/design/content/00-START-HERE.md
+AGENTS.md
+  → academe-website-brain
+  → src/design/content/00-START-HERE.md
   → content/agents/guardrails.md
   → content/product/checklist.md
 ```
