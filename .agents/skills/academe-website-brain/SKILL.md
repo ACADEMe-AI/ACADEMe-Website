@@ -58,10 +58,6 @@ Public ACADEMe website: showcase + waitlist + QR into the mobile app.
 - Changing waitlist/demo URLs except in `src/lib/constants.ts`
 - Committing `.env`, `.claude/settings.local.json`, `.codex/`, or plugin copies of `impeccable`
 
-## `clone-website` in this repo
-
-Study a reference only in an isolated directory the user names (`v3/`, `research/`, etc.). Never let that skill write the production Vite app. Never merge a pixel-clone of someone else’s live site onto `/`.
-
 ## Where to read first
 
 1. `AGENTS.md`
@@ -74,8 +70,6 @@ Study a reference only in an isolated directory the user names (`v3/`, `research
 
 | Need | Skill |
 |---|---|
-| Award-level motion / type | `top-design` |
 | Product UI quality | `frontend-ui-engineering` |
-| Clone a reference (isolated) | `clone-website` |
 | Flutter/API product facts | `academe-brain` |
 | Visual craft / critique | `impeccable` (local plugin) |

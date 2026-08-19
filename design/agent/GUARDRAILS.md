@@ -161,7 +161,7 @@ If (3) = prototype → restructure, then ship.
 | W2 | Production surface is `src/`. Experiments (`v3/`, clones) stay isolated and never replace `/`. |
 | W3 | One persistent WebGL phone (`public/models/Iphone.glb`). No CSS fake. No second phone. |
 | W4 | Do not flatten the scroll film into a left-copy / right-device SaaS template. |
-| W5 | `clone-website` is reference study only. Never publish another brand’s site, assets, or copy as ACADEMe. |
+| W5 | Never publish another brand’s site, assets, or copy as ACADEMe. Isolated experiments must not replace `/`. |
 | W6 | Waitlist and demo URLs only in `src/lib/constants.ts`. No invented metrics or testimonials. |
 | W7 | Agents start at repo `AGENTS.md` + `academe-website-brain`. `academe-brain` is product facts, not file-structure law for this repo. |
 

@@ -15,8 +15,6 @@ Skills ship in `.agents/skills/` so every clone gets the same pack (same pattern
 | Skill | Use when |
 |---|---|
 | `academe-website-brain` | Any work in this repo |
-| `top-design` | Cinematic / motion / type |
-| `clone-website` | Studying a reference site — isolated dir only |
 | `frontend-ui-engineering` | Production UI quality |
 | `using-agent-skills` | Picking the rest of the pack |
 
