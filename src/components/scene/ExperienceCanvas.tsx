@@ -28,11 +28,11 @@ function SceneContents() {
         shadow-mapSize={[1024, 1024]}
       />
       {/* Rim — cool aluminum highlights for back/edge shots */}
-      <directionalLight position={[-4.5, 1.8, -2.2]} intensity={1.15} color="#d0d4e8" />
-      <directionalLight position={[2.5, 2.5, -3.5]} intensity={0.95} color="#b8b8d8" />
+      <directionalLight position={[-4.5, 1.8, -2.2]} intensity={0.65} color="#d0d4e8" />
+      <directionalLight position={[2.5, 2.5, -3.5]} intensity={0.6} color="#b8b8d8" />
       <directionalLight position={[1.5, -2.5, -3]} intensity={0.55} color="#9890c0" />
       <pointLight position={[1.4, 0.4, -1.4]} intensity={1.45} color="#a8a0d8" distance={9} />
-      <pointLight position={[1.2, 1.2, -0.8]} intensity={0.9} color="#e0e4f0" distance={7} />
+      <pointLight position={[1.2, 1.2, -0.8]} intensity={0.5} color="#e0e4f0" distance={7} />
       <pointLight position={[3, 0.5, 1.2]} intensity={1.55} color="#7a68c8" distance={14} />
       <pointLight position={[2.2, -0.2, 1.8]} intensity={0.9} color="#6050b0" distance={10} />
       <pointLight position={[3.4, 1.2, 0.5]} intensity={1.15} color="#8a78d8" distance={12} />
@@ -46,12 +46,12 @@ function SceneContents() {
       />
 
       <Environment resolution={256}>
-        <Lightformer intensity={1.35} position={[3.5, 2.5, 1]} scale={[7, 4, 1]} color="#b8b0e8" />
-        <Lightformer intensity={0.7} position={[4, 0.5, 0]} scale={[3, 6, 1]} color="#6a58b0" />
-        <Lightformer intensity={0.75} position={[-3.5, 1.2, -2]} scale={[5, 5, 1]} color="#8070c8" />
-        <Lightformer intensity={0.55} position={[0, 3, -2]} scale={[6, 2, 1]} color="#d0d0e8" />
-        <Lightformer intensity={0.35} position={[-2, 1, -1]} scale={[4, 4, 1]} color="#302850" />
-        <Lightformer intensity={0.22} position={[0, -2, 2]} scale={[8, 2, 1]} color="#181230" />
+        <Lightformer intensity={1.1} position={[3.5, 2.5, 1]} scale={[7, 4, 1]} color="#e8e6f2" />
+        <Lightformer intensity={0.4} position={[4, 0.5, 0]} scale={[3, 6, 1]} color="#3a3450" />
+        <Lightformer intensity={0.45} position={[-3.5, 1.2, -2]} scale={[5, 5, 1]} color="#4a4468" />
+        <Lightformer intensity={0.5} position={[0, 3, -2]} scale={[6, 2, 1]} color="#e0e0ec" />
+        <Lightformer intensity={0.6} position={[-2, 1, -1]} scale={[6, 6, 1]} color="#0c0c14" />
+        <Lightformer intensity={0.4} position={[0, -2, 2]} scale={[10, 4, 1]} color="#08080f" />
       </Environment>
 
       <CameraRig />
@@ -95,7 +95,7 @@ export function ExperienceCanvas() {
         camera={{ position: [0.28, -0.1, 5.6], fov: 27, near: 0.1, far: 40 }}
         onCreated={({ gl }) => {
           gl.setClearColor(0x000000, 0);
-          gl.toneMappingExposure = 1.22;
+          gl.toneMappingExposure = 1.0;
         }}
         style={{ width: "100%", height: "100%", background: "transparent" }}
       >

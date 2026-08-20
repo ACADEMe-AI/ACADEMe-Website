@@ -59,30 +59,30 @@ function preparePhone(source: THREE.Object3D): Fit {
       if ((m as THREE.MeshStandardMaterial).isMeshStandardMaterial) {
         const sm = m as THREE.MeshStandardMaterial;
         if (sm.name === "PhoneCase_Mat") {
-          sm.color.set("#2c3140");
-          sm.metalness = 0.94;
-          sm.roughness = 0.22;
-          sm.envMapIntensity = 2.1;
+          sm.color.set("#0a0a0c");
+          sm.metalness = 0.65;
+          sm.roughness = 0.38;
+          sm.envMapIntensity = 0.85;
         } else if (sm.name === "PhoneButton_Mat") {
-          sm.color.set("#3a4050");
-          sm.metalness = 0.95;
-          sm.roughness = 0.18;
-          sm.envMapIntensity = 1.8;
+          sm.color.set("#121216");
+          sm.metalness = 0.7;
+          sm.roughness = 0.35;
+          sm.envMapIntensity = 0.8;
         } else if (sm.name === "Material.001") {
-          sm.color.set("#222836");
-          sm.metalness = 0.97;
-          sm.roughness = 0.14;
-          sm.envMapIntensity = 1.9;
+          sm.color.set("#050506");
+          sm.metalness = 0.78;
+          sm.roughness = 0.3;
+          sm.envMapIntensity = 0.9;
         } else if (sm.name?.startsWith("Camera_Light")) {
-          sm.color.set("#d8dce6");
-          sm.metalness = 0.5;
-          sm.roughness = 0.28;
-          sm.emissive = new THREE.Color("#a8b0c8");
-          sm.emissiveIntensity = 0.2;
+          sm.color.set("#cfd3dd");
+          sm.metalness = 0.45;
+          sm.roughness = 0.35;
+          sm.emissive = new THREE.Color("#8a90a8");
+          sm.emissiveIntensity = 0.12;
         } else if (sm.metalness !== undefined) {
-          sm.metalness = Math.max(sm.metalness, 0.55);
-          sm.roughness = Math.min(sm.roughness, 0.38);
-          sm.envMapIntensity = Math.max(sm.envMapIntensity ?? 1, 1.5);
+          sm.metalness = Math.max(sm.metalness, 0.4);
+          sm.roughness = Math.max(sm.roughness, 0.35);
+          sm.envMapIntensity = Math.min(sm.envMapIntensity ?? 1, 1.0);
         }
         sm.needsUpdate = true;
       }
@@ -91,7 +91,8 @@ function preparePhone(source: THREE.Object3D): Fit {
     const isFace =
       names.includes("PhoneFace_Mat") ||
       mesh.name === "Object_32" ||
-      (mesh.parent?.name?.includes("PhoneFace") ?? false);
+      (mesh.name || "").toLowerCase().includes("screen") ||
+      (mesh.parent?.name?.toLowerCase().includes("screen") ?? false);
 
     if (isFace) {
       const mb = new THREE.Box3().setFromObject(mesh);
@@ -254,12 +255,12 @@ export function PhoneMesh() {
     for (const sm of caseMats.current) {
       if (!sm.emissive) sm.emissive = new THREE.Color("#000000");
       sm.emissive.setRGB(
-        0.05 * backBoost + 0.012,
-        0.055 * backBoost + 0.014,
-        0.08 * backBoost + 0.02
+        0.02 * backBoost + 0.006,
+        0.022 * backBoost + 0.007,
+        0.03 * backBoost + 0.01
       );
-      sm.emissiveIntensity = 0.1 + backBoost * 0.35;
-      sm.envMapIntensity = 1.7 + backBoost * 0.7;
+      sm.emissiveIntensity = 0.05 + backBoost * 0.15;
+      sm.envMapIntensity = 0.8 + backBoost * 0.25;
     }
   });
 
