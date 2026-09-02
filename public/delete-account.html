@@ -39,7 +39,7 @@ h1{font-size:1.5rem}
 <script>
 // API base: same origin works when the Vercel deployment proxies /api to the
 // ACADEMe backend (see vercel.json). Change here if that changes.
-const API_BASE = window.location.origin;
+const API_BASE = "https://academe-api-production.up.railway.app";
 const E = document.getElementById('msg');
 function show(t, m){ E.textContent = m; E.className = t; }
 async function requestOtp(e){ e.preventDefault();
