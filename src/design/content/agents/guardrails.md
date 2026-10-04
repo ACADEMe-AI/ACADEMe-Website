@@ -1,34 +1,36 @@
-# Agent guardrails (summary)
+# Rules
 
-Full text: `design/agent/GUARDRAILS.md` + `ARCHITECTURE-PRINCIPLES.md`.
+Full text: `design/agent/GUARDRAILS.md` in this repo.
 
-## Product
+## The app is the source of truth
 
-- Students/college first  
-- Mobile first; site = showcase + QR  
-- Desktop later  
-- P1 = study companion parity; school OS later  
-- Feel: fast + clean + light play  
+- Colours, fonts, radii and the keycap come from the app's `app_theme.dart`. Logos and Pebby come from the app's assets
+- Phone screens on the site are real captures from the app
+- If the app changes, update this site to match. Never the other way round
 
-## Design authority
+## No other names
 
-- Colors/tokens from this design system  
-- Screens from inventory / IA  
-- Mascot: optional slot; name sparingly  
+- No competitor, social network, video site or other study app named in code, copy, docs, file names or comments
+- Say "other study apps" when a comparison is needed
+- Google Play is fine; it's where we ship
 
-## Engineering
+## No code comments
 
-- Feature modules: domain / data / application / presentation **(Flutter app)**  
-- This website repo: Vite + React film in `src/` — do not transplant Flutter layers  
-- One persistent WebGL phone. ACADEMe assets only.  
-- No god screens  
-- One state-management approach  
-- AI behind one gateway  
-- Typed errors; operable alone  
+None, in any file you create or change: no `//`, `/* */`, `{/* */}` or HTML comments. Names carry the meaning. Notes that matter go in the docs.
 
-## Definition of done
+## Honest claims
 
-- Matches content rules  
-- Checklist updated  
-- No scope creep to teacher/admin  
-- No new random colors  
+- Only 6 lessons are live. Don't say every chapter has lessons
+- Android only, on Google Play. No iOS, no App Store badge
+- No made-up numbers, reviews or testimonials
+- Pebby can be unavailable when the AI service is out of credits. Don't build a live Pebby demo on the site
+
+## Product scope
+
+- One user: the student, Class 6 to 12, CBSE / ICSE / ISC
+- No teacher or school product, no social feed, no ads
+- Free core, one Pro plan
+
+## Writing
+
+Plain, short, human. No marketing fluff. See [Voice](/design/foundations/voice).

@@ -67,7 +67,7 @@ export function renderMarkdown(md: string): string {
       .replace(
         /\[([^\]]+)\]\(([^)]+)\)/g,
         (_m, text: string, href: string) =>
-          `<a class="text-primary hover:underline" ${anchorAttrs(href)}>${text}</a>`,
+          `<a class="text-[#564CF1] hover:underline" ${anchorAttrs(href)}>${text}</a>`,
       );
 
   for (const line of lines) {
@@ -123,7 +123,7 @@ export function renderMarkdown(md: string): string {
       const checked = /\[[xX]\]/.test(line);
       const text = line.replace(/^- \[[ xX]\] /, "");
       out.push(
-        `<label class="flex items-start gap-2 my-1.5 text-sm text-muted"><input type="checkbox" disabled ${checked ? "checked" : ""} class="mt-1 accent-primary" /><span>${inline(text)}</span></label>`
+        `<label class="flex items-start gap-2 my-1.5 text-sm text-muted"><input type="checkbox" disabled ${checked ? "checked" : ""} class="mt-1 accent-[#564CF1]" /><span>${inline(text)}</span></label>`
       );
     } else if (/^[-*] /.test(line)) {
       if (!inList) {

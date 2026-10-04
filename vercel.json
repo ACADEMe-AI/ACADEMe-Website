@@ -1,20 +1,13 @@
 {
-  "rewrites": [
-    {
-      "source": "/privacy",
-      "destination": "/privacy.html"
-    },
-    {
-      "source": "/delete-account",
-      "destination": "/delete-account.html"
-    },
-    {
-      "source": "/api/(.*)",
-      "destination": "https://academe-api-production.up.railway.app/$1"
-    },
-    {
-      "source": "/(.*)",
-      "destination": "/index.html"
-    }
-  ]
+  "redirects": [
+    { "source": "/privacy", "destination": "https://api.academe.cc/privacy", "permanent": true },
+    { "source": "/privacy-policy", "destination": "https://api.academe.cc/privacy", "permanent": true },
+    { "source": "/terms", "destination": "https://api.academe.cc/terms", "permanent": true },
+    { "source": "/support", "destination": "https://api.academe.cc/support", "permanent": true },
+    { "source": "/delete-account", "destination": "https://api.academe.cc/delete-account", "permanent": true },
+    { "source": "/delete", "destination": "https://api.academe.cc/delete-account", "permanent": true },
+    { "source": "/reset-password", "destination": "https://api.academe.cc/reset-password", "permanent": true },
+    { "source": "/open", "destination": "https://api.academe.cc/open", "permanent": true }
+  ],
+  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
 }

@@ -2,29 +2,23 @@ import * as THREE from "three";
 import type { ScreenState } from "./scrollState";
 
 const SCREEN_URLS: Record<ScreenState, string> = {
-  home: "/screens/home.png",
-  upload: "/screens/upload.png",
-  processing: "/screens/processing.png",
-  chat: "/screens/chat.png",
-  cards: "/screens/cards.png",
-  quiz: "/screens/quiz.png",
-  practice: "/screens/practice.png",
-  mastery: "/screens/mastery.png",
-  waitlist: "/screens/waitlist.png",
+  home: "/screens/home.webp",
+  lesson: "/screens/lesson.webp",
+  courses: "/screens/courses.webp",
+  askme: "/screens/askme.webp",
+  scan: "/screens/scan.webp",
+  check: "/screens/check.webp",
+  revision: "/screens/revision.webp",
+  folder: "/screens/folder.webp",
+  landscape: "/screens/landscape.webp",
 };
 
-/**
- * Preload baked product UI screens and bind them to a single canvas-compatible
- * texture slot the phone screen mesh consumes.
- */
 export function createScreenTexture() {
   const loader = new THREE.TextureLoader();
   const cache = new Map<ScreenState, THREE.Texture>();
   let current: ScreenState | null = null;
   let active: THREE.Texture | null = null;
   let loading = new Set<string>();
-
-  // Shared placeholder until first texture loads
   const placeholder = makePlaceholder();
 
   function ensure(state: ScreenState): THREE.Texture {
@@ -42,7 +36,6 @@ export function createScreenTexture() {
           tex.needsUpdate = true;
           cache.set(state, tex);
           loading.delete(state);
-          // If this is the current screen, hot-swap
           if (current === state && active && onSwap) {
             onSwap(tex);
           }
@@ -70,8 +63,6 @@ export function createScreenTexture() {
   function setOnSwap(cb: (tex: THREE.Texture) => void) {
     onSwap = cb;
   }
-
-  // Kick preload of all states
   (Object.keys(SCREEN_URLS) as ScreenState[]).forEach((s) => ensure(s));
   paint("home");
 

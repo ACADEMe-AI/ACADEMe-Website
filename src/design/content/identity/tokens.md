@@ -1,48 +1,57 @@
-# Design tokens
+# Tokens
 
-## Spacing (4pt base)
+Fonts are on the [Type](/design/foundations/type) page and colours on [Color](/design/foundations/color). This page covers the rest.
 
-`4 · 8 · 12 · 16 · 20 · 24 · 32 · 40 · 48 · 64`  
-Default horizontal screen padding: **16**.
-
-## Radius
+## Radius (`AppRadius`)
 
 | Token | px | Use |
-|-------|-----|-----|
-| sm | 8 | chips |
-| md | 12 | buttons |
-| lg | 16 | cards |
-| xl | 24 | sheets |
-| full | 999 | pills |
+|-------|----|-----|
+| sm | 8 | Chips, small tags |
+| md | 12 | Inputs, small cards |
+| lg | 16 | Buttons, keycaps, cards |
+| xl | 24 | Sheets, big cards |
+| full | 999 | Pills, the nav pill |
 
-## Type (app)
+## Spacing
 
-| Token | Size / weight | Use |
-|-------|---------------|-----|
-| display | 32 / 700 | rare celebrations |
-| title-1 | 24 / 700 | screen titles |
-| title-2 | 20 / 600 | sections |
-| body | 16 / 400 | default |
-| caption | 13 / 400 | meta |
+All spacing sits on a 4 pt grid: 4 · 8 · 12 · 16 · 20 · 24 · 32 · 40 · 48. Sizes that depend on the screen come from `ScreenScale`. A test in the app checks both.
 
-Prefer system fonts on mobile for performance; marketing may use display faces.
+## Keycap (`AppKeycap`)
+
+The app's buttons look like keys on a keyboard: a coloured face, a dark border and a thick bottom edge that squashes when you press.
+
+| Token | Value |
+|-------|-------|
+| Border | 2 px, `keycapEdge` (#12141A in Light) |
+| Radius | 16 |
+| Depth, buttons | 6 px |
+| Depth, options | 4.5 px |
+| Press | 90 ms, the face drops onto the edge |
+| Disabled | 45% opacity |
+
+The website's buttons use the same keycap: purple face, dark border, thick bottom edge. No white pills.
+
+## Components
+
+Named as in `lib/ui/core/ui/`. Use these names in docs, tickets and designs.
+
+| Component | What it is |
+|-----------|------------|
+| `AppButton` | The main keycap button |
+| `Keycap` | The pressable shape under buttons and options |
+| `OptionTile` | A keycap choice; turns amber when selected |
+| `ClassDial` | The Class 6 to 12 dial in setup |
+| `BoardPicker` | CBSE / ICSE / ISC choice |
+| `Pebby` | The animated mascot (Rive) |
+| `PebbyPeek` | Pebby peeking over the edge of a sheet |
+| `AcademeWordmark` | The ACADEMe word in ArchivoWordmark |
+| `BrandMark` | The cube |
+| `Celebration` | One-shot bursts, pop-ins, count-ups and XP fly-ups |
+| `AppTextField`, `AppPasswordField` | Inputs |
+| `PageDots`, `NumberWheel`, `SubjectIcons` | Smaller shared pieces |
 
 ## Motion
 
-| Token | Value |
-|-------|--------|
-| ease-out-expo | cubic-bezier(0.16, 1, 0.3, 1) |
-| duration-1 | 120ms tap |
-| duration-2 | 200ms color |
-| duration-3 | 320ms screen |
-| duration-4 | 480ms chrome celebrate |
-
-Animate **transform + opacity** only for list chrome. Respect reduce-motion.
-
-## Touch
-
-Min tap target **44×44**. Bottom nav **56** + safe area.
-
-## Components (name map)
-
-`AppScaffold` · `AppTabBar` · `PrimaryButton` · `StudyCard` · `ChatBubble` · `PromptChip` · `EmptyState` · `MascotSlot` · `CelebrationOverlay`
+- Short and physical: presses are 90 ms, most transitions 200 to 400 ms
+- Celebrate real wins only: lesson done, quick check right, test passed
+- Respect reduce motion: when the phone asks for less animation, celebrations and swipes skip straight to the end

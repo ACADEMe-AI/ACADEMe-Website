@@ -1,65 +1,59 @@
 ---
 name: academe-website-brain
 description: >
-  MASTER brain for the ACADEMe marketing/showcase website repo (this repo).
-  Use first when planning, designing, or editing the public site, cinematic
-  experience, mascot, tokens, or conversion CTAs. Distinct from academe-brain,
-  which is the Flutter/FastAPI product.
+  Master brain for the ACADEMe marketing website repo (this repo). Use first
+  when planning, designing or editing the public site, the 3D scroll film,
+  Pebby, tokens or CTAs. academe-brain holds product facts only.
 ---
 
 # ACADEMe website brain
 
-Check this skill first for work in **this** repository.
-
-`academe-brain` is product facts only (what the app does). Do not apply Flutter modules, Rive, or FastAPI folders here.
-
-Also read `AGENTS.md` and `design/agent/GUARDRAILS.md`.
+Check this skill first for work in **this** repository. Also read `AGENTS.md`.
 
 ## What this repo is
 
-Public ACADEMe website: showcase + waitlist + QR into the mobile app.
+academe.cc: a single scroll film that shows the real app, then sends students to Google Play.
 
 | Layer | Truth |
 |---|---|
 | Stack | React + Vite + TypeScript, GSAP ScrollTrigger, Lenis, Three.js / R3F |
-| Production | `src/` — this is what `/` ships |
-| 3D phone | `public/models/Iphone.glb` — one persistent WebGL phone |
-| Screens | `public/screens/*.png` (ACADEMe product UI) |
-| Mee | `public/mascot/` — narrative character, not a sticker |
-| Brand docs | `design/` and `src/design/content/` |
-| Primary CTA | `WAITLIST_URL` in `src/lib/constants.ts` |
-| Secondary | `DEMO_URL` |
+| 3D phone | `public/models/Iphone.glb`, one persistent WebGL phone |
+| Screens | `public/screens/*.png`, real Pixel 10 captures, 720×1560, Light |
+| Pebby | `public/pebby/*.png`, the app's transparent poses |
+| Logo | `public/brand/academe_cube.png` (light surfaces), `logo_mark.png` (dark) |
+| Fonts | `public/fonts/*.woff2`, converted from the app: Baloo 2 800, Archivo 700, Noto Sans 400/600, ArchivoWordmark |
+| CTA | `PLAY_URL` and `PLAY_LIVE` in `src/lib/constants.ts` |
+| Legal | `/privacy`, `/terms`, `/support`, `/delete-account` redirect to `api.academe.cc` |
+
+## The film
+
+`src/lib/waypoints.ts` (desktop and phone paths), `src/components/ScrollExperience.tsx` (text fades and `screenFromProgress`), `src/components/ui/ChapterOverlay.tsx` (copy).
+
+| Beat | Scroll | Screens |
+|---|---|---|
+| Hero | 0 – 0.12 | home |
+| Lessons | 0.12 – 0.465 | lesson → courses (swap at 0.32, phone edge-on) |
+| Pebby | 0.465 – 0.615 | askme |
+| Scan | 0.615 – 0.762 | scan → check |
+| Revision | 0.762 – 0.875 | revision (swap at 0.762, phone edge-on) |
+| Plan | 0.875 – 0.945 | folder |
+| Get the app | 0.945 – 1 | landscape (rotated 90° into a portrait file) |
+
+Screen swaps sit where the phone is edge-on or the text is crossfading. If you move a waypoint, re-check both. Phones in landscape (height ≤ 500px, touch) use the phone path with the text on the left.
+
+After the film: "Made for students in India" (languages, safety) and Pricing, then the footer.
 
 ## Product truth
 
-- Solo students / college grads first
-- Website is showcase + QR, not the product
-- Do not market “all devices” until desktop exists
-- Teacher / admin / LMS is later, not homepage
-- No fake metrics or invented testimonials
-
-## Art direction
-
-- Type as architecture; the phone can cut through the headline
-- One continuous scroll film, not stacked SaaS sections
-- Vary composition across chapters
-- Palette: `#F6F7FA` `#FFFFFF` `#5B6CFF` `#12141A` `#5C6578` — plus the dark cinematic stage
-- Edit what exists. Do not rebuild from scratch
+- Class 6–12, CBSE / ICSE / ISC, 2026-27 syllabus. Android first; no iOS yet.
+- Only 6 lessons are live (Class 10 CBSE). Never claim every chapter has lessons.
+- Pebby answers in English, Hindi, Telugu, Tamil and Bengali; the app's own text is English for now.
+- Free: every lesson, revision, folder, reminder; 10 Pebby questions, 3 scans, 1 answer check a day. Pro: ₹200/month (first month ₹100) or ₹1,999/year.
 
 ## Forbidden
 
-- Another brand’s assets, wordmark, copy, or screenshots in this repo
-- A CSS or image fake of the phone
-- A second phone, or teleporting between device meshes
+- Other brands' names, assets, copy or screenshots
+- A CSS or image fake of the phone, or a second phone
+- Drawn or mocked app screens: capture them from the app
 - Flattening the hero into a generic SaaS split
-- Applying Flutter architecture to this repo
-- Changing waitlist/demo URLs except in `src/lib/constants.ts`
-- Committing `.env`, `.claude/settings.local.json`, or plugin copies of `impeccable`
-
-## Read first
-
-1. `AGENTS.md`
-2. `src/design/content/00-START-HERE.md`
-3. `design/agent/GUARDRAILS.md`
-4. `src/components/ScrollExperience.tsx` + `src/lib/waypoints.ts`
-5. `src/components/scene/PhoneMesh.tsx`
+- Code comments

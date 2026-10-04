@@ -4,17 +4,17 @@ import type Lenis from "lenis";
 export type StorySection = {
   id: string;
   label: string;
-    t: number;
+  t: number;
 };
 
 export const STORY_SECTIONS: StorySection[] = [
   { id: "hero", label: "Hero", t: 0 },
-  { id: "upload", label: "Upload", t: 0.26 },
-  { id: "chat", label: "Ask Mee", t: 0.53 },
-  { id: "practice", label: "Practice", t: 0.67 },
-  { id: "adaptive", label: "Adaptive", t: 0.8 },
-  { id: "mastery", label: "Mastery", t: 0.9 },
-  { id: "cta", label: "Get started", t: 0.98 },
+  { id: "lessons", label: "Lessons", t: 0.26 },
+  { id: "pebby", label: "Ask Pebby", t: 0.55 },
+  { id: "scan", label: "Scan", t: 0.68 },
+  { id: "revision", label: "Revision", t: 0.81 },
+  { id: "plan", label: "Plan", t: 0.915 },
+  { id: "cta", label: "Get the app", t: 0.98 },
 ];
 
 let storyST: ScrollTrigger | null = null;
@@ -58,7 +58,7 @@ function scrollToProgress(t: number) {
       try {
         st.scroll(y);
       } catch {
-              }
+      }
     }
     st.update();
     requestAnimationFrame(() => st.update());

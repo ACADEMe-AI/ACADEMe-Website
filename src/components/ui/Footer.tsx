@@ -1,14 +1,9 @@
-/**
- * Closer: logo left, legal right, huge half-cropped ACADEMe.
- * Letters always stay visible; stagger is polish only (never hides forever).
- */
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-/** ACADEMe — last e lowercase */
 const MEGA_LETTERS = ["A", "C", "A", "D", "E", "M", "e"] as const;
 
 export function Footer() {
@@ -24,7 +19,6 @@ export function Footer() {
     if (!letters.length) return;
 
     const ctx = gsap.context(() => {
-      // Always rest visible — never leave opacity 0 as a stuck state
       const showRest = () => {
         gsap.set(legal, { opacity: 1, y: 0, clearProps: "transform" });
         gsap.set(logo, { opacity: 1, y: 0, scale: 1, clearProps: "transform" });
@@ -34,7 +28,6 @@ export function Footer() {
       showRest();
 
       const playIn = () => {
-        // Animate FROM below TO visible; end state always visible
         gsap.fromTo(
           legal,
           { opacity: 0, y: 14 },
@@ -66,7 +59,6 @@ export function Footer() {
         end: "bottom top",
         onEnter: playIn,
         onEnterBack: playIn,
-        // Do NOT hide on leave — only re-animate on re-enter
       });
 
       if (st.isActive) playIn();
@@ -91,7 +83,7 @@ export function Footer() {
         <a className="footer-logo-link" href="#top" aria-label="ACADEMe home">
           <img
             className="footer-logo"
-            src="/brand/logo-on-dark.png"
+            src="/brand/logo_mark.png"
             alt=""
             width={56}
             height={56}
@@ -99,8 +91,10 @@ export function Footer() {
           />
         </a>
         <div className="footer-legal">
-          <a href="/privacy-policy">Privacy</a>
-          <a href="/delete">Delete data</a>
+          <a href="/privacy">Privacy</a>
+          <a href="/terms">Terms</a>
+          <a href="/support">Support</a>
+          <a href="/delete-account">Delete account</a>
           <span>© {new Date().getFullYear()} ACADEMe</span>
         </div>
       </div>

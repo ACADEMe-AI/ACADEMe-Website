@@ -1,28 +1,28 @@
 # Start here
 
-**This is the ACADEMe design system** — one place for brand, product order, and build rules.
+This folder is the content of the ACADEMe design system at `/design`. Pages are plain markdown, registered in `src/design/lib/nav.ts`.
 
-## What should I do?
+## Read in this order
 
-1. **Building something?** → [Checklist](./product/checklist.md)  
-2. **Need colors / logo?** → [Color](./identity/color.md) · [Logo](./identity/logo.md)  
-3. **Need hard rules?** → [Guardrails](./agents/guardrails.md)  
+1. [start/overview.md](/design/guides): what's here
+2. [agents/guardrails.md](/design/guides/rules): the hard rules
+3. The page for your task
 
-## Hard rules (short)
+## Hard rules
 
-- Students first, mobile first  
-- Dark colors = Scheme B, light = Scheme D  
-- Main website (`/`) ≠ this design system site (`/design`)
-- Mascot name: use sparingly in product UI  
-- No school/admin product in Phase 1  
+- The ACADEMe app is the source of truth for colours, fonts, logos, Pebby and copy
+- No other app or company names
+- No code comments
+- Only claim what the app does today
 
-## Menu (top of site)
+## Where things are
 
-| Menu | What’s inside |
-|------|----------------|
-| **Brand** | Color, tokens, logo, voice |
-| **Product** | Roadmap, checklist, app structure |
-| **Build** | Agent / engineer rules |
-| **Visual** | Mascot sheet, shape language, motion |
-
-Keep pages short. Prefer images (logo, mascot, color chips) over long essays.
+| Need | Page |
+|------|------|
+| Colours | `identity/color.md` |
+| Fonts | `identity/type.md` |
+| Logo | `identity/logo.md` |
+| Radius, keycap, components | `identity/tokens.md` |
+| Pebby | `illustration/mascot.md` |
+| USPs | `product/usps.md` |
+| Copy | `writing/voice.md`, `writing/messaging.md` |

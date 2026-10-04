@@ -1,20 +1,19 @@
 # ACADEMe website
 
-Public marketing and showcase site for [ACADEMe](https://github.com/ACADEMe-AI/ACADEMe).
+The marketing site for [academe.cc](https://academe.cc): the study app for Class 6 to 12, CBSE, ICSE and ISC.
 
-It is a single scroll film: one persistent Three.js phone, GSAP ScrollTrigger, and a Rubik’s-cube brand loader. The site’s job is to show the app, then send people to the waitlist.
+It is a single scroll film: one persistent Three.js phone showing real screens from the app, GSAP ScrollTrigger, and a cube brand loader. Then a short "Made for students in India" section, pricing and the footer.
 
-This repository is **not** the Flutter app. Product code lives in [ACADEMe](https://github.com/ACADEMe-AI/ACADEMe).
-
-**Tagline:** Study smarter. In your pocket.
+This repository is **not** the app. The app (Flutter client, Go API) lives in the academe-mobile repo under `academe/`, and it is the source of truth for screens, colours, fonts, Pebby and copy.
 
 ## Pages
 
 | URL | What you get |
 | --- | --- |
-| `/` | Cinematic product site |
+| `/` | The scroll film, then languages, safety and pricing |
 | `/design` | Design system (docs and tiles) |
 | `/?loader=1` | Force the brand loader |
+| `/privacy`, `/terms`, `/support`, `/delete-account`, `/reset-password`, `/open` | Redirect to `api.academe.cc` (`vercel.json`) |
 
 Local base: [http://localhost:3010](http://localhost:3010)
 
@@ -27,7 +26,7 @@ Local base: [http://localhost:3010](http://localhost:3010)
 | Scroll | GSAP ScrollTrigger (one scrubbed timeline) |
 | Smooth scroll | Lenis (respects `prefers-reduced-motion`) |
 | Routing | React Router (`/` and `/design`) |
-| Type | Archivo |
+| Type | The app's fonts, self-hosted as woff2: Baloo 2 800, Archivo 700, Noto Sans 400/600, ArchivoWordmark |
 
 ## Setup
 
@@ -50,7 +49,6 @@ Optional local overrides: copy `.env.example` to `.env`. Production already sets
 | `pnpm typecheck` | `tsc --noEmit` |
 | `pnpm qa` | Playwright screenshots → `qa-shots/` (gitignored) |
 | `pnpm test:loader` | Brand-loader scroll regression |
-| `pnpm assets` | Rebuild phone GLB, screens, and mascot crops |
 
 ## How it works
 
@@ -62,30 +60,31 @@ App
 │   ├── ExperienceCanvas   one persistent WebGL phone
 │   │   ├── CameraRig
 │   │   ├── PhoneMesh
-│   │   ├── FloatingDocs
-│   │   └── MeeSprite
-│   └── ChapterOverlay
+│   │   └── FloatingCards  chapter cards that fly into the phone
+│   └── ChapterOverlay     headlines, Pebby, CTAs
 ├── SectionJump / QrModal
-└── Footer
+└── AppDetails + Footer    languages, safety, pricing
 ```
 
 - GSAP writes `scrollState` every scrub frame.
 - R3F `useFrame` lerps the real Three.js objects toward that state.
-- One WebGL phone (`public/models/Iphone.glb`). No CSS fake. No second phone.
+- Desktop and phones follow different paths (`DESKTOP_WAYPOINTS`, `MOBILE_WAYPOINTS`). Phones in landscape use the phone path with the text on the left.
 
 ### Story
 
-| Progress | Chapter | Screen |
+| Progress | Beat | Screen |
 | --- | --- | --- |
-| 0.00 | Hero | home |
-| 0.18 | Upload | upload → processing |
-| 0.38 | Chat / Mee | chat |
-| 0.52 | Practice | cards → quiz |
-| 0.66 | Adaptive | practice |
-| 0.82 | Mastery | mastery |
-| 0.92 | CTA | landscape waitlist |
+| 0 – 0.12 | Hero: your syllabus, in your pocket | home |
+| 0.12 – 0.465 | Lessons | lesson → courses |
+| 0.465 – 0.615 | Ask Pebby | askme |
+| 0.615 – 0.762 | Scan, marked like the board | scan → check |
+| 0.762 – 0.875 | Revision | revision |
+| 0.875 – 0.945 | Plan for a test | folder |
+| 0.945 – 1 | Get the app | landscape |
 
-Waitlist and demo URLs live in [`src/lib/constants.ts`](src/lib/constants.ts). Do not invent metrics or testimonials.
+Screens swap where the phone is edge-on (0.32, 0.762) or while the text crossfades. Screens are Pixel 10 captures in Light, cropped to 1080×2340 and scaled to 720×1560; the landscape one is rotated 90° into a portrait file.
+
+The Play link lives in [`src/lib/constants.ts`](src/lib/constants.ts). `PLAY_LIVE` is `false` until the listing is public; flip it to show "Get it on Google Play" and the QR code. Do not invent metrics or testimonials.
 
 ## Layout
 
@@ -97,9 +96,10 @@ src/                 production site
   lib/               waypoints, CTAs, scroll state
 public/
   models/            Iphone.glb
-  screens/           baked ACADEMe product UI
-  mascot/            Mee
-  brand/             logos
+  screens/           Pixel 10 captures of the app
+  pebby/             Pebby poses from the app
+  brand/             the app's cube and logo mark
+  fonts/             the app's fonts as woff2
 design/              product and design law
 .agents/skills/      shared agent pack (clone gets the same skills)
 ```
@@ -108,14 +108,13 @@ design/              product and design law
 
 1. Read [CONTRIBUTING.md](CONTRIBUTING.md) and [AGENTS.md](AGENTS.md).
 2. Branch off `master`. One concern per pull request.
-3. If you change the film, include desktop and mobile screenshots (or a short recording).
+3. If you change the film, include desktop, phone portrait and phone landscape screenshots (or a short recording).
 
 Hard rules in short:
 
-- Students first. The site is showcase + waitlist + QR. No “all devices.” No teacher / admin homepage.
-- ACADEMe assets only. Edit `src/`.
+- The app is the source of truth. Only features it really has.
+- ACADEMe only: no other company or app names. No code comments.
 - One persistent WebGL phone. Do not flatten the film into a SaaS split layout.
 - Agents start with `academe-website-brain`. `academe-brain` is product facts, not Flutter file structure.
 
-Design law: [`design/agent/GUARDRAILS.md`](design/agent/GUARDRAILS.md).  
 Start here for brand and copy: [`src/design/content/00-START-HERE.md`](src/design/content/00-START-HERE.md).

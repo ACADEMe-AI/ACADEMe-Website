@@ -15,11 +15,11 @@ const ExperienceCanvas = lazy(() =>
 type Proxy = {
   t: number;
   hero: number;
-  upload: number;
-  chat: number;
-  practice: number;
-  adaptive: number;
-  mastery: number;
+  lessons: number;
+  pebby: number;
+  scan: number;
+  revision: number;
+  plan: number;
   cta: number;
 };
 
@@ -44,10 +44,6 @@ function applyWaypoint(w: Waypoint) {
 
   scrollState.docs.visible = w.docs;
   scrollState.docs.absorb = w.absorb;
-  scrollState.mee.visible = 0;
-  scrollState.mee.x = 0;
-  scrollState.mee.y = 0.5;
-  scrollState.mee.z = 0.2;
 }
 
 function lerpWaypoints(list: Waypoint[], t: number) {
@@ -73,7 +69,6 @@ function lerpWaypoints(list: Waypoint[], t: number) {
   applyWaypoint({
     t: clamped,
     label: (smooth < 0.5 ? a.label : b.label) as ChapterId,
-    screen: (smooth < 0.5 ? a.screen : b.screen) as ScreenState,
     phone: {
       x: mix(a.phone.x, b.phone.x),
       y: mix(a.phone.y, b.phone.y),
@@ -94,25 +89,24 @@ function lerpWaypoints(list: Waypoint[], t: number) {
     },
     docs: mix(a.docs, b.docs),
     absorb: mix(a.absorb, b.absorb),
-    mee: mix(a.mee, b.mee),
   });
   scrollState.chapter = (smooth < 0.5 ? a.label : b.label) as ChapterId;
 }
 
 function screenFromProgress(t: number): ScreenState {
   if (t < 0.12) return "home";
-  if (t < 0.38) return "upload";
-  if (t < 0.44) return "processing";
-  if (t < 0.58) return "chat"; // tutor section
-  if (t < 0.66) return "cards";
-  if (t < 0.74) return "quiz";
-  if (t < 0.86) return "practice";
-  if (t < 0.94) return "mastery";
-  return "waitlist"; // landscape CTA community screen
+  if (t < 0.32) return "lesson";
+  if (t < 0.465) return "courses";
+  if (t < 0.615) return "askme";
+  if (t < 0.69) return "scan";
+  if (t < 0.762) return "check";
+  if (t < 0.875) return "revision";
+  if (t < 0.945) return "folder";
+  return "landscape";
 }
 
 type Props = {
-    enableFilm?: boolean;
+  enableFilm?: boolean;
 };
 
 export function ScrollExperience({ enableFilm = true }: Props) {
@@ -130,11 +124,11 @@ export function ScrollExperience({ enableFilm = true }: Props) {
     const proxy: Proxy = {
       t: 0,
       hero: 1,
-      upload: 0,
-      chat: 0,
-      practice: 0,
-      adaptive: 0,
-      mastery: 0,
+      lessons: 0,
+      pebby: 0,
+      scan: 0,
+      revision: 0,
+      plan: 0,
       cta: 0,
     };
 
@@ -182,29 +176,29 @@ export function ScrollExperience({ enableFilm = true }: Props) {
 
         const writeOverlays = () => {
           scrollState.overlays.hero = proxy.hero;
-          scrollState.overlays.upload = proxy.upload;
-          scrollState.overlays.chat = proxy.chat;
-          scrollState.overlays.practice = proxy.practice;
-          scrollState.overlays.adaptive = proxy.adaptive;
-          scrollState.overlays.mastery = proxy.mastery;
+          scrollState.overlays.lessons = proxy.lessons;
+          scrollState.overlays.pebby = proxy.pebby;
+          scrollState.overlays.scan = proxy.scan;
+          scrollState.overlays.revision = proxy.revision;
+          scrollState.overlays.plan = proxy.plan;
           scrollState.overlays.cta = proxy.cta;
 
           if (layer) {
             layer.style.setProperty("--o-hero", String(proxy.hero));
-            layer.style.setProperty("--o-upload", String(proxy.upload));
-            layer.style.setProperty("--o-chat", String(proxy.chat));
-            layer.style.setProperty("--o-practice", String(proxy.practice));
-            layer.style.setProperty("--o-adaptive", String(proxy.adaptive));
-            layer.style.setProperty("--o-mastery", String(proxy.mastery));
+            layer.style.setProperty("--o-lessons", String(proxy.lessons));
+            layer.style.setProperty("--o-pebby", String(proxy.pebby));
+            layer.style.setProperty("--o-scan", String(proxy.scan));
+            layer.style.setProperty("--o-revision", String(proxy.revision));
+            layer.style.setProperty("--o-plan", String(proxy.plan));
             layer.style.setProperty("--o-cta", String(proxy.cta));
 
             const map: [string, number][] = [
               ["hero", proxy.hero],
-              ["upload", proxy.upload],
-              ["chat", proxy.chat],
-              ["practice", proxy.practice],
-              ["adaptive", proxy.adaptive],
-              ["mastery", proxy.mastery],
+              ["lessons", proxy.lessons],
+              ["pebby", proxy.pebby],
+              ["scan", proxy.scan],
+              ["revision", proxy.revision],
+              ["plan", proxy.plan],
               ["cta", proxy.cta],
             ];
             for (const [id, v] of map) {
@@ -235,7 +229,7 @@ export function ScrollExperience({ enableFilm = true }: Props) {
           0
         );
 
-                const fade = (prop: keyof Proxy, from: number, to: number, dur: number, at: number) => {
+        const fade = (prop: keyof Proxy, from: number, to: number, dur: number, at: number) => {
           tl.fromTo(
             proxy,
             { [prop]: from },
@@ -253,44 +247,44 @@ export function ScrollExperience({ enableFilm = true }: Props) {
           proxy,
           {
             hero: 1,
-            upload: 0,
-            chat: 0,
-            practice: 0,
-            adaptive: 0,
-            mastery: 0,
+            lessons: 0,
+            pebby: 0,
+            scan: 0,
+            revision: 0,
+            plan: 0,
             cta: 0,
             onUpdate: writeOverlays,
           },
           0
         );
 
-                fade("hero", 1, 0, 0.05, 0.1);
-        fade("upload", 0, 1, 0.05, 0.12);
-        fade("upload", 1, 0, 0.04, 0.38);
-        fade("chat", 0, 1, 0.05, 0.46);
-        fade("chat", 1, 0, 0.04, 0.58);
-        fade("practice", 0, 1, 0.05, 0.6);
-        fade("practice", 1, 0, 0.04, 0.72);
-        fade("adaptive", 0, 1, 0.05, 0.75);
-        fade("adaptive", 1, 0, 0.04, 0.84);
-        fade("mastery", 0, 1, 0.05, 0.86);
-        fade("mastery", 1, 0, 0.04, 0.93);
+        fade("hero", 1, 0, 0.05, 0.1);
+        fade("lessons", 0, 1, 0.05, 0.12);
+        fade("lessons", 1, 0, 0.04, 0.41);
+        fade("pebby", 0, 1, 0.05, 0.48);
+        fade("pebby", 1, 0, 0.04, 0.59);
+        fade("scan", 0, 1, 0.05, 0.62);
+        fade("scan", 1, 0, 0.04, 0.73);
+        fade("revision", 0, 1, 0.05, 0.75);
+        fade("revision", 1, 0, 0.04, 0.84);
+        fade("plan", 0, 1, 0.05, 0.86);
+        fade("plan", 1, 0, 0.04, 0.93);
         fade("cta", 0, 1, 0.05, 0.95);
 
         tl.addLabel("hero", 0);
-        tl.addLabel("upload", 0.26);
-        tl.addLabel("chat", 0.53);
-        tl.addLabel("practice", 0.67);
-        tl.addLabel("adaptive", 0.8);
-        tl.addLabel("mastery", 0.9);
+        tl.addLabel("lessons", 0.26);
+        tl.addLabel("pebby", 0.53);
+        tl.addLabel("scan", 0.67);
+        tl.addLabel("revision", 0.8);
+        tl.addLabel("plan", 0.9);
         tl.addLabel("cta", 0.98);
 
         proxy.hero = 1;
-        proxy.upload = 0;
-        proxy.chat = 0;
-        proxy.practice = 0;
-        proxy.adaptive = 0;
-        proxy.mastery = 0;
+        proxy.lessons = 0;
+        proxy.pebby = 0;
+        proxy.scan = 0;
+        proxy.revision = 0;
+        proxy.plan = 0;
         proxy.cta = 0;
         applyProgress();
         writeOverlays();
@@ -301,11 +295,11 @@ export function ScrollExperience({ enableFilm = true }: Props) {
           if (!tl.scrollTrigger || tl.scrollTrigger.progress < 0.001) {
             proxy.t = 0;
             proxy.hero = 1;
-            proxy.upload = 0;
-            proxy.chat = 0;
-            proxy.practice = 0;
-            proxy.adaptive = 0;
-            proxy.mastery = 0;
+            proxy.lessons = 0;
+            proxy.pebby = 0;
+            proxy.scan = 0;
+            proxy.revision = 0;
+            proxy.plan = 0;
             proxy.cta = 0;
           }
           applyProgress();

@@ -1,16 +1,16 @@
 const CRITICAL_ASSETS = [
   "/models/Iphone.glb",
-  "/models/phone.glb",
-  "/screens/home.png",
-  "/screens/upload.png",
-  "/screens/chat.png",
-  "/screens/quiz.png",
-  "/screens/practice.png",
-  "/screens/mastery.png",
-  "/screens/waitlist.png",
-  "/screens/processing.png",
-  "/mascot/chat.png",
-  "/mascot/upload.png",
+  "/screens/home.webp",
+  "/screens/lesson.webp",
+  "/screens/courses.webp",
+  "/screens/askme.webp",
+  "/screens/scan.webp",
+  "/screens/check.webp",
+  "/screens/revision.webp",
+  "/screens/folder.webp",
+  "/screens/landscape.webp",
+  "/pebby/wave.png",
+  "/pebby/reading.png",
 ];
 
 function loadUrl(url: string): Promise<void> {

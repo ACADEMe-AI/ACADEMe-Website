@@ -7,6 +7,7 @@ import { SmoothScroll } from "./components/SmoothScroll";
 import { ScrollProgress } from "./components/ui/ScrollProgress";
 import { SectionJump } from "./components/ui/SectionJump";
 import { QrModal } from "./components/ui/QrModal";
+import { AppDetails } from "./components/ui/AppDetails";
 import { BrandLoader } from "./loader";
 
 const DesignRoot = lazy(() => import("./design/DesignRoot"));
@@ -19,19 +20,18 @@ function WebsiteApp() {
 
   return (
     <>
-      {}
       <BrandLoader force={forceLoader} onFinished={() => setLoading(false)} />
       <SmoothScroll>
         <div id="top" className="app" aria-hidden={loading || undefined}>
           <ScrollProgress />
           <Nav />
           <main>
-            {}
-            <ScrollExperience enableFilm={!loading} />
+                  <ScrollExperience enableFilm={!loading} />
           </main>
           <SectionJump />
           <QrModal />
           <div id="cta" className="post-story">
+            <AppDetails />
             <Footer />
           </div>
         </div>
@@ -47,9 +47,9 @@ function DesignFallback() {
         minHeight: "100vh",
         display: "grid",
         placeItems: "center",
-        fontFamily: "Archivo, system-ui, sans-serif",
-        color: "#5b6cff",
-        background: "#fff",
+        fontFamily: "'Noto Sans', system-ui, sans-serif",
+        color: "#8b93a7",
+        background: "#0b0c0f",
       }}
     >
       Loading design system…

@@ -1,31 +1,49 @@
-# In action
+# Moments
 
-Study moments cut from the official sheet. Transparent PNGs under `/mascot/`.
+Which pose goes where.
 
-## Files
+## On the web
 
-| Moment | File |
+| Moment | Pose |
 |--------|------|
-| Reading | act_reading.png |
-| Studying | act_studying.png |
-| Got an idea | act_idea.png |
-| Solving | act_solving.png |
-| Achieved | act_achieved.png |
-| High five | act_highfive.png |
+| Welcome, hello, sign-up prompts | `wave` |
+| Ask Pebby, ASKMe | `chat` |
+| Lessons, Courses | `reading` |
+| Scan, solving homework | `solving` |
+| "Here's why", tips | `idea` |
+| Folders, the plan, Today | `focused` |
+| Revision, chapter tests, try again | `determined` |
+| Gentle nudges, limits, reminders | `encourage` |
+| Lesson done, test passed, start free | `celebrate` |
+| Small good news, safety and trust | `happy` |
 
-## Product aliases
+## On academe.cc
 
-| Alias | Points to |
-|-------|-----------|
-| studying.png | act_studying.png |
-| celebrate.png | act_achieved.png |
-| wave.png | act_highfive.png |
+| Section | Pose |
+|---------|------|
+| 1 · Hero | `wave` |
+| 2 · Lessons | `reading` |
+| 3 · Pebby | `chat` |
+| 4 · Scan | `solving` |
+| 5 · Revision | `determined` |
+| 6 · Folders and planner | `focused` |
+| 7 · Get it | `celebrate` |
+| Made for students in India | `happy` |
+| Pricing | `encourage` |
 
-## Use
+## In the app today
 
-* Empty library: reading
-* Active study: studying
-* Insight card: idea
-* Problem mode: solving
-* Goal complete: achieved
-* Friendly nudge: high five
+For reference, the Rive poses the app uses (`PebbyPose`):
+
+| Screen | Poses |
+|--------|-------|
+| Splash, Welcome | `wave`, `peekRight`, `idle` |
+| Sign-up and log-in | `think` while typing, `coverEyes` on the password, `encourage` on a mistake, `celebrateBig` at the end |
+| ASKMe empty state | `reading` |
+| Scan | `working` while reading the photo, `think` |
+| Folders | `think` |
+| Revision done | `happy` |
+| Lesson done | `celebrateSmall`, `celebrateBig` |
+| Daily limit, notification primer | `encourage` |
+| Paywall | `celebrateSmall` |
+| Appearance | `sleep` and `wakeUp` when switching Dark and Light |

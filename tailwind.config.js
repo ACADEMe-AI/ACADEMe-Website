@@ -5,7 +5,7 @@ export default {
     extend: {
       colors: {
         // Brand (Scheme D — Soft Day, light only for now)
-        primary: "#5b6cff",
+        primary: "#564cf1",
         secondary: "#00d2d3",
         coral: "#ff6e6e",
         success: "#0d9f6e",

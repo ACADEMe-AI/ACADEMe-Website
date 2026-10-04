@@ -37,8 +37,9 @@ pnpm qa          # Playwright screenshots → qa-shots/ (gitignored)
 
 ## Hard rules (short)
 
-- Students first. Site = showcase + waitlist + QR. No “all devices.” No teacher/admin homepage.
-- No fake metrics or invented testimonials. URLs only from `src/lib/constants.ts`.
+- The app is the source of truth: real screenshots, its logo, Pebby, colours and fonts. Only features the app has.
+- No fake metrics or invented testimonials. Store links only from `src/lib/constants.ts`.
+- No other company or app names anywhere. No code comments.
 - One persistent WebGL phone. Do not flatten the film into a SaaS split layout.
 - This repo is ACADEMe only. Edit `src/`.
 - Tokens and voice from `design/` + `src/design/content/`.
@@ -47,7 +48,7 @@ pnpm qa          # Playwright screenshots → qa-shots/ (gitignored)
 
 1. Branch off `master`. One concern per PR.
 2. Use `.github/pull_request_template.md`.
-3. If you change the cinematic site, include desktop **and** mobile screenshots (or a short screen recording).
+3. If you change the cinematic site, include desktop, phone portrait and phone landscape screenshots (or a short screen recording).
 4. Do not mix skill-pack edits with unrelated visual work unless the PR is explicitly about agents.
 
 ## Code style

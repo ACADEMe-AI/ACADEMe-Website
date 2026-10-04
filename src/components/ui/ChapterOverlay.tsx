@@ -1,21 +1,23 @@
 import { useEffect, useRef } from "react";
-import { WAITLIST_URL } from "../../lib/constants";
 import { registerPocket } from "../../loader/pocketRegistry";
-import { openQrModal } from "./QrModal";
+import { goToSection } from "../../lib/sectionNav";
+import { PlayCta } from "./PlayCta";
 
-function Mee({ src, className = "chapter-mee" }: { src: string; className?: string }) {
+function Pebby({ pose }: { pose: string }) {
   return (
     <img
-      className={className}
-      src={src}
+      className="pebby-pose"
+      src={`/pebby/${pose}.png`}
       alt=""
       width={112}
-      height={120}
+      height={112}
       decoding="async"
       aria-hidden
     />
   );
 }
+
+const USPS = ["Your syllabus", "Swipe lessons", "Pebby, your tutor", "Board-style marking"];
 
 export function ChapterOverlay() {
   const pocketRef = useRef<HTMLSpanElement>(null);
@@ -27,14 +29,12 @@ export function ChapterOverlay() {
 
   return (
     <div className="chapter-layer" aria-live="polite">
-      {}
       <div className="chapter chapter-hero" data-chapter="hero">
         <div className="hero-headline">
           <h1>
-            <span className="hero-line">Study smarter.</span>
+            <span className="hero-line">Your syllabus.</span>
             <span className="hero-line">
               In your{" "}
-              {}
               <span
                 ref={pocketRef}
                 className="hero-logo-mark"
@@ -50,157 +50,120 @@ export function ChapterOverlay() {
         </div>
 
         <div className="hero-bottom-left">
+          <ul className="usp-row" aria-label="What ACADEMe does">
+            {USPS.map((usp) => (
+              <li key={usp}>{usp}</li>
+            ))}
+          </ul>
           <p className="hero-lede">
-            Turn notes, PDFs, lectures and study material into personalized
-            AI-powered practice with ACADEMe.
+            The study app for Class 6 to 12, CBSE, ICSE and ISC. Short swipe
+            lessons from your chapters, Pebby when you&apos;re stuck, and marks
+            on your written answers the way your board gives them.
           </p>
           <div className="hero-cta-row">
-            <a className="btn-flow primary" href={WAITLIST_URL} target="_blank" rel="noreferrer">
-              <span className="btn-flow-label">Start For Free</span>
-            </a>
-            <button
-              type="button"
-              className="btn-flow icon"
-              id="hero-qr-trigger"
-              aria-label="Show QR code"
-              title="Scan to join"
-              onClick={(e) => openQrModal(e.currentTarget)}
-            >
-              <span className="btn-flow-label" aria-hidden>
-                <svg className="btn-flow-icon" viewBox="0 0 24 24" fill="none">
-                  <rect x="3.5" y="3.5" width="7" height="7" rx="1" stroke="currentColor" strokeWidth="1.6" />
-                  <rect x="13.5" y="3.5" width="7" height="7" rx="1" stroke="currentColor" strokeWidth="1.6" />
-                  <rect x="3.5" y="13.5" width="7" height="7" rx="1" stroke="currentColor" strokeWidth="1.6" />
-                  <path
-                    d="M14 14h2.5v2.5H14V14zm4 0H20v2.5h-2V14zm-4 4H16.5V20H14v-2zm4 0H20V20h-2v-2z"
-                    fill="currentColor"
-                  />
-                </svg>
-              </span>
-            </button>
+            <PlayCta id="hero-qr-trigger" />
           </div>
-          <p className="hero-micro">No credit card required</p>
+          <button type="button" className="hero-micro hero-more" onClick={() => goToSection(1)}>
+            See how it works
+          </button>
         </div>
       </div>
 
-      {}
-      <div className="chapter chapter-feature chapter-upload" data-chapter="upload">
+      <div className="chapter chapter-feature chapter-lessons" data-chapter="lessons">
         <div className="chapter-stage stage-left">
           <div className="type-block">
-            <Mee src="/mascot/upload.png" />
+            <Pebby pose="reading" />
             <h2 className="display">
-              Put your material
+              Your chapters.
               <br />
-              to work.
+              One swipe at a time.
             </h2>
             <p className="lede tight">
-              Drop in notes, slides, PDFs, or lectures. ACADEMe turns what you
-              already have into a study plan you can use.
+              Your board&apos;s 2026-27 syllabus, chapter by chapter. Each lesson
+              is a few cards: an idea, a worked example, a quick check. New
+              lessons arrive chapter by chapter, starting with Class 10.
             </p>
           </div>
         </div>
       </div>
 
-      {}
-      <div className="chapter chapter-feature chapter-chat" data-chapter="chat">
+      <div className="chapter chapter-feature chapter-pebby" data-chapter="pebby">
         <div className="chapter-stage stage-right">
           <div className="type-block type-right">
-            <Mee src="/mascot/chat.png" />
+            <Pebby pose="chat" />
             <h2 className="display">
-              A tutor that sees
+              Stuck?
               <br />
-              the context.
+              Ask Pebby.
             </h2>
             <p className="lede tight">
-              Ask the question in your own words. Mee responds from the material
-              you&apos;re actually studying.
+              Explain it simply, solve it with hints first, or quiz me. Pebby
+              answers for your class and board, in English,{" "}
+              <span lang="hi">हिन्दी</span>, <span lang="te">తెలుగు</span>,{" "}
+              <span lang="ta">தமிழ்</span> or <span lang="bn">বাংলা</span>.
             </p>
           </div>
         </div>
       </div>
 
-      {}
-      <div className="chapter chapter-cinematic chapter-practice" data-chapter="practice">
-        <div className="chapter-stage stage-practice">
-          <div className="type-block type-practice">
-            <Mee src="/mascot/practice.png" />
+      <div className="chapter chapter-cinematic chapter-scan" data-chapter="scan">
+        <div className="chapter-stage stage-scan">
+          <div className="type-block type-scan">
+            <Pebby pose="solving" />
             <h2 className="display display-cinematic">
-              Turn review
+              Your answer,
               <br />
-              into recall.
+              marked like the board.
             </h2>
             <p className="lede tight">
-              Make flashcards, quiz yourself, and practise the ideas until you
-              can retrieve them without looking.
+              Snap your written answer and see the marks it would get under the
+              CBSE or ICSE scheme, point by point, with what it takes for full
+              marks. Stuck on homework? Get hints, not just answers.
             </p>
           </div>
         </div>
       </div>
 
-      {}
-      <div className="chapter chapter-feature chapter-adaptive" data-chapter="adaptive">
+      <div className="chapter chapter-feature chapter-revision" data-chapter="revision">
         <div className="chapter-stage stage-right">
           <div className="type-block type-right">
-            <Mee src="/mascot/adaptive.png" />
+            <Pebby pose="idea" />
             <h2 className="display">
-              Practice that
+              Miss it once.
               <br />
-              adjusts to you.
+              Master it later.
             </h2>
             <p className="lede tight">
-              Wrong answers become the next useful question, not just another
-              item in a random pool.
+              Keep any card. Every question you miss comes back in your
+              revision: tomorrow, then a few days later, until you&apos;ve got it.
             </p>
           </div>
         </div>
       </div>
 
-      {}
-      <div className="chapter chapter-feature chapter-mastery" data-chapter="mastery">
-        <div className="chapter-stage stage-left stage-mastery">
+      <div className="chapter chapter-feature chapter-plan" data-chapter="plan">
+        <div className="chapter-stage stage-left stage-plan">
           <div className="type-block">
-            <Mee src="/mascot/mastery.png" />
+            <Pebby pose="determined" />
             <h2 className="display">
-              Build a study loop
+              Test on Friday?
               <br />
-              you can stick with.
+              Make a folder.
             </h2>
             <p className="lede tight">
-              Upload, understand, practise, improve. Every session moves your
-              work forward.
+              Add the chapters and the date. ACADEMe spreads the lessons over the
+              days left, adds revision and reminds you.
             </p>
           </div>
         </div>
       </div>
 
-      {}
       <div className="chapter chapter-feature chapter-cta" data-chapter="cta">
         <div className="chapter-stage stage-cta">
           <div className="type-block type-cta">
+            <p className="cta-line">Free to start. No ads, ever.</p>
             <div className="cta-row cta-row-center">
-              <a className="btn-flow primary" href={WAITLIST_URL} target="_blank" rel="noreferrer">
-                <span className="btn-flow-label">Join the community</span>
-              </a>
-              <button
-                type="button"
-                className="btn-flow icon"
-                id="cta-qr-trigger"
-                aria-label="Show QR code"
-                title="Scan to join"
-                onClick={(e) => openQrModal(e.currentTarget)}
-              >
-                <span className="btn-flow-label" aria-hidden>
-                  <svg className="btn-flow-icon" viewBox="0 0 24 24" fill="none">
-                    <rect x="3.5" y="3.5" width="7" height="7" rx="1" stroke="currentColor" strokeWidth="1.6" />
-                    <rect x="13.5" y="3.5" width="7" height="7" rx="1" stroke="currentColor" strokeWidth="1.6" />
-                    <rect x="3.5" y="13.5" width="7" height="7" rx="1" stroke="currentColor" strokeWidth="1.6" />
-                    <path
-                      d="M14 14h2.5v2.5H14V14zm4 0H20v2.5h-2V14zm-4 4H16.5V20H14v-2zm4 0H20V20h-2v-2z"
-                      fill="currentColor"
-                    />
-                  </svg>
-                </span>
-              </button>
+              <PlayCta id="cta-qr-trigger" />
             </div>
           </div>
         </div>

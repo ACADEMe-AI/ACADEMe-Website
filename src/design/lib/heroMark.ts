@@ -1,7 +1,3 @@
-/**
- * Shared geometry for the home-start cube mark and the navbar→home fly animation.
- * Scales slightly on small viewports so handoff still matches the hero mark.
- */
 function isNarrow() {
   return typeof window !== "undefined" && window.innerWidth <= 900;
 }
@@ -18,7 +14,6 @@ export const HERO_MARK = {
   },
 };
 
-/** CSS left/top for a fixed element of `size` matching the hero mark center */
 export function heroMarkFixedStyle(size?: number) {
   const s = size ?? HERO_MARK.imgSize;
   const lift = HERO_MARK.lift;

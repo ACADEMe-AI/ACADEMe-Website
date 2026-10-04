@@ -1,7 +1,3 @@
-/**
- * Visual QA for marketing-v2 — captures hero → mid → late scroll on desktop + mobile.
- * Usage: pnpm qa  (uses :3011 unless QA_URL is set)
- */
 import { chromium } from "playwright";
 import { spawn } from "node:child_process";
 import { mkdir, writeFile } from "node:fs/promises";
@@ -21,7 +17,6 @@ async function waitForServer(url, ms = 60000) {
       const r = await fetch(url);
       if (r.ok || r.status === 404) return true;
     } catch {
-      /* retry */
     }
     await new Promise((r) => setTimeout(r, 400));
   }
@@ -65,7 +60,6 @@ async function runViewport(browser, label, size, isMobile = false) {
   });
 
   await page.goto(BASE, { waitUntil: "networkidle", timeout: 60000 });
-  // Wait for WebGL canvas
   await page.waitForSelector("#story .story-pin canvas", { timeout: 20000 });
   await page.waitForTimeout(1200);
   await capture(page, `${label}-01-hero`);
@@ -79,14 +73,13 @@ async function runViewport(browser, label, size, isMobile = false) {
     };
   });
 
-  // Scroll through story pin range (story height is pin + scroll length)
   const maxScroll = Math.max(heights.doc - size.height, 1);
   const fractions = [
-    ["02-upload", 0.22],
-    ["03-chat", 0.48],
-    ["04-practice", 0.64],
-    ["05-adaptive", 0.76],
-    ["06-mastery", 0.86],
+    ["02-lessons", 0.22],
+    ["03-pebby", 0.48],
+    ["04-scan", 0.64],
+    ["05-revision", 0.76],
+    ["06-plan", 0.86],
     ["07-cta", 0.97],
   ];
 
@@ -96,7 +89,6 @@ async function runViewport(browser, label, size, isMobile = false) {
     await capture(page, `${label}-${name}`);
   }
 
-  // Full page
   await page.evaluate(() => window.scrollTo(0, 0));
   await page.waitForTimeout(400);
   await page.screenshot({
