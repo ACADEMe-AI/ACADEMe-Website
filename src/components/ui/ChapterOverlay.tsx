@@ -31,9 +31,9 @@ export function ChapterOverlay() {
       <div className="chapter chapter-hero" data-chapter="hero">
         <div className="hero-headline">
           <h1>
-            <span className="hero-line">Study smarter.</span>
+            <span className="hero-line">Level up your learning.</span>
             <span className="hero-line">
-              In your{" "}
+              With{" "}
               {}
               <span
                 ref={pocketRef}
@@ -44,7 +44,7 @@ export function ChapterOverlay() {
                 tabIndex={0}
                 data-pocket-logo="loader-live"
               />{" "}
-              pocket.
+              in your pocket.
             </span>
           </h1>
         </div>
