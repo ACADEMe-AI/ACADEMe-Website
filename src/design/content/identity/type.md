@@ -1,6 +1,6 @@
 # Type
 
-Four families, all bundled with the app so Android and iOS render the same. The website serves its own woff2 copies of the same files from `/fonts/`.
+Four families, all bundled with the app so Android and iOS render the same. This design site serves woff2 copies of the same files from `/fonts/`.
 
 ## Families
 
@@ -51,4 +51,4 @@ Headline sizes scale with the screen (`ScreenScale`). Every screen must still re
 | `"ArchivoWordmark"` | `ArchivoWordmark-SemiBold.woff2`, `ArchivoWordmark-Medium.woff2` |
 | Indian scripts | `NotoSansDevanagari-SemiBold.woff2` and the Telugu, Tamil, Bengali files |
 
-Baloo 2 and Archivo are preloaded. The Indian-script files load only on sections that show them.
+The marketing website keeps its original type: Archivo from Google Fonts.

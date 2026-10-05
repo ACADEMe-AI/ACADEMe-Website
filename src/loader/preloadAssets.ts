@@ -8,9 +8,9 @@ const CRITICAL_ASSETS = [
   "/screens/check.webp",
   "/screens/revision.webp",
   "/screens/folder.webp",
-  "/screens/landscape.webp",
-  "/pebby/wave.png",
-  "/pebby/reading.png",
+  "/screens/waitlist.png",
+  "/mascot/chat.png",
+  "/mascot/upload.png",
 ];
 
 function loadUrl(url: string): Promise<void> {

@@ -7,15 +7,15 @@ export type ScreenState =
   | "check"
   | "revision"
   | "folder"
-  | "landscape";
+  | "waitlist";
 
 export type ChapterId =
   | "hero"
-  | "lessons"
-  | "pebby"
-  | "scan"
-  | "revision"
-  | "plan"
+  | "upload"
+  | "chat"
+  | "practice"
+  | "adaptive"
+  | "mastery"
   | "cta";
 
 export const scrollState = {
@@ -50,14 +50,20 @@ export const scrollState = {
     absorb: 0,
   },
 
+  mee: {
+    visible: 0,
+    x: -1.6,
+    y: 0.4,
+    z: 0.2,
+  },
 
   overlays: {
     hero: 1,
-    lessons: 0,
-    pebby: 0,
-    scan: 0,
-    revision: 0,
-    plan: 0,
+    upload: 0,
+    chat: 0,
+    practice: 0,
+    adaptive: 0,
+    mastery: 0,
     cta: 0,
   },
 };

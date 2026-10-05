@@ -12,36 +12,31 @@ Check this skill first for work in **this** repository. Also read `AGENTS.md`.
 
 ## What this repo is
 
-academe.cc: a single scroll film that shows the real app, then sends students to Google Play.
+academe.cc: a single scroll film that shows the real app, then invites students to join.
 
 | Layer | Truth |
 |---|---|
 | Stack | React + Vite + TypeScript, GSAP ScrollTrigger, Lenis, Three.js / R3F |
 | 3D phone | `public/models/Iphone.glb`, one persistent WebGL phone |
-| Screens | `public/screens/*.png`, real Pixel 10 captures, 720×1560, Light |
-| Pebby | `public/pebby/*.png`, the app's transparent poses |
-| Logo | `public/brand/academe_cube.png` (light surfaces), `logo_mark.png` (dark) |
-| Fonts | `public/fonts/*.woff2`, converted from the app: Baloo 2 800, Archivo 700, Noto Sans 400/600, ArchivoWordmark |
-| CTA | `PLAY_URL` and `PLAY_LIVE` in `src/lib/constants.ts` |
+| Screens | `public/screens/*.webp`, real Pixel 10 captures, 720×1560, Light; the last one is the original `waitlist.png` |
+| Mascot | `public/mascot/*.png`, one image per section (keep them) |
+| Look | Archivo, white pill buttons, "Study smarter. In your pocket." Don't restyle |
+| CTA | Start For Free + QR in the hero, Join the community at the end; `WAITLIST_URL` in `src/lib/constants.ts` |
 | Legal | `/privacy`, `/terms`, `/support`, `/delete-account` redirect to `api.academe.cc` |
 
 ## The film
 
-`src/lib/waypoints.ts` (desktop and phone paths), `src/components/ScrollExperience.tsx` (text fades and `screenFromProgress`), `src/components/ui/ChapterOverlay.tsx` (copy).
+`src/lib/waypoints.ts` (desktop and phone paths), `src/components/ScrollExperience.tsx` (text fades and `screenFromProgress`), `src/components/ui/ChapterOverlay.tsx` (copy). The scroll timing is the original one: change screenshots and text, not the motion. More sections can be added after the film (`AppDetails`).
 
 | Beat | Scroll | Screens |
 |---|---|---|
 | Hero | 0 – 0.12 | home |
-| Lessons | 0.12 – 0.465 | lesson → courses (swap at 0.32, phone edge-on) |
-| Pebby | 0.465 – 0.615 | askme |
-| Scan | 0.615 – 0.762 | scan → check |
-| Revision | 0.762 – 0.875 | revision (swap at 0.762, phone edge-on) |
-| Plan | 0.875 – 0.945 | folder |
-| Get the app | 0.945 – 1 | landscape (rotated 90° into a portrait file) |
-
-Screen swaps sit where the phone is edge-on or the text is crossfading. If you move a waypoint, re-check both. Phones in landscape (height ≤ 500px, touch) use the phone path with the text on the left.
-
-After the film: "Made for students in India" (languages, safety) and Pricing, then the footer.
+| Lessons | 0.12 – 0.44 | lesson → courses |
+| Pebby | 0.44 – 0.58 | askme |
+| Scan | 0.58 – 0.74 | scan → check |
+| Revision | 0.74 – 0.86 | revision |
+| Plan | 0.86 – 0.94 | folder |
+| Join | 0.94 – 1 | waitlist (sideways) |
 
 ## Product truth
 
@@ -55,5 +50,6 @@ After the film: "Made for students in India" (languages, safety) and Pricing, th
 - Other brands' names, assets, copy or screenshots
 - A CSS or image fake of the phone, or a second phone
 - Drawn or mocked app screens: capture them from the app
+- Restyling the site's headline, buttons, mascot images or last screen
 - Flattening the hero into a generic SaaS split
 - Code comments

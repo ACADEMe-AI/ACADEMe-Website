@@ -1,3 +1,14 @@
+@font-face { font-family: "Baloo 2"; src: url("/fonts/Baloo2-ExtraBold.woff2") format("woff2"); font-weight: 800; font-display: swap; }
+@font-face { font-family: "Archivo"; src: url("/fonts/Archivo-Bold.woff2") format("woff2"); font-weight: 700; font-display: swap; }
+@font-face { font-family: "Noto Sans"; src: url("/fonts/NotoSans-Regular.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Noto Sans"; src: url("/fonts/NotoSans-SemiBold.woff2") format("woff2"); font-weight: 600; font-display: swap; }
+@font-face { font-family: "ArchivoWordmark"; src: url("/fonts/ArchivoWordmark-Medium.woff2") format("woff2"); font-weight: 500; font-display: block; }
+@font-face { font-family: "ArchivoWordmark"; src: url("/fonts/ArchivoWordmark-SemiBold.woff2") format("woff2"); font-weight: 600; font-display: block; }
+@font-face { font-family: "Noto Sans Devanagari"; src: url("/fonts/NotoSansDevanagari-SemiBold.woff2") format("woff2"); font-weight: 400 600; unicode-range: U+0900-097F; font-display: swap; }
+@font-face { font-family: "Noto Sans Telugu"; src: url("/fonts/NotoSansTelugu-SemiBold.woff2") format("woff2"); font-weight: 400 600; unicode-range: U+0C00-0C7F; font-display: swap; }
+@font-face { font-family: "Noto Sans Tamil"; src: url("/fonts/NotoSansTamil-SemiBold.woff2") format("woff2"); font-weight: 400 600; unicode-range: U+0B80-0BFF; font-display: swap; }
+@font-face { font-family: "Noto Sans Bengali"; src: url("/fonts/NotoSansBengali-SemiBold.woff2") format("woff2"); font-weight: 400 600; unicode-range: U+0980-09FF; font-display: swap; }
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

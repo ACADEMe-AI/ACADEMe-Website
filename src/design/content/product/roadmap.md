@@ -22,4 +22,4 @@ The plan lives in the app repo: `tasks/roadmap.md` (build order and status) and 
 
 - Recapture the phone screens when Courses gets subject filters and when streams ship
 - Add Class 11 and 12 streams to the hero copy once they ship
-- Keep "Coming soon on Google Play" until the listing is live
+- Point the website's buttons and QR at the Play listing once it is public

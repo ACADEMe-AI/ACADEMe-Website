@@ -4,6 +4,8 @@ The marketing site for [academe.cc](https://academe.cc): the study app for Class
 
 It is a single scroll film: one persistent Three.js phone showing real screens from the app, GSAP ScrollTrigger, and a cube brand loader. Then a short "Made for students in India" section, pricing and the footer.
 
+The site keeps its own look (headline, buttons, mascot images, the last screen). Only the phone screenshots and the text follow the app.
+
 This repository is **not** the app. The app (Flutter client, Go API) lives in the academe-mobile repo under `academe/`, and it is the source of truth for screens, colours, fonts, Pebby and copy.
 
 ## Pages
@@ -26,7 +28,7 @@ Local base: [http://localhost:3010](http://localhost:3010)
 | Scroll | GSAP ScrollTrigger (one scrubbed timeline) |
 | Smooth scroll | Lenis (respects `prefers-reduced-motion`) |
 | Routing | React Router (`/` and `/design`) |
-| Type | The app's fonts, self-hosted as woff2: Baloo 2 800, Archivo 700, Noto Sans 400/600, ArchivoWordmark |
+| Type | Archivo (the site); the app's fonts as woff2 on `/design` |
 
 ## Setup
 
@@ -60,8 +62,9 @@ App
 │   ├── ExperienceCanvas   one persistent WebGL phone
 │   │   ├── CameraRig
 │   │   ├── PhoneMesh
-│   │   └── FloatingCards  chapter cards that fly into the phone
-│   └── ChapterOverlay     headlines, Pebby, CTAs
+│   │   ├── FloatingDocs   chapter cards that fly into the phone
+│   │   └── MeeSprite
+│   └── ChapterOverlay     headlines, mascot images, CTAs
 ├── SectionJump / QrModal
 └── AppDetails + Footer    languages, safety, pricing
 ```
@@ -74,17 +77,17 @@ App
 
 | Progress | Beat | Screen |
 | --- | --- | --- |
-| 0 – 0.12 | Hero: your syllabus, in your pocket | home |
-| 0.12 – 0.465 | Lessons | lesson → courses |
-| 0.465 – 0.615 | Ask Pebby | askme |
-| 0.615 – 0.762 | Scan, marked like the board | scan → check |
-| 0.762 – 0.875 | Revision | revision |
-| 0.875 – 0.945 | Plan for a test | folder |
-| 0.945 – 1 | Get the app | landscape |
+| 0 – 0.12 | Hero: Study smarter. In your pocket. | home |
+| 0.12 – 0.44 | Lessons | lesson → courses |
+| 0.44 – 0.58 | Ask Pebby | askme |
+| 0.58 – 0.74 | Scan | scan → check |
+| 0.74 – 0.86 | Revision | revision |
+| 0.86 – 0.94 | Plan for a test | folder |
+| 0.94 – 1 | Join the community | waitlist (sideways) |
 
-Screens swap where the phone is edge-on (0.32, 0.762) or while the text crossfades. Screens are Pixel 10 captures in Light, cropped to 1080×2340 and scaled to 720×1560; the landscape one is rotated 90° into a portrait file.
+The scroll timing is the original one; only the screenshots changed. Screens are Pixel 10 captures in Light, 720×1560 WebP. The last screen ("Your next study session starts here.") is the original `waitlist.png`.
 
-The Play link lives in [`src/lib/constants.ts`](src/lib/constants.ts). `PLAY_LIVE` is `false` until the listing is public; flip it to show "Get it on Google Play" and the QR code. Do not invent metrics or testimonials.
+The community form link lives in [`src/lib/constants.ts`](src/lib/constants.ts). Do not invent metrics or testimonials.
 
 ## Layout
 
@@ -97,9 +100,10 @@ src/                 production site
 public/
   models/            Iphone.glb
   screens/           Pixel 10 captures of the app
-  pebby/             Pebby poses from the app
+  mascot/            one mascot image per section
+  pebby/             Pebby poses from the app (/design)
   brand/             the app's cube and logo mark
-  fonts/             the app's fonts as woff2
+  fonts/             the app's fonts as woff2 (/design)
 design/              product and design law
 .agents/skills/      shared agent pack (clone gets the same skills)
 ```
@@ -112,7 +116,7 @@ design/              product and design law
 
 Hard rules in short:
 
-- The app is the source of truth. Only features it really has.
+- Keep the site's look. Screenshots and text follow the app; only features it really has.
 - ACADEMe only: no other company or app names. No code comments.
 - One persistent WebGL phone. Do not flatten the film into a SaaS split layout.
 - Agents start with `academe-website-brain`. `academe-brain` is product facts, not Flutter file structure.

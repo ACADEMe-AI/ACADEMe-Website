@@ -1,3 +1,6 @@
+/**
+ * Frame-00: brand wordmark top-right — ACADEMe (final e lowercase).
+ */
 export function Nav() {
   return (
     <header className="nav">

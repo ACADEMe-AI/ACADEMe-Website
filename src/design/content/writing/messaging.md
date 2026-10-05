@@ -43,7 +43,5 @@ ACADEMe is the study app for Class 6 to 12, CBSE, ICSE and ISC. Short swipe less
 
 ## Calls to action
 
-- Primary: **Get it on Google Play** (badge, plus a QR that opens the Play listing)
-- Secondary: **See how it works** (scrolls the page)
-- Until the listing is live: "Coming soon on Google Play"
-- No App Store badge until there's an iOS app. No waitlist, no outside demo video
+- Website: **Start For Free** and the QR button in the hero, **Join the community** at the end. See [CTAs](/design/marketing/ctas)
+- Store listing: **Get it on Google Play** once the listing is public

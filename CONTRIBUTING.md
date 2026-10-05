@@ -37,7 +37,7 @@ pnpm qa          # Playwright screenshots → qa-shots/ (gitignored)
 
 ## Hard rules (short)
 
-- The app is the source of truth: real screenshots, its logo, Pebby, colours and fonts. Only features the app has.
+- Keep the site's look. Screenshots and text follow the app; only features the app has.
 - No fake metrics or invented testimonials. Store links only from `src/lib/constants.ts`.
 - No other company or app names anywhere. No code comments.
 - One persistent WebGL phone. Do not flatten the film into a SaaS split layout.

@@ -20,13 +20,15 @@ function WebsiteApp() {
 
   return (
     <>
+      {}
       <BrandLoader force={forceLoader} onFinished={() => setLoading(false)} />
       <SmoothScroll>
         <div id="top" className="app" aria-hidden={loading || undefined}>
           <ScrollProgress />
           <Nav />
           <main>
-                  <ScrollExperience enableFilm={!loading} />
+            {}
+            <ScrollExperience enableFilm={!loading} />
           </main>
           <SectionJump />
           <QrModal />
@@ -47,9 +49,9 @@ function DesignFallback() {
         minHeight: "100vh",
         display: "grid",
         placeItems: "center",
-        fontFamily: "'Noto Sans', system-ui, sans-serif",
-        color: "#8b93a7",
-        background: "#0b0c0f",
+        fontFamily: "Archivo, system-ui, sans-serif",
+        color: "#5b6cff",
+        background: "#fff",
       }}
     >
       Loading design system…

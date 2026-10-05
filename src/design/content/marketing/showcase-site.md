@@ -1,36 +1,35 @@
 # Showcase site
 
-The dark 3D scroll story stays: the cube loader, the phone, smooth scrolling and the big ACADEMe wordmark in the footer. Only the screens, cards, headings and Pebby art change.
+The website keeps its original look: the cube loader, the 3D phone, "Study smarter. In your pocket.", the white Start For Free button, the mascot image in each section, smooth scrolling and the big ACADEMe wordmark in the footer. Only the phone screenshots and the section text follow the app. The last screen, "Your next study session starts here.", stays.
 
 ## The seven beats
 
-| Beat | Heading | Phone | Pebby |
-|------|---------|-------|-------|
-| 1 · Hero | Your syllabus. One swipe at a time. | Home | `wave` |
-| 2 · Lessons | Your chapters, in swipe lessons. | Courses, then a quick-check card answered right | `reading` |
-| 3 · Pebby | Stuck? Ask Pebby. | ASKMe with a real reply | `chat` |
-| 4 · Scan | Snap it. Get it. | Scan's four jobs, then Check my answer marks | `solving` |
-| 5 · Revision | Miss it once. Master it later. | A revision card: Didn't know / Almost / Knew it | `determined` |
-| 6 · Folders | Test on Friday? Make a folder. | A folder with its plan | `focused` |
-| 7 · Get it | Start free. | The phone turns sideways; Google Play badge and QR | `celebrate` |
+| Beat | Heading | Phone | Mascot image |
+|------|---------|-------|--------------|
+| 1 · Hero | Study smarter. In your pocket. | Home with Today | none |
+| 2 · Lessons | Your chapters, one swipe at a time. | A quick check answered right, then the chapter page | `/mascot/upload.png` |
+| 3 · Pebby | Stuck? Ask Pebby. | ASKMe | `/mascot/chat.png` |
+| 4 · Scan | Snap it. Get marked. | Scan's four jobs, then Check my answer | `/mascot/practice.png` |
+| 5 · Revision | Miss it once. Master it later. | A revision card | `/mascot/adaptive.png` |
+| 6 · Plan | Test on Friday? Make a folder. | A folder's day-by-day plan | `/mascot/mastery.png` |
+| 7 · Join | (none) | Sideways: "Your next study session starts here." | none |
 
 After the scroll story: **Made for students in India** (five language chips, no ads, photos never stored, report any AI answer, delete your account anytime), then **Pricing**, then the footer.
 
 ## Must say
 
-- Class 6 to 12 · CBSE · ICSE · ISC · 2026-27 syllabus
+- Class 6 to 12 · CBSE · ICSE · ISC
 - Pebby by name, with Explain · Solve with hints first · Quiz me
-- "Pebby answers in your language"
-- New lessons are added chapter by chapter, starting with Class 10
+- Pebby answers in English, Hindi, Telugu, Tamil and Bengali
 
 ## Must not say
 
 - "Every chapter" has lessons. Only 6 are live
 - Anything about uploading PDFs, slides or lectures. The app doesn't do that
-- "Available on all devices", iOS or the App Store
+- "Available on all devices"
 - Fake user counts, ratings or testimonials
 - Any other app's or company's name
 
 ## Phone screens
 
-Real Pixel 10 captures, in Light, 720 × 1560, status and navigation bars cropped. No drawn or generated screens.
+Real Pixel 10 captures, in Light, 720 × 1560 WebP, gesture bar cropped. No drawn or generated screens. The last screen is the original `waitlist.png`.

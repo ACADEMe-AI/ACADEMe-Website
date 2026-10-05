@@ -32,7 +32,7 @@ export function QRCode({
   if (error) {
     return (
       <a className={className} href={value} target="_blank" rel="noreferrer">
-        Open on Google Play
+        Open waitlist
       </a>
     );
   }

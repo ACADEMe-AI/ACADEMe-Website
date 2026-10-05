@@ -6,8 +6,8 @@ Load `academe-website-brain` first. Use `academe-brain` only for product facts.
 
 ## Hard rules
 
-1. **The app is the source of truth.** Real Pixel 10 screenshots, the app's logo files, Pebby poses, colours and fonts. Only features the app really has.
-2. **No invented claims.** No fake metrics, testimonials or "every chapter" promises. Store links live only in `src/lib/constants.ts`; `PLAY_LIVE` stays `false` until the Play listing is public.
+1. **Keep the site's look.** "Study smarter. In your pocket.", the Start For Free and Join the community buttons, the mascot image in each section, the fonts and colours, and the last screen stay. Phone screenshots (real Pixel 10 captures) and section text follow the app; only features the app really has.
+2. **No invented claims.** No fake metrics, testimonials or "every chapter" promises. Links live only in `src/lib/constants.ts`.
 3. **One persistent WebGL phone** (`public/models/Iphone.glb`). No CSS fake. No second phone. Do not flatten the film into a left-text / right-device SaaS layout.
 4. **ACADEMe only.** No other company, app or brand name anywhere: copy, docs, code, filenames.
 5. **No code comments** in files you change.

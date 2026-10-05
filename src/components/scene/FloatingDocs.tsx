@@ -4,16 +4,50 @@ import { RoundedBox } from "@react-three/drei";
 import * as THREE from "three";
 import { scrollState } from "../../lib/scrollState";
 
-const CARDS = [
-  { subject: "Maths", chapter: "Chapter 3", title: ["Linear", "equations"], tint: "#E7E6FF", ox: 2.55, oy: 0.95, oz: 0.85 },
-  { subject: "Science", chapter: "Chapter 9", title: ["Light and", "mirrors"], tint: "#FFE7A3", ox: 2.9, oy: 0.08, oz: 0.35 },
-  { subject: "History", chapter: "Chapter 1", title: ["Nationalism", "in Europe"], tint: "#DCEBFF", ox: 2.45, oy: -0.8, oz: 1.05 },
-  { subject: "English", chapter: "Chapter 1", title: ["A Letter", "to God"], tint: "#FFE0EC", ox: 3.15, oy: 0.48, oz: 0.15 },
+/** Spawn on the RIGHT → fly into phone. Depth stagger so cards read 3D. */
+const DOCS = [
+  { label: "Maths", sub: "Chapter 3", color: "#5B6CFF", ox: 2.55, oy: 0.95, oz: 0.85 },
+  { label: "Science", sub: "Chapter 9", color: "#0D9F6E", ox: 2.9, oy: 0.08, oz: 0.35 },
+  { label: "History", sub: "Chapter 1", color: "#C98A12", ox: 2.45, oy: -0.8, oz: 1.05 },
+  { label: "English", sub: "Chapter 1", color: "#E03E4D", ox: 3.15, oy: 0.48, oz: 0.15 },
 ];
 
-type Card = (typeof CARDS)[number];
+/** Canvas label texture so we avoid drei Text font loading failures. */
+function makeLabelTexture(label: string, sub: string, accent: string) {
+  const c = document.createElement("canvas");
+  c.width = 256;
+  c.height = 320;
+  const ctx = c.getContext("2d")!;
+  ctx.fillStyle = "#ffffff";
+  ctx.fillRect(0, 0, 256, 320);
+  ctx.fillStyle = accent;
+  round(ctx, 28, 28, 200, 36, 10);
+  ctx.fill();
+  ctx.fillStyle = "#12141A";
+  ctx.font = "700 42px Archivo, system-ui, sans-serif";
+  ctx.textAlign = "center";
+  ctx.fillText(label, 128, 160);
+  ctx.fillStyle = "#5C6578";
+  ctx.font = "500 22px Archivo, system-ui, sans-serif";
+  ctx.fillText(sub, 128, 200);
+  // Fake lines
+  ctx.fillStyle = "#E4E7F0";
+  for (let i = 0; i < 5; i++) {
+    ctx.fillRect(36, 230 + i * 14, 180 - i * 12, 6);
+  }
+  const tex = new THREE.CanvasTexture(c);
+  tex.colorSpace = THREE.SRGBColorSpace;
+  return tex;
+}
 
-function round(ctx: CanvasRenderingContext2D, x: number, y: number, w: number, h: number, r: number) {
+function round(
+  ctx: CanvasRenderingContext2D,
+  x: number,
+  y: number,
+  w: number,
+  h: number,
+  r: number
+) {
   ctx.beginPath();
   ctx.moveTo(x + r, y);
   ctx.arcTo(x + w, y, x + w, y + h, r);
@@ -23,63 +57,15 @@ function round(ctx: CanvasRenderingContext2D, x: number, y: number, w: number, h
   ctx.closePath();
 }
 
-function drawCard(canvas: HTMLCanvasElement, card: Card) {
-  const ctx = canvas.getContext("2d")!;
-  const w = canvas.width;
-  const h = canvas.height;
-  ctx.fillStyle = "#ffffff";
-  ctx.fillRect(0, 0, w, h);
-  ctx.fillStyle = card.tint;
-  round(ctx, 30, 30, w - 60, 150, 22);
-  ctx.fill();
-  ctx.fillStyle = "#12141A";
-  ctx.font = "700 40px Archivo, system-ui, sans-serif";
-  ctx.fillText(card.subject, 56, 100);
-  ctx.fillStyle = "#5C6578";
-  ctx.font = "600 26px 'Noto Sans', system-ui, sans-serif";
-  ctx.fillText(card.chapter, 56, 145);
-  ctx.fillStyle = "#12141A";
-  ctx.font = "800 44px 'Baloo 2', system-ui, sans-serif";
-  card.title.forEach((line, i) => ctx.fillText(line, 40, 262 + i * 50));
-  ctx.fillStyle = "#EEF0F5";
-  round(ctx, 40, h - 92, w - 80, 16, 8);
-  ctx.fill();
-  ctx.fillStyle = "#564CF1";
-  round(ctx, 40, h - 92, (w - 80) * 0.38, 16, 8);
-  ctx.fill();
-  ctx.fillStyle = "#5C6578";
-  ctx.font = "600 24px 'Noto Sans', system-ui, sans-serif";
-  ctx.fillText("Swipe lessons", 40, h - 36);
-}
-
-function makeCardTexture(card: Card) {
-  const canvas = document.createElement("canvas");
-  canvas.width = 360;
-  canvas.height = 480;
-  drawCard(canvas, card);
-  const texture = new THREE.CanvasTexture(canvas);
-  texture.colorSpace = THREE.SRGBColorSpace;
-  texture.anisotropy = 4;
-  document.fonts
-    ?.load("800 44px 'Baloo 2'")
-    .then(() => document.fonts.load("700 40px Archivo"))
-    .then(() => document.fonts.load("600 26px 'Noto Sans'"))
-    .then(() => {
-      drawCard(canvas, card);
-      texture.needsUpdate = true;
-    })
-    .catch(() => undefined);
-  return texture;
-}
-
-export function FloatingCards() {
+/** 3D study materials that float then absorb into the phone. */
+export function FloatingDocs() {
   const group = useRef<THREE.Group>(null);
   const seeds = useMemo(
-    () => CARDS.map(() => ({ s: Math.random() * Math.PI * 2, f: 0.6 + Math.random() * 0.5 })),
+    () => DOCS.map(() => ({ s: Math.random() * Math.PI * 2, f: 0.6 + Math.random() * 0.5 })),
     []
   );
   const textures = useMemo(
-    () => CARDS.map(makeCardTexture),
+    () => DOCS.map((d) => makeLabelTexture(d.label, d.sub, d.color)),
     []
   );
 
@@ -93,7 +79,7 @@ export function FloatingCards() {
     const k = scrollState.reducedMotion ? 1 : 1 - Math.pow(0.001, dt);
 
     g.children.forEach((child, i) => {
-      const d = CARDS[i];
+      const d = DOCS[i];
       const seed = seeds[i];
       const floatY = scrollState.reducedMotion ? 0 : Math.sin(t * seed.f + seed.s) * 0.08;
       const floatX = scrollState.reducedMotion ? 0 : Math.cos(t * seed.f * 0.7 + seed.s) * 0.05;
@@ -121,8 +107,8 @@ export function FloatingCards() {
 
   return (
     <group ref={group}>
-      {CARDS.map((d, i) => (
-        <group key={d.subject} position={[d.ox, d.oy, d.oz]} scale={0.001}>
+      {DOCS.map((d, i) => (
+        <group key={d.label} position={[d.ox, d.oy, d.oz]} scale={0.001}>
           <RoundedBox args={[0.78, 1.02, 0.036]} radius={0.035} smoothness={4} castShadow receiveShadow>
             <meshStandardMaterial
               color="#ffffff"

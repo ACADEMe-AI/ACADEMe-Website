@@ -1,4 +1,5 @@
-import { PlayCta } from "./PlayCta";
+import { WAITLIST_URL } from "../../lib/constants";
+import { openQrModal } from "./QrModal";
 
 const LANGUAGES = [
   { label: "English", lang: "en" },
@@ -19,7 +20,7 @@ export function AppDetails() {
   return (
     <div className="details">
       <section className="details-block" id="india" aria-labelledby="india-title">
-        <img className="details-pebby" src="/pebby/encourage.png" alt="" width={120} height={120} loading="lazy" />
+        <img className="details-pebby" src="/mascot/cta.png" alt="" width={120} height={120} loading="lazy" />
         <h2 id="india-title" className="details-title">
           Made for students <em>in India.</em>
         </h2>
@@ -72,7 +73,29 @@ export function AppDetails() {
           </div>
         </div>
         <div className="cta-row details-cta">
-          <PlayCta id="pricing-qr-trigger" />
+          <a className="btn-flow primary" href={WAITLIST_URL} target="_blank" rel="noreferrer">
+            <span className="btn-flow-label">Start For Free</span>
+          </a>
+          <button
+            type="button"
+            className="btn-flow icon"
+            id="pricing-qr-trigger"
+            aria-label="Show QR code"
+            title="Scan to join"
+            onClick={(e) => openQrModal(e.currentTarget)}
+          >
+            <span className="btn-flow-label" aria-hidden>
+              <svg className="btn-flow-icon" viewBox="0 0 24 24" fill="none">
+                <rect x="3.5" y="3.5" width="7" height="7" rx="1" stroke="currentColor" strokeWidth="1.6" />
+                <rect x="13.5" y="3.5" width="7" height="7" rx="1" stroke="currentColor" strokeWidth="1.6" />
+                <rect x="3.5" y="13.5" width="7" height="7" rx="1" stroke="currentColor" strokeWidth="1.6" />
+                <path
+                  d="M14 14h2.5v2.5H14V14zm4 0H20v2.5h-2V14zm-4 4H16.5V20H14v-2zm4 0H20V20h-2v-2z"
+                  fill="currentColor"
+                />
+              </svg>
+            </span>
+          </button>
         </div>
       </section>
     </div>

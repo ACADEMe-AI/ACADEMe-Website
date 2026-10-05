@@ -22,8 +22,8 @@ export type TransformPiece = {
 };
 
 export const COLORS = {
-  blue: "#564CF1",
-  blueDeep: "#4339D0",
+  blue: "#4B57F5",
+  blueDeep: "#3A46E0",
   light: "#F2F3F7",
   plastic: "#050508",
 } as const;

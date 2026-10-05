@@ -10,7 +10,7 @@ const SCREEN_URLS: Record<ScreenState, string> = {
   check: "/screens/check.webp",
   revision: "/screens/revision.webp",
   folder: "/screens/folder.webp",
-  landscape: "/screens/landscape.webp",
+  waitlist: "/screens/waitlist.png",
 };
 
 export function createScreenTexture() {

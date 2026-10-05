@@ -11,7 +11,8 @@ A soft purple study buddy with a white face panel, three leaf-like tufts on top 
 | Place | What |
 |-------|------|
 | The app | `assets/academe/mascot/animations/pebby.riv`, a Rive state machine (`PebbySM`) driven by a pose number. Widget: `Pebby(pose: PebbyPose.encourage)` |
-| The website and this site | 10 transparent PNG poses in `/pebby/`, exported from the same art |
+| This design site | 10 transparent PNG poses in `/pebby/`, exported from the same art |
+| The marketing website | One image per section in `/mascot/` (upload, chat, practice, adaptive, mastery, cta) |
 
 Only use these files. Don't redraw Pebby, trace it, or generate new poses with an image tool.
 

@@ -20,7 +20,7 @@ Rules for anyone, human or agent, working on ACADEMe's website and design docs.
 | P2 | Five pillars: Pebby tutor (ASKMe), swipe lessons (Courses), Scan with board-style marking, Folders and planner, Revision |
 | P3 | Tabs: Home · ASKMe · Study · Me, plus the Scan key |
 | P4 | Only 6 lessons are live (Class 10 CBSE). Never say every chapter has lessons |
-| P5 | Android first, on Google Play. No iOS app, no App Store badge |
+| P5 | Android first, on Google Play. No iOS app yet |
 | P6 | Free: every lesson, revision, folder and reminder; 10 Pebby questions, 3 scans and 1 answer check a day. ACADEMe Pro: ₹200 a month (first month ₹100) or ₹1,999 a year |
 | P7 | One user: the student. No teacher, school or social product |
 | P8 | No ads, ever. Photos never stored |

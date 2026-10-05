@@ -1,25 +1,25 @@
 # CTAs and QR
 
-## Primary
+The website keeps its original buttons. Don't restyle or rename them.
 
-**Get it on Google Play.** The official badge, plus a QR code that opens the Play listing. Until the listing is live, show "Coming soon on Google Play".
+## Hero
 
-## Secondary
+**Start For Free** (white pill) plus the QR button, with "No credit card required" under them. Both open the community form in `WAITLIST_URL` (`src/lib/constants.ts`).
 
-**See how it works.** Scrolls to the story. No outside video.
+## End of the story
+
+The phone turns sideways and shows "Your next study session starts here." with **Join the community** and the QR button below.
+
+## QR modal
+
+The QR code plus App Store and Google Play badges, all pointing at `WAITLIST_URL` until the store links are live.
 
 ## Pricing section
 
 - Free: all lessons, revision, folders and reminders; 10 Pebby questions, 3 scans and 1 answer check a day
 - ACADEMe Pro: ₹200 a month (first month ₹100) or ₹1,999 a year
-- One button: Get it on Google Play. Purchases happen in the app
-
-## Not on the site
-
-- No App Store badge until there's an iOS app
-- No waitlist or sign-up form
-- No "No credit card required". There's nothing to pay on the website
+- The same Start For Free and QR buttons as the hero
 
 ## Buttons
 
-Keycap style from the app: purple #564CF1 face, dark border, thick bottom edge, Archivo 700 label. See [Tokens](/design/foundations/tokens).
+The website's own white pill with the purple sweep on hover, and the outlined square QR button. The app's keycap style stays in the app.

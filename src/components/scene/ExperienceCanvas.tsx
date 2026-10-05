@@ -7,16 +7,19 @@ import {
   AdaptiveEvents,
 } from "@react-three/drei";
 import { PhoneMesh } from "./PhoneMesh";
-import { FloatingCards } from "./FloatingCards";
+import { FloatingDocs } from "./FloatingDocs";
+import { MeeSprite } from "./MeeSprite";
 import { CameraRig } from "./CameraRig";
 import { scrollState } from "../../lib/scrollState";
 
 function SceneContents() {
   return (
     <>
+      {/* Transparent clear so CSS stage glow shows through (frame-00 purple) */}
       <fog attach="fog" args={["#050508", 11, 22]} />
 
       <ambientLight intensity={0.22} />
+      {/* Soft blue-violet key — product film stage */}
       <directionalLight
         castShadow
         position={[4, 3, 2]}
@@ -24,6 +27,7 @@ function SceneContents() {
         color="#d0c8f0"
         shadow-mapSize={[1024, 1024]}
       />
+      {/* Rim — cool aluminum highlights for back/edge shots */}
       <directionalLight position={[-4.5, 1.8, -2.2]} intensity={0.65} color="#d0d4e8" />
       <directionalLight position={[2.5, 2.5, -3.5]} intensity={0.6} color="#b8b8d8" />
       <directionalLight position={[1.5, -2.5, -3]} intensity={0.55} color="#9890c0" />
@@ -54,7 +58,10 @@ function SceneContents() {
       <Suspense fallback={null}>
         <PhoneMesh />
       </Suspense>
-      <FloatingCards />
+      <FloatingDocs />
+      <Suspense fallback={null}>
+        <MeeSprite />
+      </Suspense>
     </>
   );
 }

@@ -21,7 +21,7 @@ None, in any file you create or change: no `//`, `/* */`, `{/* */}` or HTML comm
 ## Honest claims
 
 - Only 6 lessons are live. Don't say every chapter has lessons
-- Android only, on Google Play. No iOS, no App Store badge
+- The app is Android first, on Google Play. No iOS app yet
 - No made-up numbers, reviews or testimonials
 - Pebby can be unavailable when the AI service is out of credits. Don't build a live Pebby demo on the site
 

@@ -29,7 +29,7 @@ The app's buttons look like keys on a keyboard: a coloured face, a dark border a
 | Press | 90 ms, the face drops onto the edge |
 | Disabled | 45% opacity |
 
-The website's buttons use the same keycap: purple face, dark border, thick bottom edge. No white pills.
+The marketing website keeps its own white pill buttons; the keycap is the app's.
 
 ## Components
 
