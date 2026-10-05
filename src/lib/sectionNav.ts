@@ -9,11 +9,11 @@ export type StorySection = {
 
 export const STORY_SECTIONS: StorySection[] = [
   { id: "hero", label: "Hero", t: 0 },
-  { id: "upload", label: "Lessons", t: 0.26 },
-  { id: "chat", label: "Ask Pebby", t: 0.53 },
-  { id: "practice", label: "Scan", t: 0.67 },
-  { id: "adaptive", label: "Revision", t: 0.8 },
-  { id: "mastery", label: "Plan", t: 0.9 },
+  { id: "upload", label: "Upload", t: 0.26 },
+  { id: "chat", label: "Ask Mee", t: 0.53 },
+  { id: "practice", label: "Practice", t: 0.67 },
+  { id: "adaptive", label: "Adaptive", t: 0.8 },
+  { id: "mastery", label: "Mastery", t: 0.9 },
   { id: "cta", label: "Get started", t: 0.98 },
 ];
 

@@ -10,7 +10,11 @@
     "preview": "vite preview --port 3010",
     "typecheck": "tsc --noEmit",
     "qa": "node scripts/visual-qa.mjs",
-    "test:loader": "node scripts/loader-scroll-regression.mjs"
+    "test:loader": "node scripts/loader-scroll-regression.mjs",
+    "assets:phone": "node scripts/build-phone-glb.mjs",
+    "assets:screens": "node scripts/build-screens.mjs",
+    "assets:mascots": "node scripts/process-mascots.mjs",
+    "assets": "node scripts/build-phone-glb.mjs && node scripts/build-screens.mjs && node scripts/process-mascots.mjs"
   },
   "dependencies": {
     "@react-three/drei": "^9.122.0",
@@ -33,6 +37,7 @@
     "autoprefixer": "^10.4.18",
     "playwright": "^1.62.1",
     "postcss": "^8.4.35",
+    "sharp": "^0.35.3",
     "tailwindcss": "^3.4.1",
     "typescript": "^5.5.3",
     "vite": "^5.4.2"

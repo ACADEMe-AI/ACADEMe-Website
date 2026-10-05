@@ -1,7 +1,9 @@
 export type Tile = {
+  /** Destination = v1 content route */
   path: string;
   label: string;
   className: string;
+  /** Solid fill used for expand-to-fullscreen */
   color: string;
   art: "nodes" | "quotes" | "mark" | "type" | "icons" | "swatches" | "photo" | "curve";
 };
@@ -20,100 +22,99 @@ export type NavGroup = {
   items: NavItem[];
 };
 
+/**
+ * Home tile board (v2 interaction) → lands on v1 content routes.
+ * Framework maps to Foundations; Iconography to Product structure.
+ */
 export const tiles: Tile[] = [
   {
     path: "/foundations",
     label: "Framework",
     className: "t-framework",
-    color: "#14161c",
+    color: "#1c1f2e",
     art: "nodes",
   },
   {
     path: "/foundations/voice",
     label: "Voice & Tone",
     className: "t-voice",
-    color: "#f5a800",
+    color: "#f0d45c",
     art: "quotes",
   },
   {
     path: "/foundations/logo",
     label: "Logo",
     className: "t-logo",
-    color: "#564cf1",
+    color: "#6ec8ff",
     art: "mark",
   },
   {
     path: "/foundations/type",
     label: "Typography",
     className: "t-type",
-    color: "#ff8a4c",
+    color: "#ff6a3d",
     art: "type",
   },
   {
-    path: "/product/usps",
-    label: "Product",
+    path: "/product/structure",
+    label: "Iconography",
     className: "t-icon",
-    color: "#3ddc97",
+    color: "#b8e03a",
     art: "icons",
   },
   {
     path: "/foundations/color",
     label: "Color",
     className: "t-color",
-    color: "#dcebff",
+    color: "#ff9a2e",
     art: "swatches",
   },
   {
     path: "/character",
-    label: "Pebby",
+    label: "Mascot",
     className: "t-imagery",
-    color: "#8b8cf5",
+    color: "#6b3d8c",
     art: "photo",
   },
   {
     path: "/character/motion",
     label: "Motion",
     className: "t-motion",
-    color: "#e7e6ff",
+    color: "#b8a0f0",
     art: "curve",
   },
 ];
 
+/** Full v1 site map — markdown guidelines */
 export const navGroups: NavGroup[] = [
   {
     id: "foundations",
     label: "Foundations",
-    description: "Logo, colour, type, tokens",
+    description: "Marks, color, type",
     items: [
       {
         path: "/foundations",
         label: "Overview",
         file: "identity/overview.md",
-        description: "Taken from the app",
+        description: "Brand basics",
       },
       {
         path: "/foundations/logo",
         label: "Logo",
         file: "identity/logo.md",
-        description: "Cube and wordmark",
+        description: "Cube mark files",
       },
       {
         path: "/foundations/color",
         label: "Color",
         file: "identity/color.md",
-        description: "Dark, light, status, Pebby, tints",
+        description: "Palettes",
       },
       {
         path: "/foundations/type",
         label: "Type",
-        file: "identity/type.md",
-        description: "Baloo 2, Archivo, Noto Sans",
-      },
-      {
-        path: "/foundations/tokens",
-        label: "Tokens",
         file: "identity/tokens.md",
-        description: "Radius, keycap, components",
+        description: "Type and space",
       },
       {
         path: "/foundations/voice",
@@ -125,131 +126,125 @@ export const navGroups: NavGroup[] = [
   },
   {
     id: "character",
-    label: "Pebby",
-    description: "The tutor and mascot",
+    label: "Mascot",
+    description: "Learning buddy assets",
     items: [
       {
         path: "/character",
-        label: "Pebby",
+        label: "Overview",
         file: "illustration/mascot.md",
-        description: "Who Pebby is",
+        description: "Meet the buddy",
       },
       {
         path: "/character/illustration",
         label: "Illustration",
         file: "illustration/overview.md",
-        description: "Pebby, cube, real screens",
+        description: "Visual system",
       },
       {
         path: "/character/expressions",
-        label: "Poses",
+        label: "Expressions",
         file: "illustration/expressions.md",
-        description: "Ten poses for the web",
+        description: "16 faces",
       },
       {
         path: "/character/actions",
-        label: "Moments",
+        label: "In action",
         file: "illustration/moments.md",
-        description: "Which pose where",
+        description: "Study moments",
       },
       {
-        path: "/character/shape",
-        label: "Shape",
+        path: "/character/turnaround",
+        label: "Turnaround",
         file: "illustration/shape-language.md",
-        description: "How Pebby is built",
+        description: "Five angles",
       },
       {
         path: "/character/motion",
         label: "Motion",
         file: "illustration/motion.md",
-        description: "Rive and celebrations",
+        description: "States in UI",
       },
     ],
   },
   {
     id: "product",
     label: "Product",
-    description: "What ACADEMe is today",
+    description: "What we ship next",
     items: [
       {
         path: "/product",
         label: "Overview",
         file: "product/overview.md",
-        description: "Five pillars",
-      },
-      {
-        path: "/product/usps",
-        label: "USPs",
-        file: "product/usps.md",
-        description: "Seven reasons, with proof",
+        description: "Direction",
       },
       {
         path: "/product/checklist",
-        label: "Built",
+        label: "What next",
         file: "product/checklist.md",
-        description: "What the app does",
+        description: "Current tasks",
       },
       {
         path: "/product/roadmap",
-        label: "Next",
+        label: "Roadmap",
         file: "product/roadmap.md",
-        description: "What's coming",
+        description: "Phase order",
       },
       {
         path: "/product/structure",
         label: "App structure",
         file: "product/app-ia.md",
-        description: "Tabs and flows",
+        description: "Tabs and flow",
       },
     ],
   },
   {
     id: "writing",
     label: "Writing",
-    description: "Voice and messaging",
+    description: "Messaging and voice",
     items: [
       {
         path: "/writing",
         label: "Overview",
         file: "writing/overview.md",
-        description: "Principles",
+        description: "How we write",
       },
       {
         path: "/writing/voice",
         label: "Voice",
         file: "writing/voice.md",
-        description: "Tone and naming",
+        description: "Tone pillars",
       },
       {
         path: "/writing/messaging",
         label: "Messaging",
         file: "writing/messaging.md",
-        description: "Lines by channel",
+        description: "Key lines",
       },
     ],
   },
   {
     id: "marketing",
     label: "Marketing",
-    description: "academe.cc",
+    description: "Site and CTAs",
     items: [
       {
         path: "/marketing",
         label: "Overview",
         file: "marketing/overview.md",
-        description: "Two sites, one repo",
+        description: "Marketing surfaces",
       },
       {
         path: "/marketing/ctas",
         label: "CTAs",
         file: "marketing/ctas.md",
-        description: "Google Play and QR",
+        description: "Buttons and asks",
       },
       {
         path: "/marketing/showcase",
         label: "Showcase site",
         file: "marketing/showcase-site.md",
-        description: "The seven beats",
+        description: "Website notes",
       },
     ],
   },
@@ -274,7 +269,7 @@ export const navGroups: NavGroup[] = [
         path: "/guides/architecture",
         label: "Architecture",
         file: "agents/architecture.md",
-        description: "App and site",
+        description: "Code shape",
       },
       {
         path: "/guides/agents",
@@ -284,9 +279,9 @@ export const navGroups: NavGroup[] = [
       },
       {
         path: "/guides/agents-overview",
-        label: "Agent rules",
+        label: "Agent system",
         file: "agents/overview.md",
-        description: "The short version",
+        description: "Agent roles",
       },
     ],
   },
@@ -315,6 +310,7 @@ export function groupForPath(pathname: string) {
   return navGroups.find((g) => g.items.some((i) => i.path === pathname));
 }
 
+/** Accent color for a path (from home tile if any) */
 export function colorForPath(pathname: string): string | null {
   const tile = tiles.find((t) => t.path === pathname);
   return tile?.color ?? null;

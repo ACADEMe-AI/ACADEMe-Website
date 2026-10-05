@@ -1,12 +1,12 @@
 export type ScreenState =
   | "home"
-  | "lesson"
-  | "courses"
-  | "askme"
-  | "scan"
-  | "check"
-  | "revision"
-  | "folder"
+  | "upload"
+  | "processing"
+  | "chat"
+  | "cards"
+  | "quiz"
+  | "practice"
+  | "mastery"
   | "waitlist";
 
 export type ChapterId =

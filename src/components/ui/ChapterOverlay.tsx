@@ -89,13 +89,13 @@ export function ChapterOverlay() {
           <div className="type-block">
             <Mee src="/mascot/upload.png" />
             <h2 className="display">
-              Your chapters,
+              Put your material
               <br />
-              one swipe at a time.
+              to work.
             </h2>
             <p className="lede tight">
-              Your board&apos;s 2026-27 syllabus, chapter by chapter. Each lesson
-              is a few cards: an idea, a worked example, a quick check.
+              Drop in notes, slides, PDFs, or lectures. ACADEMe turns what you
+              already have into a study plan you can use.
             </p>
           </div>
         </div>
@@ -107,14 +107,13 @@ export function ChapterOverlay() {
           <div className="type-block type-right">
             <Mee src="/mascot/chat.png" />
             <h2 className="display">
-              Stuck?
+              A tutor that sees
               <br />
-              Ask Pebby.
+              the context.
             </h2>
             <p className="lede tight">
-              Explain it simply, solve it with hints first, or quiz me. Pebby
-              answers for your class and board, in English, हिन्दी, తెలుగు,
-              தமிழ் or বাংলা.
+              Ask the question in your own words. Mee responds from the material
+              you&apos;re actually studying.
             </p>
           </div>
         </div>
@@ -126,14 +125,13 @@ export function ChapterOverlay() {
           <div className="type-block type-practice">
             <Mee src="/mascot/practice.png" />
             <h2 className="display display-cinematic">
-              Snap it.
+              Turn review
               <br />
-              Get marked.
+              into recall.
             </h2>
             <p className="lede tight">
-              Snap your written answer and see the marks it would get under the
-              CBSE or ICSE scheme, point by point. Stuck on homework? Get hints,
-              not just answers.
+              Make flashcards, quiz yourself, and practise the ideas until you
+              can retrieve them without looking.
             </p>
           </div>
         </div>
@@ -145,13 +143,13 @@ export function ChapterOverlay() {
           <div className="type-block type-right">
             <Mee src="/mascot/adaptive.png" />
             <h2 className="display">
-              Miss it once.
+              Practice that
               <br />
-              Master it later.
+              adjusts to you.
             </h2>
             <p className="lede tight">
-              Keep any card. Every question you miss comes back in your
-              revision: tomorrow, then a few days later, until you&apos;ve got it.
+              Wrong answers become the next useful question, not just another
+              item in a random pool.
             </p>
           </div>
         </div>
@@ -163,13 +161,13 @@ export function ChapterOverlay() {
           <div className="type-block">
             <Mee src="/mascot/mastery.png" />
             <h2 className="display">
-              Test on Friday?
+              Build a study loop
               <br />
-              Make a folder.
+              you can stick with.
             </h2>
             <p className="lede tight">
-              Add the chapters and the date. ACADEMe spreads the lessons over the
-              days left, adds revision and reminds you.
+              Upload, understand, practise, improve. Every session moves your
+              work forward.
             </p>
           </div>
         </div>

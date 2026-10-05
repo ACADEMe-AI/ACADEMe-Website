@@ -1,25 +1,44 @@
-# Next
+# Product roadmap (current)
 
-The plan lives in the app repo: `tasks/roadmap.md` (build order and status) and `tasks/strategy.md` (why). This page only gives the shape, so it doesn't go stale.
+**Updated:** 2026-08-03  
 
-## Stages
+## Phase map
 
-| Stage | What | Status |
-|-------|------|--------|
-| 1 · The core app | Sign-up, setup, ASKMe, Scan, Study, Folders, Me, Pro | Mostly built. Left: streaks, mock exams, search |
-| 2 · Your language | App text, lessons, emails and pages in English, Hindi, Telugu, Tamil and Bengali; voice | Next |
-| 3 · Lessons at scale | Every chapter written and reviewed; diagram, listen and video cards; offline chapters | After |
+```
+0.4  Design system site (src/design)            ✅ shipped (PR #3)
+  ↓
+0.5  Marketing showcase site polish (QR, tokens, copy)  ← NOW
+  ↓
+0.6  Guardrails (done — keep maintained)
+  ↓
+0.7  UI system docs (mostly done — live here)
+  ↓
+0.8  Mascot motion (Rive) from Pebby sheet · name sparingly
+  ↓
+1.0  Mobile student product = KnowUnity-class parity
+  ↓
+2.0  Growth ecosystem (library, creators)
+  ↓
+3.0+ Differentiate (school OS, desktop US, etc.)
+```
 
-## Next 90 days
+## Done signals
 
-- Generate and spot-check lessons, Class 10 and 12 first
-- Closed test with students and parents, then a staged Play rollout in India
-- Streaks and levels
-- App text in Hindi, then Telugu, Tamil and Bengali
-- Mock exams and a weekly parent report (Pro) before board exams
+| Phase | Done when |
+|-------|-----------|
+| **0.4** | Agents open `src/design/content/` first; site runs at `/design`; roadmap points here |
+| **0.5** | Marketing site uses D tokens; no “all devices”; QR path clear |
+| **0.8** | At least idle + celebrate wired; hide-mascot setting planned |
+| **1.0** | Upload → summary/cards/quiz → chat → practice test works on mobile |
 
-## For the website and this site
+## Strategy locks
 
-- Recapture the phone screens when Courses gets subject filters and when streams ship
-- Add Class 11 and 12 streams to the hero copy once they ship
-- Point the website's buttons and QR at the Play listing once it is public
+- Solo student first  
+- Mobile first; desktop later  
+- Computer product US-only later if still the plan  
+- School OS not P1  
+- Engineering: modular, contract-first  
+
+## Full feature parity inventory
+
+See repo `design/usp/academe-product-roadmap.md` Phase 1 feature list (F1–F14).

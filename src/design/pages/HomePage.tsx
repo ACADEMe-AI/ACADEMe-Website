@@ -8,9 +8,13 @@ import TileArt from "../components/TileArt";
 import { useExpand } from "../lib/expandContext";
 import { HERO_MARK } from "../lib/heroMark";
 import { dpath } from "../lib/base";
-import { logos } from "../lib/assets";
 
 gsap.registerPlugin(ScrollTrigger);
+
+/**
+ * Desktop: 4-col Dropbox board + side fly-in.
+ * Mobile: full-viewport 2-col board (fills screen) + left/right fly-in.
+ */
 
 const FLY_DESKTOP: Record<string, { x: number; y: number }> = {
   "t-framework": { x: -110, y: -8 },
@@ -23,6 +27,7 @@ const FLY_DESKTOP: Record<string, { x: number; y: number }> = {
   "t-motion": { x: 110, y: 42 },
 };
 
+/** Mobile: left column from left, right column from right */
 const FLY_MOBILE: Record<string, { x: number; y: number }> = {
   "t-framework": { x: -120, y: -20 },
   "t-voice": { x: 120, y: -20 },
@@ -33,6 +38,9 @@ const FLY_MOBILE: Record<string, { x: number; y: number }> = {
   "t-imagery": { x: -120, y: 40 },
   "t-motion": { x: 120, y: 40 },
 };
+
+const LOGO_DARK = "/brand/logo-white-bg-removed.png";
+const LOGO_LIGHT = "/brand/logo-black-bg-removed.png";
 
 function clamp01(n: number) {
   return Math.min(1, Math.max(0, n));
@@ -70,6 +78,7 @@ export default function HomePage() {
     preferAssembledBoard,
     clearPreferAssembled,
   } = useExpand();
+  // Cards return already animated in the portal — start fully assembled (no 2nd fly-in)
   const fromCards = Boolean(locState.fromCards || preferAssembledBoard);
   const fromHome = Boolean(locState.fromHome);
   const [p, setP] = useState(() => (fromCards ? 1 : 0));
@@ -77,6 +86,7 @@ export default function HomePage() {
   const narrow = useNarrow();
 
   useEffect(() => {
+    // Cards return: stay solid (portal already did the show). Logo fly: soft crossfade.
     if (fromCards) {
       setWelcome(true);
       return;
@@ -99,6 +109,7 @@ export default function HomePage() {
       return;
     }
 
+    // fromCards: hold p=1 until scroll is pinned at end (portal already did fly-in)
     let cardsPinned = fromCards;
     if (fromCards) {
       setP(1);
@@ -109,7 +120,9 @@ export default function HomePage() {
 
     const touch = window.matchMedia("(hover: none), (pointer: coarse)").matches;
     const narrowBoard = window.matchMedia("(max-width: 900px)").matches;
+    // Shorter pin distance = less scroll to assemble cards (mobile much tighter)
     const pinEnd = narrowBoard ? "+=160%" : "+=240%";
+    // Lower scrub = snappier follow (mobile slightly more responsive)
     const scrubAmt = narrowBoard ? 0.55 : 0.85;
 
     const st = ScrollTrigger.create({
@@ -123,6 +136,7 @@ export default function HomePage() {
       invalidateOnRefresh: true,
       onUpdate: (self) => {
         if (cardsPinned) {
+          // Stay assembled until user scrolls away from the end
           if (self.progress >= 0.97) setP(1);
           else {
             cardsPinned = false;
@@ -168,8 +182,10 @@ export default function HomePage() {
   const logoPx = HERO_MARK.box - logoSettle * (HERO_MARK.box - tabSize);
   const logoLift = (1 - logoSettle) * HERO_MARK.lift;
 
+  // Slightly earlier board so cards feel within reach of a short scroll
   const boardReveal = smooth(clamp01((p - 0.38) / 0.48));
   const cardsInteractive = boardReveal > 0.82;
+  // Hint arrow: visible until cards are mostly in
   const scrollHintOpacity = clamp01(1 - smooth(clamp01((p - 0.12) / 0.55)));
 
   const purpleFill = smooth(clamp01((boardReveal - 0.62) / 0.38));
@@ -191,13 +207,14 @@ export default function HomePage() {
     });
   };
 
+  /** Center cube between cards → back to home intro (not logo doc page) */
   const openCenter = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     if (p < 0.15) return;
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const heroImg = purpleFill > 0.45 ? logos.mark : logos.cube;
+  const heroImg = purpleFill > 0.45 ? LOGO_LIGHT : LOGO_DARK;
   const heroImgSize =
     HERO_MARK.imgSize +
     logoSettle * (tabSize * 0.52 - HERO_MARK.imgSize) -
@@ -206,6 +223,7 @@ export default function HomePage() {
   const showHeroMark = homeHandoff !== "hide-mark" && heroLogoFade > 0.02;
   const flyMap = narrow ? FLY_MOBILE : FLY_DESKTOP;
 
+  // Logo always settles to board center (mobile + desktop)
   const pe: "auto" | "none" = centerTabOn > 0.5 ? "auto" : "none";
   const centerStyle = {
     opacity: centerTabOn,
@@ -214,10 +232,10 @@ export default function HomePage() {
     bottom: "auto",
     transform: `translate3d(-50%, -50%, 0) scale(${0.72 + centerTabOn * 0.28})`,
     pointerEvents: pe,
-    background: `rgba(86, 76, 241, ${Math.max(purpleFill, 0.001)})`,
+    background: `rgba(91, 108, 255, ${Math.max(purpleFill, 0.001)})`,
     boxShadow:
       purpleFill > 0.2
-        ? `0 16px 48px rgba(86,76,241,${0.4 * purpleFill})`
+        ? `0 16px 48px rgba(91,108,255,${0.4 * purpleFill})`
         : "none",
   };
 
@@ -245,8 +263,8 @@ export default function HomePage() {
         }}
       >
         <div style={{ height: logoPx + 32, marginBottom: 10 }} aria-hidden />
-        <h1 className="db-display max-w-[14ch] text-center text-[clamp(1.7rem,5.5vw,3.4rem)] text-[#564cf1]">
-          How ACADEMe looks, sounds and moves. Taken from the app.
+        <h1 className="db-display max-w-[14ch] text-center text-[clamp(1.7rem,5.5vw,3.4rem)] text-[#5b6cff]">
+          How ACADEMe looks, feels, and sounds for every student surface.
         </h1>
       </div>
 
@@ -266,10 +284,10 @@ export default function HomePage() {
           <div
             className="grid h-full w-full place-items-center"
             style={{
-              background: `rgba(86, 76, 241, ${purpleFill})`,
+              background: `rgba(91, 108, 255, ${purpleFill})`,
               boxShadow:
                 purpleFill > 0.05
-                  ? `0 18px 48px rgba(86,76,241,${0.35 * purpleFill})`
+                  ? `0 18px 48px rgba(91,108,255,${0.35 * purpleFill})`
                   : "none",
             }}
           >
@@ -320,13 +338,14 @@ export default function HomePage() {
             style={centerStyle}
           >
             <img
-              src={purpleFill > 0.45 ? logos.mark : logos.cube}
+              src={purpleFill > 0.45 ? LOGO_LIGHT : LOGO_DARK}
               alt="ACADEMe"
             />
           </button>
         </div>
       </div>
 
+      {/* Scroll hint — bottom-right, both desktop + mobile */}
       <div
         className="scroll-hint"
         style={{
@@ -343,6 +362,7 @@ export default function HomePage() {
             const max =
               ScrollTrigger.maxScroll(window) ||
               document.documentElement.scrollHeight;
+            // Jump partway so cards start assembling without a long drag
             window.scrollTo({
               top: Math.max(max * 0.55, window.innerHeight * 1.2),
               behavior: "smooth",

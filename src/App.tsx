@@ -7,7 +7,6 @@ import { SmoothScroll } from "./components/SmoothScroll";
 import { ScrollProgress } from "./components/ui/ScrollProgress";
 import { SectionJump } from "./components/ui/SectionJump";
 import { QrModal } from "./components/ui/QrModal";
-import { AppDetails } from "./components/ui/AppDetails";
 import { BrandLoader } from "./loader";
 
 const DesignRoot = lazy(() => import("./design/DesignRoot"));
@@ -33,7 +32,6 @@ function WebsiteApp() {
           <SectionJump />
           <QrModal />
           <div id="cta" className="post-story">
-            <AppDetails />
             <Footer />
           </div>
         </div>

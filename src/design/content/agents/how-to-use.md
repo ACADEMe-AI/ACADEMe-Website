@@ -1,29 +1,34 @@
-# For agents
+# How agents use this site
 
-## Read first
+## Always
 
-1. `AGENTS.md` in this repo
-2. [Start here](/design/guides) (`src/design/content/start/overview.md`)
-3. [Rules](/design/guides/rules)
-4. The page for your task, below
+```
+AGENTS.md
+  → academe-website-brain
+  → src/design/content/00-START-HERE.md
+  → content/agents/guardrails.md
+  → content/product/checklist.md
+```
 
-## By task
+## By task type
 
 | Task | Read |
 |------|------|
-| Colours, theme | [Color](/design/foundations/color), [Tokens](/design/foundations/tokens) |
-| Fonts | [Type](/design/foundations/type) |
-| Logo | [Logo](/design/foundations/logo) |
-| Copy | [Voice](/design/foundations/voice), [Messaging](/design/writing/messaging), [USPs](/design/product/usps) |
-| Pebby art | [Pebby](/design/character), [Moments](/design/character/actions) |
-| Marketing site | [Showcase site](/design/marketing/showcase), [CTAs](/design/marketing/ctas) |
-| What the app does | [Built](/design/product/checklist), [App structure](/design/product/structure) |
+| Colors / theme | `identity/color.md` + `tokens.md` |
+| Copy | `writing/*` |
+| Mascot / art | `illustration/*` |
+| Marketing site | `marketing/*` |
+| What to build next | `product/roadmap.md` + `checklist.md` |
+| App structure | `product/app-ia.md` |
 
-## When the answer isn't here
+## After finishing work
 
-Check the app repo, not your memory: `lib/ui/core/themes/app_theme.dart`, `AGENTS.md`, `tasks/strategy.md`, `tasks/roadmap.md`.
+1. Update `product/checklist.md` checkboxes  
+2. If decision changed, update the relevant content MD  
+3. Don’t leave truth only in chat  
 
-## After you finish
+## Do not
 
-- If the app changed something this site describes, update the page in `src/design/content/`
-- Run the name check: no other app or company names in `src/design` or `design`
+- Grep whole monorepo before reading this spine  
+- Invent phase order  
+- Ship teacher/admin as P1  

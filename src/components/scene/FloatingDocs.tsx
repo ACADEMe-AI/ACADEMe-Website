@@ -6,14 +6,14 @@ import { scrollState } from "../../lib/scrollState";
 
 /** Spawn on the RIGHT → fly into phone. Depth stagger so cards read 3D. */
 const DOCS = [
-  { label: "Maths", sub: "Chapter 3", color: "#5B6CFF", ox: 2.55, oy: 0.95, oz: 0.85 },
-  { label: "Science", sub: "Chapter 9", color: "#0D9F6E", ox: 2.9, oy: 0.08, oz: 0.35 },
-  { label: "History", sub: "Chapter 1", color: "#C98A12", ox: 2.45, oy: -0.8, oz: 1.05 },
-  { label: "English", sub: "Chapter 1", color: "#E03E4D", ox: 3.15, oy: 0.48, oz: 0.15 },
+  { label: "PDF", color: "#5B6CFF", ox: 2.55, oy: 0.95, oz: 0.85 },
+  { label: "Notes", color: "#0D9F6E", ox: 2.9, oy: 0.08, oz: 0.35 },
+  { label: "Slides", color: "#C98A12", ox: 2.45, oy: -0.8, oz: 1.05 },
+  { label: "Lec", color: "#E03E4D", ox: 3.15, oy: 0.48, oz: 0.15 },
 ];
 
 /** Canvas label texture so we avoid drei Text font loading failures. */
-function makeLabelTexture(label: string, sub: string, accent: string) {
+function makeLabelTexture(label: string, accent: string) {
   const c = document.createElement("canvas");
   c.width = 256;
   c.height = 320;
@@ -29,7 +29,7 @@ function makeLabelTexture(label: string, sub: string, accent: string) {
   ctx.fillText(label, 128, 160);
   ctx.fillStyle = "#5C6578";
   ctx.font = "500 22px Archivo, system-ui, sans-serif";
-  ctx.fillText(sub, 128, 200);
+  ctx.fillText("Study material", 128, 200);
   // Fake lines
   ctx.fillStyle = "#E4E7F0";
   for (let i = 0; i < 5; i++) {
@@ -65,7 +65,7 @@ export function FloatingDocs() {
     []
   );
   const textures = useMemo(
-    () => DOCS.map((d) => makeLabelTexture(d.label, d.sub, d.color)),
+    () => DOCS.map((d) => makeLabelTexture(d.label, d.color)),
     []
   );
 

@@ -1,18 +1,54 @@
-# Built
+# Master checklist (current work)
 
-What the app does today. The full, up-to-date list is §5 of `tasks/roadmap.md` in the app repo; this page is a short copy for designers and the website.
+## Phase 0.4 — Design system site ✅ building
 
-- [x] Splash, Welcome with Pebby peeking, email and Google sign-in, forgot password with a 6-digit code
-- [x] Setup: language, birth year, class dial, board, +25 XP each step
-- [x] Floating nav pill (Home · ASKMe · Study · Me) and a separate Scan key
-- [x] Home: greeting, class and board, streak and XP, ask field, quick actions, Today card, subjects
-- [x] ASKMe: Explain · Solve · Quiz me, answers in the profile language, history, Report on every answer
-- [x] Courses: every syllabus chapter for your class and board, lesson player, quick checks, chapter tests, revision queue
-- [x] 6 lessons live: Class 10 CBSE Maths (prime factorisation, irrational numbers, substitution) and Science (types of reactions, spherical mirrors, mirror formula)
-- [x] Folders: chapters, notes, to-dos, a plan from the test date, Today checklist, reminders
-- [x] Scan: Solve · Check my answer · Notes · Ask, up to 10 pages, photos never stored
-- [x] Me: class and board, app language, Appearance (Light / Dark), reminders, help, account, delete account
-- [x] ACADEMe Pro: paywall, monthly and annual, limits enforced on the server
-- [ ] Class 11 and 12 streams (Science PCM / PCB, Commerce, Humanities): in progress
-- [ ] Pick your subjects in setup and filter Courses: in progress
-- [ ] More lessons: Class 10 and 12 first, then 9 and 11, then 6 to 8
+- [x] Intent: agents first  
+- [x] `src/design/` Vite app scaffold  
+- [x] Content spine (Identity / Writing / Illustration / Marketing / Product / Agents)  
+- [x] `00-START-HERE.md` entry  
+- [x] Browse UI (sidebar + pages)  
+- [x] Roadmap updated to put 0.4 first  
+- [x] `pnpm install` + production `vite build` succeeds  
+- [ ] Founder smoke-open `pnpm dev` at `/design`  
+- [ ] Optional: deploy design.academe subdomain later  
+
+## Phase 0.5 — Marketing site (next)
+
+- [x] Tailwind colors aligned to Scheme D (light default)  
+- [x] Remove “all devices” + “millions of learners” language  
+- [x] QR asset + store badges live  
+- [x] Feature copy = 5 study pillars (chat · flashcards · quizzes · summaries · practice tests)  
+- [x] Honest social proof structure  
+- [ ] Craft pass (type, motion, signature moment)  
+
+## Phase 0.6 — Guardrails
+
+- [x] `design/agent/GUARDRAILS.md`  
+- [x] Architecture principles  
+- [x] Mirrored into src/design content  
+
+## Phase 0.7 — UI system
+
+- [x] Tokens, IA, screens docs  
+- [x] Colors B + D approved  
+- [ ] Wireframes top 10 (optional before Flutter)  
+
+## Phase 0.8 — Mascot motion
+
+- [x] Character sheet asset (`mascot_academe.png`)  
+- [x] Name: Pebby (internal, spare use)  
+- [ ] Map expressions → state catalog  
+- [ ] Rive or transparent WebM loops  
+- [ ] Flutter `MascotSlot`  
+
+## Phase 1 — Student app (later)
+
+- [ ] See `design/usp/academe-product-roadmap.md` F1–F14  
+- [ ] Waves 1.0–1.4  
+
+## Explicitly not now
+
+- [ ] School teacher/admin OS  
+- [ ] Desktop product UI  
+- [ ] Creator marketplace  
+- [ ] Heavy public use of mascot name  

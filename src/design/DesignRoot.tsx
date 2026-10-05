@@ -1,3 +1,4 @@
+/** Brand guidelines app — mounted at /design/* on the ACADEMe website. */
 import { useEffect } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import HomePage from "./pages/HomePage";
@@ -14,8 +15,8 @@ export default function DesignRoot() {
   useEffect(() => {
     const root = document.documentElement;
     const body = document.body;
+    // Main site scales root rem fluidly — design was built at 16px.
     const prev = {
-      title: document.title,
       htmlBg: root.style.background,
       htmlFont: root.style.fontSize,
       bodyBg: body.style.background,
@@ -30,11 +31,11 @@ export default function DesignRoot() {
     root.style.background = "#fff";
     root.style.fontSize = "16px";
     body.style.background = "#fff";
-    body.style.color = "#12141a";
-    body.style.fontFamily = '"Noto Sans", system-ui, sans-serif';
+    body.style.color = "#0f1115";
+    body.style.fontFamily = 'Archivo, "Helvetica Neue", Arial, sans-serif';
     body.style.overflowX = "hidden";
 
-    document.title = "ACADEMe design system";
+    document.title = "ACADEMe Design System";
 
     return () => {
       root.classList.remove("on-design-site");
@@ -46,7 +47,7 @@ export default function DesignRoot() {
       body.style.fontFamily = prev.bodyFont;
       body.style.overflow = prev.overflow;
       body.style.overflowX = prev.overflowX;
-      document.title = prev.title;
+      document.title = "ACADEMe — Study smarter. In your pocket.";
     };
   }, []);
 
@@ -80,11 +81,7 @@ export default function DesignRoot() {
           />
           <Route
             path="iconography"
-            element={<Navigate to={dpath("/product/usps")} replace />}
-          />
-          <Route
-            path="character/turnaround"
-            element={<Navigate to={dpath("/character/shape")} replace />}
+            element={<Navigate to={dpath("/product/structure")} replace />}
           />
           <Route
             path="color"

@@ -1,3 +1,4 @@
+/** Tile decorations — ACADEMe-flavored (buddy / study / cube cues) */
 export default function TileArt({ kind }: { kind: string }) {
   switch (kind) {
     case "nodes":
@@ -22,6 +23,7 @@ export default function TileArt({ kind }: { kind: string }) {
         </div>
       );
     case "mark":
+      // Layered diamond monogram — brand mark cue, not the cube
       return (
         <svg
           className="tile-art"
@@ -46,15 +48,12 @@ export default function TileArt({ kind }: { kind: string }) {
             fill="currentColor"
             opacity="0.92"
           />
-          <circle cx="80" cy="80" r="10" fill="#f5a800" opacity="0.95" />
+          <circle cx="80" cy="80" r="10" fill="#6ec8ff" opacity="0.95" />
         </svg>
       );
     case "type":
       return (
-        <div
-          className="tile-art self-end text-[5.5rem] leading-none opacity-90"
-          style={{ fontFamily: '"Baloo 2", "Noto Sans", sans-serif', fontWeight: 800 }}
-        >
+        <div className="tile-art self-end text-[5.5rem] font-bold leading-none tracking-tight opacity-90">
           Aa
         </div>
       );
@@ -69,7 +68,7 @@ export default function TileArt({ kind }: { kind: string }) {
     case "swatches":
       return (
         <div className="tile-art flex gap-2 self-end">
-          {["#564cf1", "#f5a800", "#3ddc97", "#8b8cf5"].map((c) => (
+          {["#5b6cff", "#0d9f6e", "#e86b2f", "#b8a0f0"].map((c) => (
             <span
               key={c}
               className="h-10 w-10 rounded-full ring-2 ring-black/5"
@@ -79,6 +78,7 @@ export default function TileArt({ kind }: { kind: string }) {
         </div>
       );
     case "photo":
+      // Expression set — reads as “mascot system”, not a single cartoon
       return (
         <svg
           className="tile-art"
@@ -86,18 +86,22 @@ export default function TileArt({ kind }: { kind: string }) {
           fill="none"
           aria-hidden
         >
-          <ellipse cx="62" cy="40" rx="8" ry="14" fill="#a2a4fb" />
-          <ellipse cx="80" cy="34" rx="9" ry="18" fill="#a2a4fb" />
-          <ellipse cx="98" cy="40" rx="8" ry="14" fill="#a2a4fb" />
-          <rect x="34" y="44" width="92" height="98" rx="40" fill="#6e71d6" />
-          <rect x="50" y="62" width="60" height="44" rx="16" fill="#ffffff" />
-          <ellipse cx="68" cy="82" rx="5" ry="6.5" fill="#12141a" />
-          <ellipse cx="92" cy="82" rx="5" ry="6.5" fill="#12141a" />
+          {/* back plate */}
+          <circle cx="56" cy="72" r="34" fill="currentColor" opacity="0.35" />
+          <circle cx="104" cy="72" r="34" fill="currentColor" opacity="0.55" />
+          {/* front face */}
+          <circle cx="80" cy="88" r="38" fill="currentColor" opacity="0.95" />
+          {/* eyes */}
+          <circle cx="66" cy="82" r="5" fill="#6b3d8c" opacity="0.9" />
+          <circle cx="94" cy="82" r="5" fill="#6b3d8c" opacity="0.9" />
+          {/* happy smile */}
           <path
-            d="M72 94 C76 100 84 100 88 94"
-            stroke="#12141a"
-            strokeWidth="3.5"
+            d="M64 96 C70 108 90 108 96 96"
+            stroke="#6b3d8c"
+            strokeWidth="4"
             strokeLinecap="round"
+            fill="none"
+            opacity="0.85"
           />
         </svg>
       );

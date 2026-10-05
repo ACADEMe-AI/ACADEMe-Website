@@ -1,26 +1,21 @@
-# Motion
+# Motion & celebrations
 
-## In the app
+## Stack
 
-| Piece | How |
-|-------|-----|
-| Pebby | Rive, `pebby.riv`, state machine `PebbySM`. Inputs: `pose` (a number), `reduceMotion`, `appear` |
-| Wins | `Celebration` widgets: `Burst`, `PopIn`, `Shake`, `FloatUp`, `CountUp` |
-| Buttons | The keycap press, 90 ms |
-| Lessons | Swipe cards |
+| Primary | Rive (`.riv`) state machine for character |
+| Secondary | Lottie for non-character FX (check, confetti) |
+| Preview | SVG/CSS only if needed |
 
-The app picks a pose with a named constant, for example `PebbyPose.celebrateSmall`. Screens never load the Rive file themselves; they use the `Pebby` widget.
+## State IDs (stable)
+
+`idle` · `wave` · `think` · `encourage` · `celebrate_small` · `celebrate_big` · `wow` · `sleepy`
 
 ## Rules
 
-- Celebrate real wins only: a right quick check (+5 XP), a lesson done, a test passed, setup steps (+25 XP)
-- One big celebration at a time. Small ones can stack (XP flying into the chip)
-- Everything is skippable and never blocks the next tap
-- When the phone asks for less motion, Pebby holds a still pose and bursts are skipped
+- Subtle motion in-product (no cinema camera spam)  
+- Always skippable  
+- Respect reduce-motion  
+- Max one big celebration per ~5 minutes  
+- Single integration: `MascotSlot` / `MeeView`-style widget  
 
-## On the website
-
-- Pebby is a still PNG pose next to each heading, with a short fade or rise as the heading comes in
-- No Rive on the site for now
-- The 3D phone, the floating chapter cards and the cube loader keep their existing motion
-- Respect `prefers-reduced-motion`
+Deep catalog: `design/mascot/flat/animations/catalog.json` (update name when Rive ships).

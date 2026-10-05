@@ -1,0 +1,119 @@
+{
+  "mascot": "mee",
+  "version": "2.0.0",
+  "style": "flat-2d-sticker",
+  "inspiration": "Pinterest app mascots · simple shapes · big eyes · no 3D",
+  "colors": {
+    "body": "#5B6CFF",
+    "accent": "#7CFFB2",
+    "face": "#0B0C0F",
+    "eyeWhite": "#FFFFFF",
+    "schemeDark": "B",
+    "schemeLight": "D"
+  },
+  "primaryRuntime": "rive",
+  "secondaryRuntime": "lottie-fx-only",
+  "previewRuntime": "svg-css",
+  "files": {
+    "svgMaster": "svg/mee.svg",
+    "rive": "animations/rive/mee.riv",
+    "cssPreview": "animations/css/mee-animations.css",
+    "previewHtml": "preview-flat-mascot.html"
+  },
+  "riveLayers": [
+    "shadow",
+    "body",
+    "ribbon",
+    "eye_l",
+    "eye_r",
+    "pupil_l",
+    "pupil_r",
+    "shine_l",
+    "shine_r",
+    "cheek_l",
+    "cheek_r",
+    "mouth",
+    "arm_l",
+    "arm_r"
+  ],
+  "stateMachine": "MeeSM",
+  "states": [
+    {
+      "id": "idle",
+      "type": "loop",
+      "trigger": "default",
+      "durationMs": 3000,
+      "description": "Soft vertical bob + ribbon sway"
+    },
+    {
+      "id": "wave",
+      "type": "oneshot",
+      "trigger": "onboarding_or_empty",
+      "durationMs": 1200,
+      "description": "Arm wave"
+    },
+    {
+      "id": "think",
+      "type": "loop",
+      "trigger": "ai_streaming",
+      "durationMs": 1500,
+      "description": "Pupils up, slight lean"
+    },
+    {
+      "id": "encourage",
+      "type": "oneshot",
+      "trigger": "wrong_answer",
+      "durationMs": 850,
+      "description": "Nod + soft smile"
+    },
+    {
+      "id": "celebrate_small",
+      "type": "oneshot",
+      "trigger": "session_complete",
+      "durationMs": 1000,
+      "description": "Bounce + arms"
+    },
+    {
+      "id": "celebrate_big",
+      "type": "oneshot",
+      "trigger": "perfect_or_streak",
+      "durationMs": 1400,
+      "description": "Jump + ribbon spin"
+    },
+    {
+      "id": "wow",
+      "type": "oneshot",
+      "trigger": "high_score",
+      "durationMs": 700,
+      "description": "Eyes scale up"
+    },
+    {
+      "id": "sleepy",
+      "type": "loop",
+      "trigger": "optional_late_night",
+      "durationMs": 2400,
+      "description": "Slow blink"
+    }
+  ],
+  "lottieFx": [
+    {
+      "id": "check_pop",
+      "file": "animations/lottie/check-pop.json",
+      "use": "correct_answer"
+    },
+    {
+      "id": "confetti_success",
+      "file": "animations/lottie/confetti-success.json",
+      "use": "under_celebrate_big"
+    }
+  ],
+  "flutter": {
+    "packages": ["rive", "lottie (optional FX)"],
+    "widget": "MeeView(state: MeeState.idle)",
+    "assets": ["assets/rive/mee.riv"]
+  },
+  "web": {
+    "packages": ["@rive-app/canvas"],
+    "preview": "CSS + SVG until mee.riv exists"
+  }
+}

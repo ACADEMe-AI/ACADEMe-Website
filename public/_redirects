@@ -1,9 +1,5 @@
-/privacy https://api.academe.cc/privacy 301
-/privacy-policy https://api.academe.cc/privacy 301
-/terms https://api.academe.cc/terms 301
-/support https://api.academe.cc/support 301
-/delete-account https://api.academe.cc/delete-account 301
-/delete https://api.academe.cc/delete-account 301
-/reset-password https://api.academe.cc/reset-password 301
-/open https://api.academe.cc/open 301
+/privacy /privacy.html 200
+/delete-account /delete-account.html 200
+/privacy-policy /privacy.html 200
+/api/* https://academe-api-production.up.railway.app/:splat 200
 /* /index.html 200

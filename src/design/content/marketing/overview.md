@@ -1,19 +1,17 @@
-# Marketing
+# Marketing — overview
 
-academe.cc sells the app. Everything on it has to match the app: same screens, same logo files, same colours and fonts, and only features the app really has.
+Create materials using ACADEMe visual identity without breaking product truth.
 
-## Pages
+## Contents
 
-- [Showcase site](/design/marketing/showcase): the scroll story, section by section
-- [CTAs](/design/marketing/ctas): buttons, the QR and what not to show
+- [Showcase site](./showcase-site.md)  
+- [CTAs & QR](./ctas.md)  
 
-## Two sites, one repo
+## Dual product surfaces
 
-| Site | Path | Job |
-|------|------|-----|
-| Marketing | `/` | Get students to install from Google Play |
-| Design system | `/design` | Rules and assets for people building ACADEMe |
+| Surface | URL (target) | Role |
+|---------|----------------|------|
+| Product marketing | academe… / root Vite app | Convert to app install |
+| Design system | design.academe… / `/design` | Rules for builders |
 
-## Legal pages
-
-Privacy, Terms, Delete account and Support live on `api.academe.cc`, the same server as the app. academe.cc redirects `/privacy`, `/terms`, `/delete-account` and `/support` there.
+Do not confuse the two.

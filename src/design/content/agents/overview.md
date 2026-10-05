@@ -1,14 +1,14 @@
-# Agents
+# Agents — overview
 
-Rules for people and AI agents working on ACADEMe.
+## Contents
 
-- [Rules](/design/guides/rules): the hard limits
-- [Architecture](/design/guides/architecture): how the app and this site are built
-- [For agents](/design/guides/agents): what to read for which task
+- [Guardrails](./guardrails.md)  
+- [Architecture](./architecture.md)  
+- [How to use this site](./how-to-use.md)  
 
-## The short version
+## Default behavior
 
-1. The app is the source of truth. Copy from it; don't invent
-2. No other app or company names, anywhere
-3. No code comments
-4. Only claim what the app does today
+1. Read `content/00-START-HERE.md`  
+2. Read guardrails  
+3. Read roadmap/checklist for phase  
+4. Only then open deep `design/` research files if needed  

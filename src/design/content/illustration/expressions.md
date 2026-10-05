@@ -1,24 +1,31 @@
-# Poses
+# Expressions
 
-Ten transparent PNGs in `/pebby/`, 440 × 440, exported from the app's Pebby art. The filename is the id.
+Sixteen faces cut from the official character sheet. Each file is a transparent PNG under `/mascot/`.
 
-| Pose | File | Feels like |
-|------|------|------------|
-| Wave | `wave.png` | Hello, welcome back |
-| Happy | `happy.png` | All good, default positive |
-| Encourage | `encourage.png` | You can do this |
-| Reading | `reading.png` | Learning, lessons |
-| Chat | `chat.png` | Talking, ASKMe |
-| Solving | `solving.png` | Working a problem out |
-| Idea | `idea.png` | Got it, here's why |
-| Focused | `focused.png` | Planning, heads down |
-| Determined | `determined.png` | Try again, test time |
-| Celebrate | `celebrate.png` | You did it |
+## When to use
 
-The app's Rive file has more poses (thinking, shy, sleeping, peeking, covering eyes and others). Only these ten are exported for the web. If a page needs another one, export it from the app's art; don't draw it.
+| Mood | File | Typical moment |
+|------|------|----------------|
+| Happy | happy.png | Default positive |
+| Laughing | laughing.png | Light celebration |
+| Excited | excited.png | New feature reveal |
+| Cheering | cheering.png | Big win |
+| Thinking | thinking.png | Loading or AI working |
+| Focused | focused.png | Deep work |
+| Confused | confused.png | Wrong answer soft feedback |
+| Surprised | surprised.png | Unexpected result |
+| Proud | proud.png | Streak or level up |
+| Shy | shy.png | First session |
+| Tired | tired.png | Long session wrap |
+| Determined | determined.png | Retry after miss |
+| Sad | sad.png | Gentle miss (use rarely) |
+| Sleeping | sleeping.png | Idle timeout |
+| Loved | loved.png | Thanks or rating |
+| Wow | wow.png | Insight unlocked |
 
 ## Rules
 
-- One pose per moment. Don't cycle through poses in one flow
-- Use the same pose for the same moment everywhere
-- Keep the transparent background. No circles or blobs behind Pebby
+* Prefer happy, thinking, studying, celebrate, wave in product UI
+* Do not rotate through every face in one flow
+* Keep the soft purple body. Do not recolor wildly
+* Pair with short copy. The face does the emotion

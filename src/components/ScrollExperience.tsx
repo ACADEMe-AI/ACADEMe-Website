@@ -101,13 +101,13 @@ function lerpWaypoints(list: Waypoint[], t: number) {
 
 function screenFromProgress(t: number): ScreenState {
   if (t < 0.12) return "home";
-  if (t < 0.38) return "lesson";
-  if (t < 0.44) return "courses";
-  if (t < 0.58) return "askme";
-  if (t < 0.66) return "scan";
-  if (t < 0.74) return "check";
-  if (t < 0.86) return "revision";
-  if (t < 0.94) return "folder";
+  if (t < 0.38) return "upload";
+  if (t < 0.44) return "processing";
+  if (t < 0.58) return "chat"; // tutor section
+  if (t < 0.66) return "cards";
+  if (t < 0.74) return "quiz";
+  if (t < 0.86) return "practice";
+  if (t < 0.94) return "mastery";
   return "waitlist"; // landscape CTA community screen
 }
 

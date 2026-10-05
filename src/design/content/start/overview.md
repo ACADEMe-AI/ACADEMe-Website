@@ -1,25 +1,23 @@
 # Start here
 
-This is the ACADEMe design system: the brand, Pebby, the words and the rules, all taken from the app.
+This site is the source of truth for ACADEMe design assets and rules.
 
 ## Sections
 
-1. **Foundations**: logo, colour, type, tokens, voice
-2. **Pebby**: the mascot, poses, moments, shape, motion
-3. **Product**: what ACADEMe is, the USPs, what's built, what's next, app structure
-4. **Writing**: voice and messaging
-5. **Marketing**: the showcase site and CTAs
-6. **Guides**: rules for people and agents
+1. **Foundations** — logo, color, type, voice  
+2. **Mascot** — buddy cutouts, expressions, motion  
+3. **Product** — checklist, roadmap, app structure  
+4. **Writing** — voice and messaging  
+5. **Marketing** — CTAs and showcase notes  
+6. **Guides** — rules for people and agents  
 
-## The essentials
+## If you are unsure
 
-- Study app for Class 6 to 12, CBSE / ICSE / ISC, 2026-27 syllabus. Android first, Google Play
-- Primary #564CF1, selected amber #F5A800. Light and Dark in the app; academe.cc is dark
-- Baloo 2 800 headlines, Archivo 700 subheads, Noto Sans body, ArchivoWordmark for ACADEMe
-- Pebby is the tutor's name. Say it
-- Logo files: `/brand/academe_cube.png` (on light), `/brand/logo_mark.png` (on dark)
-- Pebby poses: `/pebby/*.png`
+Open **Product → What next**. That checklist wins over old docs.
 
-## If two sources disagree
+## Assets
 
-The app wins. Then fix this site.
+* Light mode is default (no dark mode for now)
+* Default logo: `logo-white-bg-removed.png` (dark cube) → `/logos/…` and `/brand/logo-on-light.png`
+* On dark sample only: `logo-black-bg-removed.png`
+* Buddy: `/mascot/*.png` cut from the official sheet

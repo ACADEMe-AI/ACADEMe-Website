@@ -13,18 +13,22 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { HERO_MARK, heroMarkFixedStyle } from "./heroMark";
 import { dpath } from "./base";
 import { tiles } from "./nav";
-import { logos } from "./assets";
 import { ExpandContext, type ExpandContextValue, type ExpandPayload } from "./expandContext";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const EXPAND_MS = 620;
+/** Logo mark → hero center: longer, softer fly */
 const HOME_FLY_MS = 1100;
 const HOME_HOLD_MS = 520;
 const HOME_FADE_MS = 560;
 const CARDS_MS = 900;
 const CARDS_HOLD_MS = 320;
 
+const LOGO_DARK = "/brand/logo-white-bg-removed.png";
+const LOGO_LIGHT = "/brand/logo-black-bg-removed.png";
+
+/** Off-screen start offsets for return assemble (left / right / top / bottom) */
 const CARD_FROM: Record<string, { x: string; y: string }> = {
   "t-framework": { x: "-130%", y: "0%" },
   "t-voice": { x: "0%", y: "-130%" },
@@ -46,6 +50,7 @@ function isDark(hex: string) {
   return (r * 299 + g * 587 + b * 114) / 1000 < 140;
 }
 
+/** Lock scroll while the full-screen card return covers the page. */
 function lockReturnScroll() {
   document.body.classList.add("design-returning-home");
   document.body.style.overflow = "hidden";
@@ -84,6 +89,7 @@ export function ExpandProvider({ children }: { children: ReactNode }) {
   const timers = useRef<number[]>([]);
   const cardsRootRef = useRef<HTMLDivElement | null>(null);
   const cardsTlRef = useRef<gsap.core.Timeline | null>(null);
+  /** Bumps each goHomeCards call — ignores stale timers */
   const cardsGenRef = useRef(0);
   const cardsBusyRef = useRef(false);
   const navigateRef = useRef(navigate);
@@ -110,6 +116,7 @@ export function ExpandProvider({ children }: { children: ReactNode }) {
       ScrollTrigger.getAll().forEach((st) => st.kill());
       ScrollTrigger.clearScrollMemory?.();
     } catch {
+      /* ignore */
     }
   };
 
@@ -145,6 +152,7 @@ export function ExpandProvider({ children }: { children: ReactNode }) {
     [navigate]
   );
 
+  /** Logo mark → flies to hero center */
   const goHome = useCallback(
     (logoRect: DOMRect) => {
       clearTimers();
@@ -163,6 +171,7 @@ export function ExpandProvider({ children }: { children: ReactNode }) {
         requestAnimationFrame(() => setPhase("home-to"));
       });
 
+      // Navigate mid-flight so home is ready under the logo
       const tNav = window.setTimeout(() => {
         killScroll();
         window.scrollTo(0, 0);
@@ -184,7 +193,12 @@ export function ExpandProvider({ children }: { children: ReactNode }) {
     [navigate]
   );
 
+  /**
+   * Home tiles return (replaces side-drawer menu):
+   * One shot only — flushSync mounts portal, GSAP runs once (no effect re-fire).
+   */
   const goHomeCards = useCallback(() => {
+    // One animation at a time (blocks double-tap / double fire)
     if (cardsBusyRef.current) return;
     cardsBusyRef.current = true;
 
@@ -198,6 +212,7 @@ export function ExpandProvider({ children }: { children: ReactNode }) {
     setPreferAssembledBoard(true);
     lockReturnScroll();
 
+    // Mount portal in the same turn so we can animate immediately (once)
     flushSync(() => {
       setCardsMobile(window.matchMedia("(max-width: 900px)").matches);
       setCardsActive(true);
@@ -262,6 +277,7 @@ export function ExpandProvider({ children }: { children: ReactNode }) {
       navigateRef.current(dpath("/"), {
         state: { fromHome: true, fromCards: true },
       });
+      // Land on assembled board under the cover (no second fly-in)
       requestAnimationFrame(() => {
         const max =
           ScrollTrigger.maxScroll(window) ||
@@ -320,7 +336,7 @@ export function ExpandProvider({ children }: { children: ReactNode }) {
 
   const fg =
     payload?.fg ??
-    (payload ? (isDark(payload.color) ? "#f2f3f5" : "#12141a") : "#fff");
+    (payload ? (isDark(payload.color) ? "#f4f1ea" : "#0f1115") : "#fff");
 
   const settled = heroMarkFixedStyle(HERO_MARK.imgSize);
   const homeLogoStyle: CSSProperties | undefined =
@@ -363,6 +379,7 @@ export function ExpandProvider({ children }: { children: ReactNode }) {
           ? 0
           : 0;
 
+  // Portal overlay styles are inline so nothing (Tailwind, drawer z-index) can beat them
   const cardsOverlayStyle: CSSProperties = {
     position: "fixed",
     inset: 0,
@@ -410,11 +427,15 @@ export function ExpandProvider({ children }: { children: ReactNode }) {
             aria-hidden
           />
           <div className="home-return-logo" style={homeLogoStyle} aria-hidden>
-            <img src={logos.cube} alt="" />
+            <img src={LOGO_DARK} alt="" />
           </div>
         </>
       )}
 
+      {/*
+        Portal to body + inline max z-index so the side drawer can never cover this.
+        Logo sits in the center hole; cards fly in around it via GSAP.
+      */}
       {cardsActive &&
         createPortal(
           <div
@@ -433,7 +454,7 @@ export function ExpandProvider({ children }: { children: ReactNode }) {
                   cardsMobile ? " center-tab--mobile" : ""
                 }`}
               >
-                <img src={logos.mark} alt="" />
+                <img src={LOGO_LIGHT} alt="" />
               </div>
               {tiles.map((t) => {
                 const from = CARD_FROM[t.className] ?? { x: "0%", y: "100%" };
@@ -445,7 +466,8 @@ export function ExpandProvider({ children }: { children: ReactNode }) {
                     data-from-y={from.y}
                     style={{
                       background: t.color,
-                      color: isDark(t.color) ? "#f2f3f5" : "#12141a",
+                      color: isDark(t.color) ? "#f4f1ea" : "#0f1115",
+                      // GSAP owns transform/opacity; kill CSS transition races
                       transition: "none",
                     }}
                   >
