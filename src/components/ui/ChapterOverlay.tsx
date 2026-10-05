@@ -31,9 +31,9 @@ export function ChapterOverlay() {
       <div className="chapter chapter-hero" data-chapter="hero">
         <div className="hero-headline">
           <h1>
-            <span className="hero-line">Study smarter.</span>
+            <span className="hero-line">Level up your learning.</span>
             <span className="hero-line">
-              In your{" "}
+              With{" "}
               {}
               <span
                 ref={pocketRef}
@@ -43,16 +43,16 @@ export function ChapterOverlay() {
                 title="ACADEMe"
                 tabIndex={0}
                 data-pocket-logo="loader-live"
-              />{" "}
-              pocket.
+              />
             </span>
+            <span className="hero-line">in your pocket.</span>
           </h1>
         </div>
 
         <div className="hero-bottom-left">
           <p className="hero-lede">
-            Turn notes, PDFs, lectures and study material into personalized
-            AI-powered practice with ACADEMe.
+            Swipe lessons from your syllabus, Pebby when you&apos;re stuck, and
+            board-style marks on your answers. Class 6 to 12, CBSE, ICSE and ISC.
           </p>
           <div className="hero-cta-row">
             <a className="btn-flow primary" href={WAITLIST_URL} target="_blank" rel="noreferrer">

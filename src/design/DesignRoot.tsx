@@ -47,7 +47,7 @@ export default function DesignRoot() {
       body.style.fontFamily = prev.bodyFont;
       body.style.overflow = prev.overflow;
       body.style.overflowX = prev.overflowX;
-      document.title = "ACADEMe — Study smarter. In your pocket.";
+      document.title = "ACADEMe - Level Up your learning 🚀";
     };
   }, []);
 
