@@ -43,9 +43,9 @@ export function ChapterOverlay() {
                 title="ACADEMe"
                 tabIndex={0}
                 data-pocket-logo="loader-live"
-              />{" "}
-              in your pocket.
+              />
             </span>
+            <span className="hero-line">in your pocket.</span>
           </h1>
         </div>
 
