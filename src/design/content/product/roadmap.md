@@ -15,7 +15,7 @@
   ↓
 0.8  Mascot motion (Rive) from Pebby sheet · name sparingly
   ↓
-1.0  Mobile student product = KnowUnity-class parity
+1.0  Class 6–12 app: syllabus lessons, Pebby, Scan, folders, My Progress
   ↓
 2.0  Growth ecosystem (library, creators)
   ↓

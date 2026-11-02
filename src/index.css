@@ -599,7 +599,7 @@ a:focus-visible { outline: 2px solid var(--primary); outline-offset: 4px; }
 .webgl-layer canvas { display: block; width: 100% !important; height: 100% !important; }
 
 .chapter-layer {
-  --o-hero: 1; --o-upload: 0; --o-chat: 0; --o-practice: 0; --o-adaptive: 0; --o-mastery: 0; --o-cta: 0;
+  --o-hero: 1; --o-upload: 0; --o-chat: 0; --o-language: 0; --o-practice: 0; --o-adaptive: 0; --o-mastery: 0; --o-cta: 0;
   position: absolute;
   inset: 0;
   z-index: 5;
@@ -611,6 +611,7 @@ a:focus-visible { outline: 2px solid var(--primary); outline-offset: 4px; }
 .chapter-hero { opacity: var(--o-hero, 1); }
 .chapter-upload { opacity: var(--o-upload, 0); }
 .chapter-chat { opacity: var(--o-chat, 0); }
+.chapter-language { opacity: var(--o-language, 0); }
 .chapter-practice { opacity: var(--o-practice, 0); }
 .chapter-adaptive { opacity: var(--o-adaptive, 0); }
 .chapter-mastery { opacity: var(--o-mastery, 0); }
@@ -657,7 +658,7 @@ a:focus-visible { outline: 2px solid var(--primary); outline-offset: 4px; }
   text-wrap: pretty;
 }
 
-.hero-headline h1 { font-size: 6.5rem; }
+.hero-headline h1 { font-size: min(5.2rem, 6.4vw); }
 .hero-line {
   display: flex;
   flex-wrap: nowrap; 
@@ -869,6 +870,7 @@ a:focus-visible { outline: 2px solid var(--primary); outline-offset: 4px; }
 
 .chapter-upload .type-block { transform: translateY(-3vh); }
 .chapter-chat .type-block { transform: translateY(-1vh); }
+.chapter-language .type-block { transform: translateY(-1vh); }
 .chapter-adaptive .type-block { transform: translateY(0); }
 .chapter-mastery .type-block { transform: translateY(1vh); }
 .chapter-cta .cta-row { margin-top: 0; }
@@ -1119,7 +1121,7 @@ a:focus-visible { outline: 2px solid var(--primary); outline-offset: 4px; }
     z-index: 12;
   }
   .hero-headline h1 {
-    font-size: clamp(2.35rem, 9.8vw, 3.05rem);
+    font-size: clamp(1.9rem, 8vw, 2.6rem);
     line-height: 0.96;
     letter-spacing: -0.035em;
   }
@@ -1208,6 +1210,7 @@ a:focus-visible { outline: 2px solid var(--primary); outline-offset: 4px; }
   }
   .chapter-upload .type-block,
   .chapter-chat .type-block,
+  .chapter-language .type-block,
   .chapter-practice .type-block,
   .chapter-adaptive .type-block,
   .chapter-mastery .type-block,

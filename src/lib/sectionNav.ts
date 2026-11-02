@@ -10,11 +10,12 @@ export type StorySection = {
 export const STORY_SECTIONS: StorySection[] = [
   { id: "hero", label: "Hero", t: 0 },
   { id: "upload", label: "Upload", t: 0.26 },
-  { id: "chat", label: "Ask Mee", t: 0.53 },
-  { id: "practice", label: "Practice", t: 0.67 },
-  { id: "adaptive", label: "Adaptive", t: 0.8 },
-  { id: "mastery", label: "Mastery", t: 0.9 },
-  { id: "cta", label: "Get started", t: 0.98 },
+  { id: "chat", label: "Ask Pebby", t: 0.52 },
+  { id: "language", label: "Language", t: 0.64 },
+  { id: "practice", label: "Practice", t: 0.755 },
+  { id: "adaptive", label: "Progress", t: 0.83 },
+  { id: "mastery", label: "Plan", t: 0.93 },
+  { id: "cta", label: "Get started", t: 0.99 },
 ];
 
 let storyST: ScrollTrigger | null = null;

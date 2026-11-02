@@ -6,9 +6,10 @@ const SCREEN_URLS: Record<ScreenState, string> = {
   upload: "/screens/upload.png",
   processing: "/screens/processing.png",
   chat: "/screens/chat.png",
+  language: "/screens/language.png",
   cards: "/screens/cards.png",
   quiz: "/screens/quiz.png",
-  practice: "/screens/practice.png",
+  progress: "/screens/progress.png",
   mastery: "/screens/mastery.png",
   waitlist: "/screens/waitlist.png",
 };

@@ -142,7 +142,24 @@ export const DESKTOP_WAYPOINTS: Waypoint[] = [
   ),
 
   wp(
-    0.66,
+    0.63,
+    "language",
+    "language",
+    { x: -1.42, y: -0.03, z: 0.24, rotX: 0.03, rotY: -TAU + 0.32, rotZ: 0.04, scale: 0.94 },
+    { x: -0.24, y: -0.02, z: 5.25, lookX: -1.0, lookY: -0.03, lookZ: 0.1, fov: 26.4 },
+    { absorb: 1 }
+  ),
+  wp(
+    0.69,
+    "language",
+    "language",
+    { x: -1.36, y: -0.04, z: 0.24, rotX: 0.03, rotY: -TAU + 0.28, rotZ: 0.04, scale: 0.95 },
+    { x: -0.22, y: -0.02, z: 5.22, lookX: -0.95, lookY: -0.03, lookZ: 0.1, fov: 26.4 },
+    { absorb: 1 }
+  ),
+
+  wp(
+    0.74,
     "practice",
     "cards",
     { x: 0.38, y: -0.06, z: 0.22, rotX: 0.04, rotY: -TAU - 0.16, rotZ: -0.04, scale: 0.96 },
@@ -150,7 +167,7 @@ export const DESKTOP_WAYPOINTS: Waypoint[] = [
     { absorb: 1 }
   ),
   wp(
-    0.71,
+    0.77,
     "practice",
     "quiz",
     { x: 0.35, y: -0.08, z: 0.24, rotX: 0.03, rotY: -TAU - 0.12, rotZ: -0.03, scale: 0.98 },
@@ -158,33 +175,33 @@ export const DESKTOP_WAYPOINTS: Waypoint[] = [
     { absorb: 1 }
   ),
   wp(
-    0.75,
+    0.785,
     "practice",
     "quiz",
-    { x: 0.05, y: -0.04, z: 0.18, rotX: 0.03, rotY: -TAU - 0.05, rotZ: 0, scale: 0.9 },
-    { x: 0, y: -0.02, z: 5.35, lookX: 0.05, lookY: -0.03, lookZ: 0.08, fov: 27 },
+    { x: 0.32, y: -0.07, z: 0.24, rotX: 0.03, rotY: -TAU - 0.1, rotZ: -0.02, scale: 0.98 },
+    { x: 0.04, y: -0.03, z: 5.22, lookX: 0.24, lookY: -0.05, lookZ: 0.1, fov: 26.6 },
     { absorb: 1 }
   ),
 
   wp(
-    0.79,
+    0.82,
     "adaptive",
-    "practice",
+    "progress",
     { x: -0.72, y: -0.02, z: 0.28, rotX: 0.02, rotY: -TAU * 2 + 0.22, rotZ: 0.03, scale: 0.94 },
     { x: -0.08, y: 0.0, z: 5.25, lookX: -0.48, lookY: -0.02, lookZ: 0.1, fov: 26.5 },
     { absorb: 1 }
   ),
   wp(
-    0.84,
+    0.848,
     "adaptive",
-    "practice",
+    "progress",
     { x: -0.68, y: -0.04, z: 0.3, rotX: 0.02, rotY: -TAU * 2 + 0.18, rotZ: 0.02, scale: 0.96 },
     { x: -0.06, y: -0.02, z: 5.15, lookX: -0.44, lookY: -0.03, lookZ: 0.1, fov: 26.2 },
     { absorb: 1 }
   ),
 
   wp(
-    0.9,
+    0.885,
     "mastery",
     "mastery",
     { x: 0.78, y: -0.1, z: 0.26, rotX: 0.04, rotY: -TAU * 2 - 0.22, rotZ: -0.06, scale: 0.96 },
@@ -192,24 +209,16 @@ export const DESKTOP_WAYPOINTS: Waypoint[] = [
     { absorb: 1 }
   ),
   wp(
-    0.93,
+    0.97,
     "mastery",
     "mastery",
-    {
-      x: 0.28,
-      y: 0.0,
-      z: 0.4,
-      rotX: -0.2,
-      rotY: -12.62,
-      rotZ: 0.85,
-      scale: 0.92,
-    },
-    { x: 0.06, y: 0.0, z: 5.6, lookX: 0.14, lookY: -0.02, lookZ: 0.05, fov: 26.9 },
+    { x: 0.74, y: -0.08, z: 0.28, rotX: 0.03, rotY: -TAU * 2 - 0.18, rotZ: -0.04, scale: 0.96 },
+    { x: 0.12, y: -0.02, z: 5.48, lookX: 0.48, lookY: -0.04, lookZ: 0.08, fov: 26.8 },
     { absorb: 1 }
   ),
 
   wp(
-    0.96,
+    0.992,
     "cta",
     "waitlist",
     {
@@ -315,7 +324,23 @@ export const MOBILE_WAYPOINTS: Waypoint[] = [
     { absorb: 1 }
   ),
   wp(
-    0.66,
+    0.63,
+    "language",
+    "language",
+    { x: 0, y: 0.32, z: 0.14, rotX: 0.02, rotY: -TAU + 0.22, rotZ: 0.02, scale: 0.64 },
+    { x: 0, y: 0.16, z: 6.4, lookX: 0, lookY: 0.12, lookZ: 0.06, fov: 29.5 },
+    { absorb: 1 }
+  ),
+  wp(
+    0.69,
+    "language",
+    "language",
+    { x: 0, y: 0.32, z: 0.15, rotX: 0.02, rotY: -TAU + 0.18, rotZ: 0.02, scale: 0.65 },
+    { x: 0, y: 0.16, z: 6.35, lookX: 0, lookY: 0.12, lookZ: 0.06, fov: 29.5 },
+    { absorb: 1 }
+  ),
+  wp(
+    0.74,
     "practice",
     "cards",
     { x: 0, y: 0.3, z: 0.16, rotX: 0.02, rotY: -TAU - 0.06, rotZ: 0, scale: 0.66 },
@@ -323,7 +348,7 @@ export const MOBILE_WAYPOINTS: Waypoint[] = [
     { absorb: 1 }
   ),
   wp(
-    0.72,
+    0.8,
     "practice",
     "quiz",
     { x: 0, y: 0.28, z: 0.18, rotX: 0.02, rotY: -TAU - 0.04, rotZ: 0, scale: 0.68 },
@@ -331,23 +356,23 @@ export const MOBILE_WAYPOINTS: Waypoint[] = [
     { absorb: 1 }
   ),
   wp(
-    0.78,
+    0.82,
     "adaptive",
-    "practice",
+    "progress",
     { x: 0, y: 0.32, z: 0.14, rotX: 0.02, rotY: -TAU * 2 + 0.28, rotZ: 0.03, scale: 0.62 },
     { x: 0, y: 0.16, z: 6.45, lookX: 0, lookY: 0.12, lookZ: 0.06, fov: 29.5 },
     { absorb: 1 }
   ),
   wp(
-    0.84,
+    0.848,
     "adaptive",
-    "practice",
+    "progress",
     { x: 0, y: 0.32, z: 0.14, rotX: 0.02, rotY: -TAU * 2 + 0.24, rotZ: 0.02, scale: 0.64 },
     { x: 0, y: 0.16, z: 6.4, lookX: 0, lookY: 0.12, lookZ: 0.06, fov: 29.5 },
     { absorb: 1 }
   ),
   wp(
-    0.9,
+    0.885,
     "mastery",
     "mastery",
     { x: 0, y: 0.3, z: 0.12, rotX: 0.04, rotY: -TAU * 2 - 0.22, rotZ: -0.02, scale: 0.66 },
@@ -355,7 +380,15 @@ export const MOBILE_WAYPOINTS: Waypoint[] = [
     { absorb: 1 }
   ),
   wp(
-    0.96,
+    0.97,
+    "mastery",
+    "mastery",
+    { x: 0, y: 0.3, z: 0.13, rotX: 0.03, rotY: -TAU * 2 - 0.18, rotZ: -0.01, scale: 0.66 },
+    { x: 0, y: 0.14, z: 6.32, lookX: 0, lookY: 0.12, lookZ: 0.06, fov: 29.5 },
+    { absorb: 1 }
+  ),
+  wp(
+    0.992,
     "cta",
     "waitlist",
     {

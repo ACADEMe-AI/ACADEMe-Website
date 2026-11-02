@@ -17,7 +17,7 @@
 - [x] Tailwind colors aligned to Scheme D (light default)  
 - [x] Remove “all devices” + “millions of learners” language  
 - [x] QR asset + store badges live  
-- [x] Feature copy = 5 study pillars (chat · flashcards · quizzes · summaries · practice tests)  
+- [x] Film copy matches the live chapters (material, Pebby, language, review, My Progress, plan)
 - [x] Honest social proof structure  
 - [ ] Craft pass (type, motion, signature moment)  
 
@@ -36,7 +36,7 @@
 ## Phase 0.8 — Mascot motion
 
 - [x] Character sheet asset (`mascot_academe.png`)  
-- [x] Name: Pebby (internal, spare use)  
+- [x] Name: Pebby, in the app and on the site
 - [ ] Map expressions → state catalog  
 - [ ] Rive or transparent WebM loops  
 - [ ] Flutter `MascotSlot`  

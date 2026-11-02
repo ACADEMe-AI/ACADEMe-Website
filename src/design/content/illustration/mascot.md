@@ -1,6 +1,6 @@
-# Learning buddy
+# Pebby
 
-Soft rounded character that coaches students. Internal name: **Pebby** (design work only, spare use). In product UI prefer “learning buddy” or no name at all.
+Pebby is the tutor. Use that name in the app and on the site. The ASKMe tab is where you talk to Pebby.
 
 ## Source
 

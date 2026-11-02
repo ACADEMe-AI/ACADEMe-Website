@@ -3,9 +3,10 @@ export type ScreenState =
   | "upload"
   | "processing"
   | "chat"
+  | "language"
   | "cards"
   | "quiz"
-  | "practice"
+  | "progress"
   | "mastery"
   | "waitlist";
 
@@ -13,6 +14,7 @@ export type ChapterId =
   | "hero"
   | "upload"
   | "chat"
+  | "language"
   | "practice"
   | "adaptive"
   | "mastery"
@@ -61,6 +63,7 @@ export const scrollState = {
     hero: 1,
     upload: 0,
     chat: 0,
+    language: 0,
     practice: 0,
     adaptive: 0,
     mastery: 0,
