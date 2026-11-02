@@ -51,8 +51,8 @@ export function ChapterOverlay() {
 
         <div className="hero-bottom-left">
           <p className="hero-lede">
-            Swipe lessons from your syllabus, Pebby when you&apos;re stuck, and
-            board-style marks on your answers. Class 6 to 12, CBSE, ICSE and ISC.
+            With AI, the way you study has to change. Adapt to it, or stay
+            behind.
           </p>
           <div className="hero-cta-row">
             <a className="btn-flow primary" href={WAITLIST_URL} target="_blank" rel="noreferrer">
@@ -112,8 +112,26 @@ export function ChapterOverlay() {
               the context.
             </h2>
             <p className="lede tight">
-              Ask the question in your own words. Mee responds from the material
+              Ask the question in your own words. Pebby responds from the material
               you&apos;re actually studying.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {}
+      <div className="chapter chapter-feature chapter-language" data-chapter="language">
+        <div className="chapter-stage stage-right">
+          <div className="type-block type-right">
+            <Mee src="/mascot/language.png" />
+            <h2 className="display">
+              In the language
+              <br />
+              you think in.
+            </h2>
+            <p className="lede tight">
+              English, Hindi, Telugu, Tamil, or Bengali. Pebby and your study
+              cards use it. Switch any time.
             </p>
           </div>
         </div>
@@ -143,13 +161,13 @@ export function ChapterOverlay() {
           <div className="type-block type-right">
             <Mee src="/mascot/adaptive.png" />
             <h2 className="display">
-              Practice that
+              Personalized
               <br />
-              adjusts to you.
+              feedback.
             </h2>
             <p className="lede tight">
-              Wrong answers become the next useful question, not just another
-              item in a random pool.
+              Me, then My Progress. Where you&apos;re doing well, where to
+              focus, and what to do next.
             </p>
           </div>
         </div>
@@ -161,13 +179,13 @@ export function ChapterOverlay() {
           <div className="type-block">
             <Mee src="/mascot/mastery.png" />
             <h2 className="display">
-              Build a study loop
+              Set the
               <br />
-              you can stick with.
+              date.
             </h2>
             <p className="lede tight">
-              Upload, understand, practise, improve. Every session moves your
-              work forward.
+              A folder, the chapters, the test date. That becomes a plan, a
+              Today list, and reminders.
             </p>
           </div>
         </div>

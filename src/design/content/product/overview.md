@@ -8,4 +8,4 @@
 
 ## North star
 
-Best daily AI study companion for students and college grads — KnowUnity-class basics first, then growth, then ACADEMe differentiation.
+Study app for Class 6 to 12, CBSE, ICSE and ISC. The syllabus is the product. Pebby is the tutor inside it. Tabs are Home, ASKMe, Study and Me, plus Scan.

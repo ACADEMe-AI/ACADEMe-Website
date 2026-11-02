@@ -17,6 +17,7 @@ type Proxy = {
   hero: number;
   upload: number;
   chat: number;
+  language: number;
   practice: number;
   adaptive: number;
   mastery: number;
@@ -103,12 +104,13 @@ function screenFromProgress(t: number): ScreenState {
   if (t < 0.12) return "home";
   if (t < 0.38) return "upload";
   if (t < 0.44) return "processing";
-  if (t < 0.58) return "chat"; // tutor section
-  if (t < 0.66) return "cards";
-  if (t < 0.74) return "quiz";
-  if (t < 0.86) return "practice";
-  if (t < 0.94) return "mastery";
-  return "waitlist"; // landscape CTA community screen
+  if (t < 0.61) return "chat";
+  if (t < 0.72) return "language";
+  if (t < 0.775) return "cards";
+  if (t < 0.81) return "quiz";
+  if (t < 0.87) return "progress";
+  if (t < 0.978) return "mastery";
+  return "waitlist";
 }
 
 type Props = {
@@ -132,6 +134,7 @@ export function ScrollExperience({ enableFilm = true }: Props) {
       hero: 1,
       upload: 0,
       chat: 0,
+      language: 0,
       practice: 0,
       adaptive: 0,
       mastery: 0,
@@ -156,7 +159,7 @@ export function ScrollExperience({ enableFilm = true }: Props) {
         scrollState.reducedMotion = !!reduce;
 
         const getWaypoints = () => (isMobile ? MOBILE_WAYPOINTS : DESKTOP_WAYPOINTS);
-        const scrollLen = reduce ? "+=240%" : isMobile ? "+=540%" : "+=760%";
+        const scrollLen = reduce ? "+=240%" : isMobile ? "+=700%" : "+=1000%";
         const layer = pin.querySelector(".chapter-layer") as HTMLElement | null;
 
         const tl = gsap.timeline({
@@ -184,6 +187,7 @@ export function ScrollExperience({ enableFilm = true }: Props) {
           scrollState.overlays.hero = proxy.hero;
           scrollState.overlays.upload = proxy.upload;
           scrollState.overlays.chat = proxy.chat;
+          scrollState.overlays.language = proxy.language;
           scrollState.overlays.practice = proxy.practice;
           scrollState.overlays.adaptive = proxy.adaptive;
           scrollState.overlays.mastery = proxy.mastery;
@@ -193,6 +197,7 @@ export function ScrollExperience({ enableFilm = true }: Props) {
             layer.style.setProperty("--o-hero", String(proxy.hero));
             layer.style.setProperty("--o-upload", String(proxy.upload));
             layer.style.setProperty("--o-chat", String(proxy.chat));
+            layer.style.setProperty("--o-language", String(proxy.language));
             layer.style.setProperty("--o-practice", String(proxy.practice));
             layer.style.setProperty("--o-adaptive", String(proxy.adaptive));
             layer.style.setProperty("--o-mastery", String(proxy.mastery));
@@ -202,6 +207,7 @@ export function ScrollExperience({ enableFilm = true }: Props) {
               ["hero", proxy.hero],
               ["upload", proxy.upload],
               ["chat", proxy.chat],
+              ["language", proxy.language],
               ["practice", proxy.practice],
               ["adaptive", proxy.adaptive],
               ["mastery", proxy.mastery],
@@ -255,6 +261,7 @@ export function ScrollExperience({ enableFilm = true }: Props) {
             hero: 1,
             upload: 0,
             chat: 0,
+            language: 0,
             practice: 0,
             adaptive: 0,
             mastery: 0,
@@ -268,26 +275,30 @@ export function ScrollExperience({ enableFilm = true }: Props) {
         fade("upload", 0, 1, 0.05, 0.12);
         fade("upload", 1, 0, 0.04, 0.38);
         fade("chat", 0, 1, 0.05, 0.46);
-        fade("chat", 1, 0, 0.04, 0.58);
-        fade("practice", 0, 1, 0.05, 0.6);
-        fade("practice", 1, 0, 0.04, 0.72);
-        fade("adaptive", 0, 1, 0.05, 0.75);
-        fade("adaptive", 1, 0, 0.04, 0.84);
-        fade("mastery", 0, 1, 0.05, 0.86);
-        fade("mastery", 1, 0, 0.04, 0.93);
-        fade("cta", 0, 1, 0.05, 0.95);
+        fade("chat", 1, 0, 0.04, 0.56);
+        fade("language", 0, 1, 0.05, 0.58);
+        fade("language", 1, 0, 0.04, 0.70);
+        fade("practice", 0, 1, 0.025, 0.71);
+        fade("practice", 1, 0, 0.025, 0.775);
+        fade("adaptive", 0, 1, 0.025, 0.785);
+        fade("adaptive", 1, 0, 0.025, 0.845);
+        fade("mastery", 0, 1, 0.025, 0.855);
+        fade("mastery", 1, 0, 0.022, 0.972);
+        fade("cta", 0, 1, 0.02, 0.976);
 
         tl.addLabel("hero", 0);
         tl.addLabel("upload", 0.26);
-        tl.addLabel("chat", 0.53);
-        tl.addLabel("practice", 0.67);
-        tl.addLabel("adaptive", 0.8);
-        tl.addLabel("mastery", 0.9);
-        tl.addLabel("cta", 0.98);
+        tl.addLabel("chat", 0.52);
+        tl.addLabel("language", 0.64);
+        tl.addLabel("practice", 0.755);
+        tl.addLabel("adaptive", 0.83);
+        tl.addLabel("mastery", 0.93);
+        tl.addLabel("cta", 0.99);
 
         proxy.hero = 1;
         proxy.upload = 0;
         proxy.chat = 0;
+        proxy.language = 0;
         proxy.practice = 0;
         proxy.adaptive = 0;
         proxy.mastery = 0;
@@ -303,6 +314,7 @@ export function ScrollExperience({ enableFilm = true }: Props) {
             proxy.hero = 1;
             proxy.upload = 0;
             proxy.chat = 0;
+            proxy.language = 0;
             proxy.practice = 0;
             proxy.adaptive = 0;
             proxy.mastery = 0;

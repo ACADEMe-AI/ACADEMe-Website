@@ -16,6 +16,6 @@
 - Always skippable  
 - Respect reduce-motion  
 - Max one big celebration per ~5 minutes  
-- Single integration: `MascotSlot` / `MeeView`-style widget  
+- In the app, Pebby is the Rive mascot. On the site, each chapter uses one still pose.
 
 Deep catalog: `design/mascot/flat/animations/catalog.json` (update name when Rive ships).

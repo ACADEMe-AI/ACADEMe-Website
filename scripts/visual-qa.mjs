@@ -84,10 +84,11 @@ async function runViewport(browser, label, size, isMobile = false) {
   const fractions = [
     ["02-upload", 0.22],
     ["03-chat", 0.48],
-    ["04-practice", 0.64],
-    ["05-adaptive", 0.76],
-    ["06-mastery", 0.86],
-    ["07-cta", 0.97],
+    ["04-language", 0.6],
+    ["05-practice", 0.755],
+    ["06-progress", 0.83],
+    ["07-plan", 0.93],
+    ["08-cta", 0.995],
   ];
 
   for (const [name, f] of fractions) {

@@ -1,21 +1,16 @@
-# App information architecture (P1)
+# App information architecture
 
-## Tabs (max 4)
+## Tabs
 
 | Tab | Role |
 |-----|------|
-| Home | Continue · due · quick actions |
-| Library | Materials · decks · quizzes |
-| AI | Chat hub + camera FAB |
-| You | Plan · stats · settings |
+| Home | Today list, subjects, ask bar |
+| ASKMe | Talk to Pebby |
+| Study | Lessons, cards, folders |
+| Me | Account, language, My Progress |
 
-## Material-first
+Scan is the camera action: Solve homework, Check my answer, notes into a folder, ask about a photo.
 
-```
-Upload / capture → Material hub
-  → Chat | Flashcards | Quizzes | Summaries | Practice tests
-```
+## My Progress
 
-## Nav rule
-
-≤ 2 taps from home to Chat / Scan / Upload.
+The title is **My Progress**. It stays held for every account for now, including Pro. Do not invent study hours or finished lessons on that screen.

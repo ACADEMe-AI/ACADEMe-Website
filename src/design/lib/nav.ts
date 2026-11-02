@@ -127,13 +127,13 @@ export const navGroups: NavGroup[] = [
   {
     id: "character",
     label: "Mascot",
-    description: "Learning buddy assets",
+    description: "Pebby",
     items: [
       {
         path: "/character",
         label: "Overview",
         file: "illustration/mascot.md",
-        description: "Meet the buddy",
+        description: "Meet Pebby",
       },
       {
         path: "/character/illustration",

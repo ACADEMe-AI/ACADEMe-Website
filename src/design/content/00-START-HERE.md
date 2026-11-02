@@ -13,7 +13,7 @@
 - Students first, mobile first  
 - Dark colors = Scheme B, light = Scheme D  
 - Main website (`/`) ≠ this design system site (`/design`)
-- Mascot name: use sparingly in product UI  
+- Mascot name: **Pebby**. Tutor tab: **ASKMe**
 - No school/admin product in Phase 1  
 
 ## Menu (top of site)

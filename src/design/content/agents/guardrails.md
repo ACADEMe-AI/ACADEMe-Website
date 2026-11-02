@@ -4,17 +4,17 @@ Full text: `design/agent/GUARDRAILS.md` + `ARCHITECTURE-PRINCIPLES.md`.
 
 ## Product
 
-- Students/college first  
-- Mobile first; site = showcase + QR  
-- Desktop later  
-- P1 = study companion parity; school OS later  
-- Feel: fast + clean + light play  
+- Class 6 to 12, CBSE, ICSE and ISC  
+- Mobile first; the site is the scroll film  
+- Name the tutor **Pebby**. The tab is **ASKMe**  
+- The syllabus is the product. Do not pitch a generic notes app  
+- School tools are not this product  
 
 ## Design authority
 
 - Colors/tokens from this design system  
 - Screens from inventory / IA  
-- Mascot: optional slot; name sparingly  
+- Mascot: Pebby, named in the product
 
 ## Engineering
 

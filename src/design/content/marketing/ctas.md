@@ -1,19 +1,17 @@
-# CTAs & QR
+# CTAs
 
-## Primary CTA
+## On the film
 
-**Download App** → store links or waitlist form until stores live  
+| Place | Label |
+|-------|--------|
+| Hero | **Start For Free** |
+| Under the hero button | No credit card required |
+| End of the film | **Join the community** |
 
-## Required patterns (KnowUnity-style)
+A QR sits next to both buttons. It does not open a Play listing yet.
 
-- Large **QR** on home + feature footers  
-- App Store + Play badges  
-- Mobile sticky “Get the app” optional  
+## Not yet
 
-## Secondary
-
-Watch demo (YouTube)  
-
-## Register
-
-Navbar register may stay waitlist — label honestly if not full signup.
+- **Get it on Google Play** waits until the listing is public.
+- No App Store badge as the main ask until there is an iOS app.
+- No "Watch demo" on an outside video site.

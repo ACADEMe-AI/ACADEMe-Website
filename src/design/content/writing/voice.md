@@ -11,9 +11,9 @@
 
 ## Mascot naming
 
-- Internal / design docs may say **Pebby**  
-- Product UI: prefer **learning buddy**, **your AI tutor**, or no character name  
-- Don’t put the name on every empty state  
+- The name is **Pebby**, in the app and on the site.
+- The tutor tab is **ASKMe**.
+- Do not call Pebby Mee, and do not hide the name behind "learning buddy."
 
 ## Celebration copy
 
