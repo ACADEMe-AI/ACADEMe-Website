@@ -1,17 +1,37 @@
 {
-  "rewrites": [
+  "redirects": [
     {
       "source": "/privacy",
-      "destination": "/privacy.html"
+      "destination": "https://api.academe.cc/privacy",
+      "permanent": true
+    },
+    {
+      "source": "/terms",
+      "destination": "https://api.academe.cc/terms",
+      "permanent": true
+    },
+    {
+      "source": "/support",
+      "destination": "https://api.academe.cc/support",
+      "permanent": true
     },
     {
       "source": "/delete-account",
-      "destination": "/delete-account.html"
+      "destination": "https://api.academe.cc/delete-account",
+      "permanent": true
     },
     {
-      "source": "/api/(.*)",
-      "destination": "https://academe-api-production.up.railway.app/$1"
+      "source": "/reset-password",
+      "destination": "https://api.academe.cc/reset-password",
+      "permanent": true
     },
+    {
+      "source": "/open",
+      "destination": "https://api.academe.cc/open",
+      "permanent": true
+    }
+  ],
+  "rewrites": [
     {
       "source": "/(.*)",
       "destination": "/index.html"
